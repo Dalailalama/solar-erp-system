@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Ultra Rays Solar | Clean Energy Solutions{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'website/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Use a specific ID for the Vue app pivot -->
+<div id="landing-app" v-cloak>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg solar-navbar" :class="{ 'scrolled': isScrolled }">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-sun fa-2x text-warning"></i>
+                <div class="brand-text">
+                    <span class="brand-title">ULTRA RAYS</span>
+                    <span class="brand-subtitle">ENERGY SOLUTION</span>
+                </div>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars text-dark"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 hero-content fade-in-up">
+                    <div class="d-inline-block px-3 py-1 border border-light rounded-pill mb-4 text-white-50">
+                        <i class="fas fa-leaf text-success me-2"></i> #1 Renewable Energy Provider
+                    </div>
+                    <h1>Power Your Future With <span class="text-success">Solar Energy</span></h1>
+                    <p>Reduce your electricity bills and carbon footprint with our state-of-the-art solar installation
+                        services for homes and businesses.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#contact" class="btn btn-solar btn-lg">Start Saving Today</a>
+                        <a href="#projects" class="btn btn-outline-light btn-lg rounded-pill px-4">View Our Work</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h6 class="text-success text-uppercase fw-bold ls-1">Why Choose Us</h6>
+                <h2 class="fw-bold fs-1 mb-3">Leading the Solar Revolution</h2>
+                <p class="text-muted mx-auto" style="max-width: 600px;">We combine cutting-edge technology with expert
+                    installation to deliver the most efficient solar solutions.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="icon-box">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <h4>Cost Savings</h4>
+                        <p class="text-muted">Save up to 40% on your monthly electricity bills from day one of
+                            installation.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="icon-box">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>25-Year Warranty</h4>
+                        <p class="text-muted">Peace of mind with our comprehensive performance and equipment warranty.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="icon-box">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h4>0% Maintenance</h4>
+                        <p class="text-muted">Our systems are designed for durability and require minimal upkeep.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Parallax -->
+    <section id="services" class="section-padding bg-light-alt">
+        <div class="container">
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-6">
+                    <h2 class="fw-bold fs-1">Complete Solar Solutions</h2>
+                    <p class="text-muted">From consultation to activation, we handle everything.</p>
+                </div>
+                <div class="col-lg-6 text-lg-end">
+                    <a href="#" class="btn btn-outline-primary rounded-pill">Explore All Services <i
+                            class="fas fa-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            class="service-img" alt="Residential">
+                        <div class="card-body p-4">
+                            <h4>Residential Solar</h4>
+                            <p class="text-muted mb-3">Power your home with clean energy. Custom designs for every roof
+                                type.</p>
+                            <a href="#" class="text-primary fw-bold text-decoration-none">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more cards as needed -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section with VUE Integration -->
+    <section id="contact" class="section-padding contact-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-5 mb-lg-0">
+                    <h2 class="fs-1 fw-bold mb-4">Ready to Switch to Solar?</h2>
+                    <p class="lead mb-5 opacity-75">Get a free, no-obligation quote. Our engineers will analyze your
+                        energy needs and provide a custom proposal.</p>
+
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <div class="bg-success rounded-circle p-3">
+                            <i class="fas fa-phone fa-lg"></i>
+                        </div>
+                        <div>
+                            <div class="small opacity-75">Call Us 24/7</div>
+                            <div class="fs-5 fw-bold">+1 (555) 123-4567</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 offset-lg-1">
+                    <div class="contact-form-glass">
+                        <form @submit.prevent="submitContact">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label small text-uppercase fw-bold opacity-75">Your Name</label>
+                                    <input type="text" class="form-control form-control-glass"
+                                        v-model="contactForm.name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small text-uppercase fw-bold opacity-75">Phone
+                                        Number</label>
+                                    <input type="tel" class="form-control form-control-glass"
+                                        v-model="contactForm.phone" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label small text-uppercase fw-bold opacity-75">Email
+                                        Address</label>
+                                    <input type="email" class="form-control form-control-glass"
+                                        v-model="contactForm.email" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label small text-uppercase fw-bold opacity-75">Message</label>
+                                    <textarea class="form-control form-control-glass" rows="4"
+                                        v-model="contactForm.message"></textarea>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn btn-solar w-100" :disabled="loading">
+                                        <span v-if="loading"><i class="fas fa-spinner fa-spin me-2"></i>
+                                            Sending...</span>
+                                        <span v-else>Get My Free Quote</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="solar-footer py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="text-white mb-3">Ultra Rays</h5>
+                    <p class="small">Empowering the world with sustainable energy solutions, one rooftop at a time.</p>
+                </div>
+                <div class="col-md-2">
+                    <h6 class="text-white mb-3">Quick Links</h6>
+                    <ul class="list-unstyled small d-flex flex-column gap-2">
+                        <li><a href="#" class="text-white-50 text-decoration-none">About Us</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Projects</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Careers</a></li>
+                    </ul>
+                </div>
+                <!-- More cols... -->
+            </div>
+            <div class="border-top border-secondary mt-5 pt-4 text-center small text-white-50">
+                &copy; 2024 Ultra Rays Solar. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</div>
+{% endblock %}
+
+{% block vue_entry %}
+<script type="module" src="{% static 'website/js/landing.js' %}"></script>
+{% endblock %}

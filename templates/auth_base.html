@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ERP System{% endblock %}</title>
+    {% load static %}
+    {% load django_vite %}
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="{% static 'css/core/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/core/toast.css' %}">
+
+    <!-- Page specific CSS -->
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+    <!-- No #app wrapper here to prevent main app interference -->
+    {% block content %}
+    {% endblock %}
+
+    <!-- Vite Integration -->
+    {% vite_hmr_client %}
+
+    <!-- Note: We do NOT load app.js here. Login pages should load their own specific JS -->
+
+    <!-- Page specific JavaScript -->
+    {% block extra_js %}{% endblock %}
+</body>
+
+</html>

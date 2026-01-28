@@ -1,0 +1,40 @@
+{
+  "name": "erp_system_project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@tanstack/vue-virtual": "^3.13.13",
+    "@uppy/core": "^5.2.0",
+    "@uppy/dashboard": "^5.1.0",
+    "@vitejs/plugin-vue": "^6.0.2",
+    "axios": "^1.13.2",
+    "chart.js": "^4.5.1",
+    "dayjs": "^1.11.19",
+    "exceljs": "^4.4.0",
+    "fuse.js": "^7.1.0",
+    "jspdf": "^3.0.4",
+    "jspdf-autotable": "^5.0.2",
+    "lodash": "^4.17.21",
+    "mousetrap": "^1.6.5",
+    "quill": "^2.0.3",
+    "sortablejs": "^1.15.6",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.7",
+    "vue": "^3.5.25",
+    "vue-router": "^4.6.4",
+    "zod": "^4.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.2",
+    "unplugin-auto-import": "^20.3.0"
+  }
+}

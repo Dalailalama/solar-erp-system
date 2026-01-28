@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_vite %}
+
+{% block title %}Dashboard - ERP System{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/core/core.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Vue MainLayout will render here -->
+<main-layout></main-layout>
+{% endblock %}
+
+{% block vue_entry %}
+{% vite_asset 'core/app.js' %}
+{% endblock %}
+
+{% block extra_js %}
+<!-- Core specific JS if any -->
+{% endblock %}

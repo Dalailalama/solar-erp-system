@@ -1,0 +1,137 @@
+.crash-reporter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 2rem;
+    background: var(--bg-soft, #f8f9fa);
+}
+
+.crash-card {
+    background: var(--bg-surface, #ffffff);
+    border-radius: 1.5rem;
+    padding: 3rem;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color, #e9ecef);
+    backdrop-filter: blur(10px);
+}
+
+.crash-icon {
+    font-size: 4rem;
+    color: var(--danger, #dc3545);
+    margin-bottom: 2rem;
+    animation: pulse-danger 2s infinite;
+}
+
+@keyframes pulse-danger {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.crash-card h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-main, #212529);
+    margin-bottom: 1rem;
+}
+
+.crash-card p {
+    color: var(--text-muted, #6c757d);
+    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+}
+
+.crash-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.crash-details {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: #1a1a1a;
+    color: #00ff00;
+    border-radius: 1rem;
+    text-align: left;
+    overflow-x: auto;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 0.9rem;
+    max-height: 400px;
+}
+
+.crash-details pre {
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+.diagnostic-actions {
+    margin-top: 1.5rem;
+    border-top: 1px solid #333;
+    padding-top: 1rem;
+}
+
+.btn-primary {
+    background: var(--primary, #0d6efd);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark, #0a58ca);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: var(--bg-soft, #f8f9fa);
+    color: var(--text-main, #212529);
+    border: 1px solid var(--border-color, #e9ecef);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+    background: var(--border-color);
+}
+
+.btn-sm {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    border-radius: 0.5rem;
+    background: transparent;
+    border: 1px solid #333;
+    color: #888;
+    cursor: pointer;
+}
+
+.btn-sm:hover {
+    color: #fff;
+    border-color: #666;
+}

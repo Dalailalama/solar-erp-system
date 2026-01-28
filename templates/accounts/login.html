@@ -1,0 +1,20 @@
+{% extends 'auth_base.html' %}
+{% load static %}
+{% load django_vite %}
+
+{% block title %}Login - ERP System{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/core/login.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="login-app">
+    <login-form></login-form>
+    <toast-container position="top-right"></toast-container>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{% vite_asset 'core/login_app.js' %}
+{% endblock %}

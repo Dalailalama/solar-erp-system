@@ -1,0 +1,247 @@
+/* Toast Notification Styles */
+
+/* Container positioning */
+.toast-container {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 400px;
+    padding: 20px;
+}
+
+/* Position variants */
+.toast-container-top-right {
+    top: 0;
+    right: 0;
+}
+
+.toast-container-top-left {
+    top: 0;
+    left: 0;
+}
+
+.toast-container-top-center {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.toast-container-bottom-right {
+    bottom: 0;
+    right: 0;
+}
+
+.toast-container-bottom-left {
+    bottom: 0;
+    left: 0;
+}
+
+.toast-container-bottom-center {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Toast base styles */
+.toast {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 300px;
+    max-width: 400px;
+    padding: 16px 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-left: 4px solid;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toast:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Toast content */
+.toast-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.toast-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.toast-message {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #374151;
+    font-weight: 500;
+}
+
+/* Close button */
+.toast-close {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 4px;
+    margin-left: 12px;
+    font-size: 16px;
+    transition: color 0.2s;
+    flex-shrink: 0;
+}
+
+.toast-close:hover {
+    color: #4b5563;
+}
+
+/* Type variants */
+.toast-success {
+    border-left-color: #10b981;
+}
+
+.toast-success .toast-icon {
+    color: #10b981;
+}
+
+.toast-error {
+    border-left-color: #ef4444;
+}
+
+.toast-error .toast-icon {
+    color: #ef4444;
+}
+
+.toast-warning {
+    border-left-color: #f59e0b;
+}
+
+.toast-warning .toast-icon {
+    color: #f59e0b;
+}
+
+.toast-info {
+    border-left-color: #3b82f6;
+}
+
+.toast-info .toast-icon {
+    color: #3b82f6;
+}
+
+.toast-custom {
+    border-left-color: #8b5cf6;
+}
+
+/* Animations */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* Transition group animations */
+.toast-list-enter-active {
+    animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toast-list-leave-active {
+    animation: fadeOut 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toast-list-move {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+    .toast-container {
+        max-width: 100%;
+        padding: 12px;
+    }
+    
+    .toast {
+        min-width: auto;
+        max-width: 100%;
+    }
+    
+    .toast-container-top-center,
+    .toast-container-bottom-center {
+        left: 0;
+        right: 0;
+        transform: none;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .toast {
+        background: #1f2937;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+    
+    .toast-message {
+        color: #f3f4f6;
+    }
+    
+    .toast-close {
+        color: #9ca3af;
+    }
+    
+    .toast-close:hover {
+        color: #d1d5db;
+    }
+}
+
+/* Accessibility */
+.toast:focus-within {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Loading state (optional) */
+.toast-loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.toast-loading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: currentColor;
+    animation: loading 3s linear;
+}
+
+@keyframes loading {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}

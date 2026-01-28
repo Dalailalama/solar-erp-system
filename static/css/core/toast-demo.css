@@ -1,0 +1,175 @@
+/* Toast Demo Styles */
+
+.toast-demo {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.demo-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.demo-header h2 {
+    font-size: 32px;
+    color: #1f2937;
+    margin-bottom: 10px;
+}
+
+.demo-header p {
+    font-size: 16px;
+    color: #6b7280;
+}
+
+.demo-section {
+    margin-bottom: 40px;
+}
+
+.demo-section h3 {
+    font-size: 20px;
+    color: #374151;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.demo-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-success {
+    background: #10b981;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background: #059669;
+}
+
+.btn-error {
+    background: #ef4444;
+    color: #fff;
+}
+
+.btn-error:hover {
+    background: #dc2626;
+}
+
+.btn-warning {
+    background: #f59e0b;
+    color: #fff;
+}
+
+.btn-warning:hover {
+    background: #d97706;
+}
+
+.btn-info {
+    background: #3b82f6;
+    color: #fff;
+}
+
+.btn-info:hover {
+    background: #2563eb;
+}
+
+.btn-secondary {
+    background: #6b7280;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background: #4b5563;
+}
+
+.btn-primary {
+    background: #8b5cf6;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #7c3aed;
+}
+
+.btn-danger {
+    background: #dc2626;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background: #b91c1c;
+}
+
+.btn-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+}
+
+.btn-custom {
+    background: #1f2937;
+    color: #10b981;
+    border: 2px solid #10b981;
+}
+
+.btn-custom:hover {
+    background: #111827;
+}
+
+.code-example {
+    background: #1f2937;
+    border-radius: 8px;
+    padding: 20px;
+    overflow-x: auto;
+}
+
+.code-example code {
+    color: #e5e7eb;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .toast-demo {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .demo-buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

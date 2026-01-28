@@ -1,0 +1,554 @@
+/* DataTable Premium Desgin System */
+:root {
+    /* Core Palette */
+    --dt-bg: #ffffff;
+    --dt-surface: #f8fafc;
+    --dt-border: #e2e8f0;
+    --dt-text: #334155;
+    --dt-text-muted: #64748b;
+    --dt-primary: #3b82f6;
+    --dt-primary-light: #eff6ff;
+    --dt-hover: #f1f5f9;
+    --dt-input-bg: #ffffff;
+
+    /* Dimensions */
+    --dt-radius: 12px;
+    --dt-header-height: 48px;
+
+    /* Density Defaults (Comfortable) */
+    --dt-cell-padding: 16px;
+    --dt-font-size: 14px;
+}
+
+/* Dark Mode Support */
+[data-theme="dark"] {
+    --dt-bg: #1e293b;
+    --dt-surface: #0f172a;
+    --dt-border: #334155;
+    --dt-text: #f8fafc;
+    --dt-text-muted: #94a3b8;
+    --dt-primary: #60a5fa;
+    --dt-primary-light: #1e3a8a;
+    --dt-hover: #334155;
+    --dt-input-bg: #1e293b;
+}
+
+.datatable-wrapper {
+    background: var(--dt-bg);
+    border-radius: var(--dt-radius);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--dt-border);
+    overflow: hidden;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    transition: all 0.3s ease;
+}
+
+/* --- Toolbar Area --- */
+.table-controls {
+    padding: 16px;
+    background: var(--dt-bg);
+    border-bottom: 1px solid var(--dt-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    position: relative;
+    /* Context for dropdowns */
+    z-index: 20;
+}
+
+.search-box-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 240px;
+    max-width: 400px;
+}
+
+.dt-toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 16px 10px 42px;
+    border-radius: 8px;
+    border: 1px solid var(--dt-border);
+    background: var(--dt-input-bg);
+    color: var(--dt-text);
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--dt-primary);
+    box-shadow: 0 0 0 3px var(--dt-primary-light);
+}
+
+.search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--dt-text-muted);
+}
+
+.btn-toolbar {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--dt-border);
+    background: var(--dt-bg);
+    color: var(--dt-text);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 38px;
+    /* Fixed height for alignment */
+    white-space: nowrap;
+}
+
+.btn-toolbar:hover {
+    background: var(--dt-hover);
+    border-color: var(--dt-text-muted);
+}
+
+.btn-toolbar.active {
+    background: var(--dt-primary-light);
+    color: var(--dt-primary);
+    border-color: var(--dt-primary);
+}
+
+/* Primary Action Button (Slot content styling helper) */
+.btn-toolbar-primary,
+.table-controls .btn-primary {
+    background: var(--dt-primary) !important;
+    border-color: var(--dt-primary) !important;
+    color: #fff !important;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 38px;
+}
+
+.btn-toolbar-primary:hover,
+.table-controls .btn-primary:hover {
+    filter: brightness(1.1);
+}
+
+/* --- Dropdown Menus --- */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background: var(--dt-bg);
+    border: 1px solid var(--dt-border);
+    border-radius: 8px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    min-width: 180px;
+    z-index: 100;
+    padding: 6px;
+    list-style: none !important;
+    /* Force remove bullets */
+}
+
+/* Specific fix for custom ul menus inside dropdown wrapper if structure differs */
+.dropdown-menu ul,
+ul.dropdown-menu {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: var(--dt-text);
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.1s;
+    text-decoration: none;
+}
+
+.dropdown-item:hover {
+    background: var(--dt-hover);
+    color: var(--dt-text);
+    /* Keep text color stable */
+}
+
+.dropdown-item.active {
+    background: var(--dt-primary-light);
+    color: var(--dt-primary);
+    font-weight: 500;
+}
+
+.dropdown-item i {
+    width: 16px;
+    text-align: center;
+    font-size: 12px;
+}
+
+
+/* --- Filter Area --- */
+.filter-bar {
+    background: var(--dt-surface);
+    border-bottom: 1px solid var(--dt-border);
+    padding: 16px;
+}
+
+.filter-bar .form-label {
+    color: var(--dt-text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.filter-bar .form-control,
+.filter-bar .form-select {
+    background-color: var(--dt-input-bg);
+    border: 1px solid var(--dt-border);
+    color: var(--dt-text);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 13px;
+    width: 100%;
+}
+
+.filter-bar .form-control:focus,
+.filter-bar .form-select:focus {
+    border-color: var(--dt-primary);
+    box-shadow: 0 0 0 3px var(--dt-primary-light);
+    outline: none;
+}
+
+/* --- Filter Chips --- */
+.active-filters-chips {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    background: var(--dt-surface);
+    border-bottom: 1px solid var(--dt-border);
+    overflow-x: auto;
+}
+
+.filter-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: var(--dt-primary-light);
+    color: var(--dt-primary);
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.filter-chip i.fa-times {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.filter-chip i.fa-times:hover {
+    opacity: 1;
+}
+
+/* --- Table Structure --- */
+.table-container {
+    position: relative;
+    overflow: auto;
+    /* Custom Scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: var(--dt-text-muted) transparent;
+}
+
+.erp-table {
+    width: 100%;
+    border-collapse: separate;
+    /* Required for sticky headers */
+    border-spacing: 0;
+}
+
+/* Sticky Header with Blur */
+.erp-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.9);
+    /* Fallback */
+    background: var(--dt-bg);
+    padding: var(--dt-cell-padding);
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--dt-text-muted);
+    border-bottom: 2px solid var(--dt-border);
+    user-select: none;
+    backdrop-filter: blur(8px);
+    /* Glassmorphism */
+}
+
+[data-theme="dark"] .erp-table thead th {
+    background: rgba(30, 41, 59, 0.9);
+}
+
+.erp-table tbody td {
+    padding: var(--dt-cell-padding);
+    border-bottom: 1px solid var(--dt-border);
+    color: var(--dt-text);
+    font-size: var(--dt-font-size);
+    transition: background 0.1s;
+}
+
+/* Row Interaction */
+.erp-table tbody tr.data-row:hover td {
+    background: var(--dt-hover);
+    cursor: pointer;
+}
+
+.erp-table tbody tr.selected td {
+    background: var(--dt-primary-light);
+}
+
+/* Density Modes */
+.datatable-wrapper.dense {
+    --dt-cell-padding: 8px;
+    --dt-font-size: 13px;
+}
+
+.datatable-wrapper.compact {
+    --dt-cell-padding: 4px 8px;
+    --dt-font-size: 12px;
+}
+
+/* --- Skeleton Loading --- */
+.skeleton-row td {
+    border-bottom: 1px solid var(--dt-border);
+    padding: var(--dt-cell-padding);
+}
+
+.skeleton-box {
+    height: 16px;
+    background: linear-gradient(90deg, var(--dt-surface) 25%, var(--dt-hover) 50%, var(--dt-surface) 75%);
+    background-size: 200% 100%;
+    border-radius: 4px;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* --- Footer --- */
+.table-footer {
+    padding: 16px;
+    border-top: 1px solid var(--dt-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--dt-text-muted);
+    background: var(--dt-bg);
+}
+
+.dt-pagination-info {
+    display: flex;
+    align-items: center;
+}
+
+.dt-pagination-controls {
+    display: flex;
+    gap: 4px;
+}
+
+.page-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: 1px solid var(--dt-border);
+    background: var(--dt-bg);
+    color: var(--dt-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.page-btn:hover:not(:disabled) {
+    border-color: var(--dt-primary);
+    color: var(--dt-primary);
+}
+
+.page-btn.active {
+    background: var(--dt-primary);
+    color: white;
+    border-color: var(--dt-primary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .table-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .dt-toolbar-actions {
+        margin-left: 0;
+        justify-content: space-between;
+    }
+
+    .table-footer {
+        flex-direction: column;
+        gap: 16px;
+    }
+}
+
+/* --- DT Modal System (Self-Contained) --- */
+.dt-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 1050;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: dt-fade-in 0.2s ease-out;
+}
+
+.dt-modal-dialog {
+    background: var(--dt-bg);
+    width: 100%;
+    max-width: 500px;
+    max-height: 85vh;
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: dt-scale-in 0.2s ease-out;
+    border: 1px solid var(--dt-border);
+}
+
+.dt-modal-header {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--dt-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--dt-bg);
+}
+
+.dt-modal-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--dt-text);
+    margin: 0;
+}
+
+.dt-btn-close {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: var(--dt-text-muted);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.dt-btn-close:hover {
+    background: var(--dt-hover);
+    color: var(--dt-text);
+}
+
+.dt-modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+}
+
+.dt-modal-footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--dt-border);
+    background: var(--dt-surface);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Modal Helper Components */
+.dt-list-item {
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--dt-border);
+    background: var(--dt-bg);
+    transition: background 0.1s;
+}
+
+.dt-list-item:hover {
+    background: var(--dt-hover);
+}
+
+.dt-list-item:last-child {
+    border-bottom: none;
+}
+
+@keyframes dt-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes dt-scale-in {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Sortable Ghost */
+.dt-sortable-ghost {
+    background: var(--dt-primary-light) !important;
+    opacity: 0.5;
+}

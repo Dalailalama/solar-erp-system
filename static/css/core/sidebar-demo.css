@@ -1,0 +1,45 @@
+/* Sidebar Footer Styles */
+
+.sidebar-footer {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.demo-button {
+    width: 100%;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
+}
+
+.demo-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.demo-button i {
+    font-size: 16px;
+}
+
+.api-button {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.api-button:hover {
+    box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
+}
