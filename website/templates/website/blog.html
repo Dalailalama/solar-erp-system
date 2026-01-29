@@ -1,0 +1,133 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Solar Energy Blog - Latest News & Insights{% endblock %}
+
+{% block meta_description %}Stay updated with the latest trends, news, and tips about solar energy, installation, and
+sustainability.{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="page-hero bg-overlay" style="background-image: url('{% static 'website/images/blog-hero.jpg' %}');">
+    <div class="container text-center">
+        <h1 class="page-title text-white">Solar Insights</h1>
+        <p class="page-subtitle text-white">Latest news, guides, and updates from the world of renewable energy</p>
+    </div>
+</section>
+
+<!-- Blog Listing -->
+<section class="section-padding">
+    <div class="container">
+        <div class="row g-4">
+            <!-- Sidebar -->
+            <div class="col-lg-4 order-lg-2">
+                <div class="blog-sidebar sticky-top" style="top: 100px;">
+                    <!-- Search -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Search</h5>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search articles...">
+                                <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Categories -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Categories</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Residential Solar
+                                        (12)</a></li>
+                                <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Commercial News
+                                        (5)</a></li>
+                                <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Subsidies & Policy
+                                        (8)</a></li>
+                                <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Technology (4)</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Popular Posts -->
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Popular Posts</h5>
+                            <div class="d-flex mb-3 align-items-center">
+                                <img src="{% static 'website/images/blog-thumb-1.jpg' %}" class="rounded me-3"
+                                    width="60" height="60" style="object-fit: cover;">
+                                <div>
+                                    <h6 class="mb-1"><a href="#" class="text-dark text-decoration-none">Top 5 Benefits
+                                            of Going Solar</a></h6>
+                                    <small class="text-muted">Jan 15, 2024</small>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <img src="{% static 'website/images/blog-thumb-2.jpg' %}" class="rounded me-3"
+                                    width="60" height="60" style="object-fit: cover;">
+                                <div>
+                                    <h6 class="mb-1"><a href="#" class="text-dark text-decoration-none">Understanding
+                                            Net Metering</a></h6>
+                                    <small class="text-muted">Feb 02, 2024</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Posts Grid -->
+            <div class="col-lg-8 order-lg-1">
+                <!-- Blog Post 1 -->
+                <article class="card border-0 shadow-sm mb-4 overflow-hidden">
+                    <img src="{% static 'website/images/blog-1.jpg' %}" class="card-img-top" alt="Blog Post 1"
+                        style="height: 400px; object-fit: cover;">
+                    <div class="card-body p-4">
+                        <div class="mb-2">
+                            <span class="badge bg-light text-primary me-2">Installation</span>
+                            <small class="text-muted"><i class="far fa-calendar me-1"></i> March 10, 2024</small>
+                        </div>
+                        <h2 class="card-title h3"><a href="{% url 'website:blog_post' slug='benefits-of-solar' %}"
+                                class="text-dark text-decoration-none">Everything You Need to Know Before Installing
+                                Solar</a></h2>
+                        <p class="card-text text-muted">Thinking about switching to solar energy? Here is a
+                            comprehensive guide on costs, benefits, and the installation process to help you make an
+                            informed decision.</p>
+                        <a href="{% url 'website:blog_post' slug='benefits-of-solar' %}"
+                            class="btn btn-outline-primary btn-sm">Read More</a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 2 -->
+                <article class="card border-0 shadow-sm mb-4 overflow-hidden">
+                    <img src="{% static 'website/images/blog-2.jpg' %}" class="card-img-top" alt="Blog Post 2"
+                        style="height: 400px; object-fit: cover;">
+                    <div class="card-body p-4">
+                        <div class="mb-2">
+                            <span class="badge bg-light text-primary me-2">Finance</span>
+                            <small class="text-muted"><i class="far fa-calendar me-1"></i> Feb 28, 2024</small>
+                        </div>
+                        <h2 class="card-title h3"><a href="#" class="text-dark text-decoration-none">How to calculate
+                                your Solar ROI?</a></h2>
+                        <p class="card-text text-muted">Understanding the financial returns of your solar investment is
+                            crucial. Learn how to calculate payback periods and lifetime savings.</p>
+                        <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
+                    </div>
+                </article>
+
+                <!-- Pagination -->
+                <nav aria-label="Page navigation" class="mt-5">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

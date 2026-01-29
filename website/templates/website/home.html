@@ -1,224 +1,636 @@
-{% extends 'base.html' %}
+{% extends 'website/base.html' %}
 {% load static %}
 
-{% block title %}Ultra Rays Solar | Clean Energy Solutions{% endblock %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'website/css/style.css' %}">
+{% block title %}Ultra Rays Solar Energy Solutions :: Best Solar Panel Installation Company{% endblock %}
+
+{% block meta_description %}Ultra Rays Solar Energy Solutions - Leading solar energy company providing professional
+solar panel installation for homes and
+businesses. Get free quotes, calculate savings, and go solar today. 25-year warranty.{% endblock %}
+
+{% block meta_keywords %}ultra rays solar, solar panel installation, residential solar, commercial solar, solar energy,
+solar calculator,
+solar company, best solar panels{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Ultra Rays Solar Energy Solutions",
+  "image": "{% static 'website/images/office.jpg' %}",
+  "@id": "{{ request.build_absolute_uri }}",
+  "url": "{{ request.scheme }}://{{ request.get_host }}",
+  "telephone": "+1-234-567-8900",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Solar Street",
+    "addressLocality": "Your City",
+    "addressRegion": "Your State",
+    "postalCode": "12345",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 40.7128,
+    "longitude": -74.0060
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "08:00",
+      "closes": "18:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "09:00",
+      "closes": "16:00"
+    }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "150"
+  }
+}
+</script>
 {% endblock %}
 
 {% block content %}
-<!-- Use a specific ID for the Vue app pivot -->
-<div id="landing-app" v-cloak>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg solar-navbar" :class="{ 'scrolled': isScrolled }">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-sun fa-2x text-warning"></i>
-                <div class="brand-text">
-                    <span class="brand-title">ULTRA RAYS</span>
-                    <span class="brand-subtitle">ENERGY SOLUTION</span>
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-background">
+        <img src="{% static 'website/images/hero-solar.jpg' %}" alt="Solar panels on residential roof" loading="eager">
+        <div class="hero-overlay"></div>
+    </div>
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                Power Your Future with
+                <span class="highlight">Clean Solar Energy</span>
+            </h1>
+            <p class="hero-subtitle">
+                Professional solar panel installation for homes and businesses.
+                Save up to 70% on electricity bills with our premium solar solutions.
+            </p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">5000+</div>
+                    <div class="stat-label">Installations</div>
                 </div>
-            </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <i class="fas fa-bars text-dark"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact us</a></li>
-                </ul>
+                <div class="stat-item">
+                    <div class="stat-number">25</div>
+                    <div class="stat-label">Years Warranty</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Satisfaction Rate</div>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <a href="{% url 'website:quote' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-calculator"></i>
+                    Get Free Quote
+                </a>
+                <a href="{% url 'website:calculator' %}" class="btn btn-secondary btn-lg">
+                    <i class="fas fa-chart-line"></i>
+                    Calculate Savings
+                </a>
+            </div>
+            <div class="hero-trust">
+                <p>
+                    <i class="fas fa-shield-alt"></i>
+                    Certified & Insured |
+                    <i class="fas fa-award"></i>
+                    Award-Winning Service |
+                    <i class="fas fa-star"></i>
+                    4.8/5 Rating
+                </p>
             </div>
         </div>
-    </nav>
+    </div>
+    <div class="hero-scroll">
+        <a href="#benefits" class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </div>
+</section>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 hero-content fade-in-up">
-                    <div class="d-inline-block px-3 py-1 border border-light rounded-pill mb-4 text-white-50">
-                        <i class="fas fa-leaf text-success me-2"></i> #1 Renewable Energy Provider
-                    </div>
-                    <h1>Power Your Future With <span class="text-success">Solar Energy</span></h1>
-                    <p>Reduce your electricity bills and carbon footprint with our state-of-the-art solar installation
-                        services for homes and businesses.</p>
-                    <div class="d-flex gap-3">
-                        <a href="#contact" class="btn btn-solar btn-lg">Start Saving Today</a>
-                        <a href="#projects" class="btn btn-outline-light btn-lg rounded-pill px-4">View Our Work</a>
-                    </div>
+<!-- Benefits Section -->
+<section id="benefits" class="benefits-section section-padding">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title">Why Choose Solar Energy?</h2>
+            <p class="section-subtitle">
+                Discover the amazing benefits of switching to clean, renewable solar power
+            </p>
+        </div>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-dollar-sign"></i>
                 </div>
+                <h3>Reduce Energy Bills</h3>
+                <p>Save up to 70% on your monthly electricity costs with solar panels. Start saving from day one.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3>Eco-Friendly</h3>
+                <p>Reduce your carbon footprint and contribute to a cleaner, greener planet for future generations.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <h3>Increase Property Value</h3>
+                <p>Solar panels can increase your home's value by up to 4% according to recent studies.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Energy Independence</h3>
+                <p>Generate your own clean electricity and reduce dependence on the grid and rising energy costs.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-piggy-bank"></i>
+                </div>
+                <h3>Government Incentives</h3>
+                <p>Take advantage of federal tax credits, state rebates, and local incentives to reduce installation
+                    costs.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h3>Low Maintenance</h3>
+                <p>Solar panels require minimal maintenance and come with 25-year performance warranties.</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Features Section -->
-    <section id="about" class="section-padding">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h6 class="text-success text-uppercase fw-bold ls-1">Why Choose Us</h6>
-                <h2 class="fw-bold fs-1 mb-3">Leading the Solar Revolution</h2>
-                <p class="text-muted mx-auto" style="max-width: 600px;">We combine cutting-edge technology with expert
-                    installation to deliver the most efficient solar solutions.</p>
-            </div>
-
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="feature-card">
-                        <div class="icon-box">
-                            <i class="fas fa-wallet"></i>
-                        </div>
-                        <h4>Cost Savings</h4>
-                        <p class="text-muted">Save up to 40% on your monthly electricity bills from day one of
-                            installation.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="feature-card">
-                        <div class="icon-box">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h4>25-Year Warranty</h4>
-                        <p class="text-muted">Peace of mind with our comprehensive performance and equipment warranty.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="feature-card">
-                        <div class="icon-box">
-                            <i class="fas fa-tools"></i>
-                        </div>
-                        <h4>0% Maintenance</h4>
-                        <p class="text-muted">Our systems are designed for durability and require minimal upkeep.</p>
-                    </div>
-                </div>
-            </div>
+<!-- How It Works Section -->
+<section class="process-section section-padding bg-light">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title">How Solar Installation Works</h2>
+            <p class="section-subtitle">
+                Our simple 6-step process makes going solar easy and hassle-free
+            </p>
         </div>
-    </section>
-
-    <!-- Services Parallax -->
-    <section id="services" class="section-padding bg-light-alt">
-        <div class="container">
-            <div class="row align-items-center mb-5">
-                <div class="col-lg-6">
-                    <h2 class="fw-bold fs-1">Complete Solar Solutions</h2>
-                    <p class="text-muted">From consultation to activation, we handle everything.</p>
-                </div>
-                <div class="col-lg-6 text-lg-end">
-                    <a href="#" class="btn btn-outline-primary rounded-pill">Explore All Services <i
-                            class="fas fa-arrow-right ms-2"></i></a>
+        <div class="process-timeline">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Free Consultation</h3>
+                    <p>Schedule a free consultation with our solar experts to discuss your energy needs and goals.</p>
                 </div>
             </div>
-
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card border-0 shadow-sm h-100 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                            class="service-img" alt="Residential">
-                        <div class="card-body p-4">
-                            <h4>Residential Solar</h4>
-                            <p class="text-muted mb-3">Power your home with clean energy. Custom designs for every roof
-                                type.</p>
-                            <a href="#" class="text-primary fw-bold text-decoration-none">Learn More</a>
-                        </div>
-                    </div>
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Site Assessment</h3>
+                    <p>We evaluate your property's solar potential, roof condition, and energy consumption patterns.</p>
                 </div>
-                <!-- Add more cards as needed -->
             </div>
-        </div>
-    </section>
-
-    <!-- Contact Section with VUE Integration -->
-    <section id="contact" class="section-padding contact-section">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-5 mb-5 mb-lg-0">
-                    <h2 class="fs-1 fw-bold mb-4">Ready to Switch to Solar?</h2>
-                    <p class="lead mb-5 opacity-75">Get a free, no-obligation quote. Our engineers will analyze your
-                        energy needs and provide a custom proposal.</p>
-
-                    <div class="d-flex align-items-center gap-3 mb-4">
-                        <div class="bg-success rounded-circle p-3">
-                            <i class="fas fa-phone fa-lg"></i>
-                        </div>
-                        <div>
-                            <div class="small opacity-75">Call Us 24/7</div>
-                            <div class="fs-5 fw-bold">+1 (555) 123-4567</div>
-                        </div>
-                    </div>
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Custom Design</h3>
+                    <p>Our engineers design a customized solar system optimized for maximum energy production.</p>
                 </div>
-
-                <div class="col-lg-6 offset-lg-1">
-                    <div class="contact-form-glass">
-                        <form @submit.prevent="submitContact">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label class="form-label small text-uppercase fw-bold opacity-75">Your Name</label>
-                                    <input type="text" class="form-control form-control-glass"
-                                        v-model="contactForm.name" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label small text-uppercase fw-bold opacity-75">Phone
-                                        Number</label>
-                                    <input type="tel" class="form-control form-control-glass"
-                                        v-model="contactForm.phone" required>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label small text-uppercase fw-bold opacity-75">Email
-                                        Address</label>
-                                    <input type="email" class="form-control form-control-glass"
-                                        v-model="contactForm.email" required>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label small text-uppercase fw-bold opacity-75">Message</label>
-                                    <textarea class="form-control form-control-glass" rows="4"
-                                        v-model="contactForm.message"></textarea>
-                                </div>
-                                <div class="col-12 mt-4">
-                                    <button type="submit" class="btn btn-solar w-100" :disabled="loading">
-                                        <span v-if="loading"><i class="fas fa-spinner fa-spin me-2"></i>
-                                            Sending...</span>
-                                        <span v-else>Get My Free Quote</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+            </div>
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Permits & Approvals</h3>
+                    <p>We handle all paperwork, permits, and utility interconnection agreements on your behalf.</p>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h3>Professional Installation</h3>
+                    <p>Our certified installers complete the installation in 1-3 days with minimal disruption.</p>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-number">6</div>
+                <div class="step-content">
+                    <h3>Activation & Monitoring</h3>
+                    <p>System activation and ongoing monitoring to ensure optimal performance and savings.</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="solar-footer py-5">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <h5 class="text-white mb-3">Ultra Rays</h5>
-                    <p class="small">Empowering the world with sustainable energy solutions, one rooftop at a time.</p>
+<!-- Services Section -->
+<section class="services-section section-padding">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title">Our Solar Solutions</h2>
+            <p class="section-subtitle">
+                Comprehensive solar energy solutions for every need
+            </p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="{% static 'website/images/residential-solar.jpg' %}" alt="Residential solar installation"
+                        loading="lazy">
                 </div>
-                <div class="col-md-2">
-                    <h6 class="text-white mb-3">Quick Links</h6>
-                    <ul class="list-unstyled small d-flex flex-column gap-2">
-                        <li><a href="#" class="text-white-50 text-decoration-none">About Us</a></li>
-                        <li><a href="#" class="text-white-50 text-decoration-none">Projects</a></li>
-                        <li><a href="#" class="text-white-50 text-decoration-none">Careers</a></li>
+                <div class="service-content">
+                    <h3>Residential Solar</h3>
+                    <p>
+                        Transform your home with clean solar energy. Our residential solar solutions are designed
+                        to maximize savings while seamlessly integrating with your home's architecture.
+                    </p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Custom system design</li>
+                        <li><i class="fas fa-check"></i> Premium solar panels</li>
+                        <li><i class="fas fa-check"></i> 25-year warranty</li>
+                        <li><i class="fas fa-check"></i> Flexible financing</li>
                     </ul>
+                    <a href="{% url 'website:residential' %}" class="btn btn-outline">
+                        Learn More
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-                <!-- More cols... -->
             </div>
-            <div class="border-top border-secondary mt-5 pt-4 text-center small text-white-50">
-                &copy; 2024 Ultra Rays Solar. All rights reserved.
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="{% static 'website/images/commercial-solar.jpg' %}" alt="Commercial solar installation"
+                        loading="lazy">
+                </div>
+                <div class="service-content">
+                    <h3>Commercial Solar</h3>
+                    <p>
+                        Reduce operating costs and demonstrate environmental leadership with commercial solar.
+                        Perfect for businesses, offices, and retail spaces.
+                    </p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> ROI analysis</li>
+                        <li><i class="fas fa-check"></i> Scalable systems</li>
+                        <li><i class="fas fa-check"></i> Tax incentives</li>
+                        <li><i class="fas fa-check"></i> Energy management</li>
+                    </ul>
+                    <a href="{% url 'website:commercial' %}" class="btn btn-outline">
+                        Learn More
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="{% static 'website/images/industrial-solar.jpg' %}" alt="Industrial solar installation"
+                        loading="lazy">
+                </div>
+                <div class="service-content">
+                    <h3>Industrial Solar</h3>
+                    <p>
+                        Large-scale solar solutions for industrial facilities and manufacturing plants.
+                        Reduce energy costs and meet sustainability goals.
+                    </p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> High-capacity systems</li>
+                        <li><i class="fas fa-check"></i> Grid integration</li>
+                        <li><i class="fas fa-check"></i> 24/7 monitoring</li>
+                        <li><i class="fas fa-check"></i> Maintenance plans</li>
+                    </ul>
+                    <a href="{% url 'website:industrial' %}" class="btn btn-outline">
+                        Learn More
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
-    </footer>
-</div>
+    </div>
+</section>
+
+<!-- Stats Counter Section -->
+<section class="stats-section section-padding bg-gradient">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-icon">
+                    <i class="fas fa-solar-panel"></i>
+                </div>
+                <div class="stat-value" data-target="5000">0</div>
+                <div class="stat-label">Installations Completed</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-value" data-target="4500">0</div>
+                <div class="stat-label">Happy Customers</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="stat-value" data-target="50">0</div>
+                <div class="stat-suffix">MW</div>
+                <div class="stat-label">Total Capacity Installed</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <div class="stat-value" data-target="25000">0</div>
+                <div class="stat-suffix">tons</div>
+                <div class="stat-label">CO₂ Emissions Reduced</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section section-padding">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <p class="section-subtitle">
+                Don't just take our word for it - hear from our satisfied customers
+            </p>
+        </div>
+        <div class="testimonials-slider">
+            <div class="testimonial-card">
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">
+                    "The team was professional, efficient, and completed the installation in just 2 days.
+                    Our energy bills have dropped by 65%! Highly recommend!"
+                </p>
+                <div class="testimonial-author">
+                    <img src="{% static 'website/images/testimonial-1.jpg' %}" alt="John Smith" loading="lazy">
+                    <div class="author-info">
+                        <h4>John Smith</h4>
+                        <p>Homeowner, Los Angeles</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">
+                    "Excellent service from start to finish. The solar calculator helped us understand our savings,
+                    and the financing options made it affordable. Very happy with our decision!"
+                </p>
+                <div class="testimonial-author">
+                    <img src="{% static 'website/images/testimonial-2.jpg' %}" alt="Sarah Johnson" loading="lazy">
+                    <div class="author-info">
+                        <h4>Sarah Johnson</h4>
+                        <p>Business Owner, San Diego</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">
+                    "Best investment we've made! The system pays for itself, and we're doing our part for the
+                    environment.
+                    The monitoring app is fantastic too!"
+                </p>
+                <div class="testimonial-author">
+                    <img src="{% static 'website/images/testimonial-3.jpg' %}" alt="Michael Chen" loading="lazy">
+                    <div class="author-info">
+                        <h4>Michael Chen</h4>
+                        <p>Homeowner, Phoenix</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section section-padding bg-gradient">
+    <div class="container">
+        <div class="cta-content text-center">
+            <h2 class="cta-title">Ready to Start Saving with Solar?</h2>
+            <p class="cta-subtitle">
+                Get a free, no-obligation quote today and discover how much you can save with solar energy
+            </p>
+            <div class="cta-buttons">
+                <a href="{% url 'website:quote' %}" class="btn btn-white btn-lg">
+                    <i class="fas fa-file-invoice"></i>
+                    Get Free Quote
+                </a>
+                <a href="tel:+12345678900" class="btn btn-outline-white btn-lg">
+                    <i class="fas fa-phone"></i>
+                    Call Now: (234) 567-8900
+                </a>
+            </div>
+            <p class="cta-note">
+                <i class="fas fa-clock"></i>
+                Average response time: Under 2 hours
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section section-padding">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">
+                Find answers to common questions about solar panel installation
+            </p>
+        </div>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>How much can I save with solar panels?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>
+                        Most homeowners save between 40-70% on their electricity bills. The exact savings depend on
+                        your location, energy consumption, system size, and local electricity rates. Use our
+                        <a href="{% url 'website:calculator' %}">solar calculator</a> to get a personalized estimate.
+                    </p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>How long does installation take?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>
+                        The physical installation typically takes 1-3 days for residential systems. However, the entire
+                        process from consultation to activation usually takes 4-8 weeks, including design, permits,
+                        and utility approvals.
+                    </p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>What financing options are available?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>
+                        We offer multiple financing options including cash purchase, solar loans, leases, and Power
+                        Purchase Agreements (PPAs). We also help you take advantage of federal tax credits and state
+                        incentives. Learn more about <a href="{% url 'website:financing' %}">financing options</a>.
+                    </p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Do solar panels work on cloudy days?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>
+                        Yes! Solar panels still generate electricity on cloudy days, though at reduced efficiency
+                        (typically 10-25% of full capacity). Modern solar panels are designed to capture diffuse
+                        sunlight and work efficiently in various weather conditions.
+                    </p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>What is the warranty on solar panels?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>
+                        Our solar panels come with a 25-year performance warranty, guaranteeing at least 80% efficiency
+                        after 25 years. We also provide a 10-year workmanship warranty on installation and a 25-year
+                        warranty on inverters.
+                    </p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>How much maintenance do solar panels require?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>
+                        Solar panels require minimal maintenance. Rain naturally cleans the panels, but we recommend
+                        professional cleaning 1-2 times per year for optimal performance. We offer maintenance plans
+                        for worry-free operation.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="text-center" style="margin-top: 2rem;">
+            <a href="{% url 'website:faq' %}" class="btn btn-outline">
+                View All FAQs
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
 {% endblock %}
 
-{% block vue_entry %}
-<script type="module" src="{% static 'website/js/landing.js' %}"></script>
+{% block extra_js %}
+<script>
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(button => {
+        button.addEventListener('click', () => {
+            const faqItem = button.parentElement;
+            const isOpen = faqItem.classList.contains('active');
+
+            // Close all FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Open clicked item if it wasn't open
+            if (!isOpen) {
+                faqItem.classList.add('active');
+            }
+        });
+    });
+
+    // Stats Counter Animation
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px'
+    };
+
+    const animateCounter = (element) => {
+        const target = parseInt(element.dataset.target);
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+
+        const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+                element.textContent = Math.floor(current).toLocaleString();
+                requestAnimationFrame(updateCounter);
+            } else {
+                element.textContent = target.toLocaleString();
+            }
+        };
+
+        updateCounter();
+    };
+
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counters = entry.target.querySelectorAll('.stat-value');
+                counters.forEach(counter => {
+                    if (!counter.classList.contains('animated')) {
+                        counter.classList.add('animated');
+                        animateCounter(counter);
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+
+    const statsSection = document.querySelector('.stats-section');
+    if (statsSection) {
+        statsObserver.observe(statsSection);
+    }
+
+    // Smooth Scroll for Anchor Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+</script>
 {% endblock %}

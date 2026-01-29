@@ -1,0 +1,116 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Careers at Ultra Rays Solar - Join Our Team{% endblock %}
+
+{% block meta_description %}Build a career with purpose. Join Ultra Rays Solar and help power the world with clean,
+renewable energy. View current job openings.{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section class="page-hero bg-overlay" style="background-image: url('{% static 'website/images/careers-hero.jpg' %}');">
+    <div class="container text-center">
+        <h1 class="page-title text-white">Join the Solar Revolution</h1>
+        <p class="page-subtitle text-white">Build a career that makes a real difference</p>
+    </div>
+</section>
+
+<!-- Values & Culture -->
+<section class="section-padding">
+    <div class="container text-center">
+        <h2 class="section-title mb-5">Why Work With Us?</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="p-4">
+                    <i class="fas fa-heart fa-3x text-danger mb-3"></i>
+                    <h4>Purpose-Driven Work</h4>
+                    <p>Every project you work on contributes directly to a cleaner, healthier planet.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4">
+                    <i class="fas fa-chart-line fa-3x text-success mb-3"></i>
+                    <h4>Growth & Learning</h4>
+                    <p>We invest in our people with continuous training and certification programs.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4">
+                    <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                    <h4>Inclusive Culture</h4>
+                    <p>We believe diverse teams build better solutions. Everyone's voice is heard here.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Open Positions -->
+<section class="section-padding bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Current Openings</h2>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <!-- Job 1 -->
+                <div class="card mb-3 shadow-sm border-0">
+                    <div
+                        class="card-body p-4 d-flex flex-column flex-md-row justify-content-between align-items-center">
+                        <div>
+                            <h4 class="card-title text-primary">Senior Solar Engineer</h4>
+                            <div class="text-muted mb-2">
+                                <i class="fas fa-map-marker-alt me-2"></i> Bangalore, India
+                                <span class="mx-2">|</span>
+                                <i class="fas fa-briefcase me-2"></i> Full-time
+                            </div>
+                        </div>
+                        <a href="mailto:careers@ultrarayssolar.com?subject=Application for Senior Solar Engineer"
+                            class="btn btn-outline-primary mt-3 mt-md-0">Apply Now</a>
+                    </div>
+                </div>
+
+                <!-- Job 2 -->
+                <div class="card mb-3 shadow-sm border-0">
+                    <div
+                        class="card-body p-4 d-flex flex-column flex-md-row justify-content-between align-items-center">
+                        <div>
+                            <h4 class="card-title text-primary">Sales Executive</h4>
+                            <div class="text-muted mb-2">
+                                <i class="fas fa-map-marker-alt me-2"></i> Mumbai, India
+                                <span class="mx-2">|</span>
+                                <i class="fas fa-briefcase me-2"></i> Full-time
+                            </div>
+                        </div>
+                        <a href="mailto:careers@ultrarayssolar.com?subject=Application for Sales Executive"
+                            class="btn btn-outline-primary mt-3 mt-md-0">Apply Now</a>
+                    </div>
+                </div>
+
+                <!-- Job 3 -->
+                <div class="card mb-3 shadow-sm border-0">
+                    <div
+                        class="card-body p-4 d-flex flex-column flex-md-row justify-content-between align-items-center">
+                        <div>
+                            <h4 class="card-title text-primary">Solar Installation Technician</h4>
+                            <div class="text-muted mb-2">
+                                <i class="fas fa-map-marker-alt me-2"></i> Multiple Locations
+                                <span class="mx-2">|</span>
+                                <i class="fas fa-briefcase me-2"></i> Contract
+                            </div>
+                        </div>
+                        <a href="mailto:careers@ultrarayssolar.com?subject=Application for Installation Technician"
+                            class="btn btn-outline-primary mt-3 mt-md-0">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <p>Don't see a role that fits? We are always looking for talent.</p>
+            <a href="mailto:careers@ultrarayssolar.com" class="btn btn-link">Send us your resume</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

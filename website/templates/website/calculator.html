@@ -1,0 +1,97 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Free Solar Cost Calculator - Estimate Your Savings{% endblock %}
+
+{% block meta_description %}Calculate your potential solar savings, payback period, and system cost instantly with our
+advanced solar calculator.{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="page-hero bg-overlay"
+    style="background-image: url('{% static 'website/images/calculator-hero.jpg' %}');">
+    <div class="container text-center">
+        <h1 class="page-title text-white">Solar Savings Calculator</h1>
+        <p class="page-subtitle text-white">Find out how much you can save by switching to solar</p>
+    </div>
+</section>
+
+<!-- Calculator App Container -->
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow-lg border-0 rounded-lg overflow-hidden">
+                    <div class="card-header bg-primary text-white p-4 text-center">
+                        <h3 class="mb-0">Estimate Your Solar Potential</h3>
+                    </div>
+                    <div class="card-body p-5">
+                        <!-- 
+                            Vue Component Mount Point 
+                            The actual interactive calculator will be mounted here by Vue.
+                            For SEO, we provide a basic fallback form or text.
+                        -->
+                        <div id="solar-calculator-app">
+                            <form>
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold">Monthly Electricity Bill (Avg)</label>
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class="form-control" placeholder="e.g. 150">
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold">Roof Type</label>
+                                    <select class="form-select form-select-lg">
+                                        <option>Flat Concrete</option>
+                                        <option>Sloped Metal</option>
+                                        <option>Tiled</option>
+                                    </select>
+                                </div>
+                                <div class="d-grid">
+                                    <button class="btn btn-primary btn-lg" type="button">Calculate Savings</button>
+                                </div>
+                                <p class="text-muted text-center mt-3 small">
+                                    <i class="fas fa-info-circle me-1"></i> Interactive calculator loading...
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="section-padding">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">How We Calculate Savings</h2>
+        <div class="row g-4">
+            <div class="col-md-4 text-center">
+                <div class="p-4">
+                    <i class="fas fa-sun fa-3x text-warning mb-3"></i>
+                    <h5>Sunlight Hours</h5>
+                    <p>We analyze local weather data to estimate annual solar production for your region.</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="p-4">
+                    <i class="fas fa-plug fa-3x text-warning mb-3"></i>
+                    <h5>Energy Usage</h5>
+                    <p>Your current bill helps us size the perfect system to offset your consumption.</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="p-4">
+                    <i class="fas fa-hand-holding-dollar fa-3x text-warning mb-3"></i>
+                    <h5>Incentives</h5>
+                    <p>We factor in federal tax credits and local rebates to show true net cost.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

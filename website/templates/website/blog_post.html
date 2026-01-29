@@ -1,0 +1,116 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Everything You Need to Know Before Installing Solar - Ultra Rays Blog{% endblock %}
+
+{% block meta_description %}A comprehensive guide on costs, benefits, and the installation process for residential solar
+panels.{% endblock %}
+
+{% block content %}
+
+<!-- Hero/Header -->
+<section class="page-hero bg-overlay"
+    style="background-image: url('{% static 'website/images/blog-1.jpg' %}'); min-height: 400px;">
+    <div class="container text-center">
+        <span class="badge bg-warning text-dark mb-3">Installation Guide</span>
+        <h1 class="page-title text-white display-4">Everything You Need to Know Before Installing Solar</h1>
+        <div class="d-flex justify-content-center align-items-center text-white mt-3">
+            <div class="me-4"><i class="far fa-user me-2"></i> Aditi Sharma</div>
+            <div class="me-4"><i class="far fa-calendar me-2"></i> March 10, 2024</div>
+            <div><i class="far fa-clock me-2"></i> 5 min read</div>
+        </div>
+    </div>
+</section>
+
+<section class="section-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Article Content -->
+                <article class="blog-content">
+                    <p class="lead">Switching to solar energy is one of the best investments homeowners can make today.
+                        Not only does it reduce your electricity bills, but it also increases your property value and
+                        contributes to a greener planet.</p>
+
+                    <h3>1. Understand Your Energy Consumption</h3>
+                    <p>Before installing solar panels, analyze your electricity bill. Look at your monthly usage in
+                        kilowatt-hours (kWh). This will help determine the size of the system you need.</p>
+                    <div class="alert alert-info">
+                        <strong>Tip:</strong> Most average homes require a 3kW to 5kW system to offset 80-90% of their
+                        bill.
+                    </div>
+
+                    <h3>2. Assess Your Roof Condition</h3>
+                    <p>Solar panels are designed to last 25 years or more. Ensure your roof is in good condition to
+                        support the panels for this duration. Ideally, your roof should face south to capture maximum
+                        sunlight.</p>
+                    <img src="{% static 'website/images/blog-content-roof.jpg' %}" class="img-fluid rounded my-4 w-100"
+                        alt="Solar Roof Inspection">
+
+                    <h3>3. Know the Costs and Incentives</h3>
+                    <p>The cost of solar has dropped significantly. Additionally, government incentives like the PM
+                        Surya Ghar Yojana can subsidize a significant portion of the cost. Check our <a
+                            href="{% url 'website:subsidies' %}">subsidies page</a> for more details.</p>
+
+                    <h3>4. Choose the Right Installer</h3>
+                    <p>Work with certified and experienced installers who offer warranties on workmanship. A good
+                        installer will handle all the permits and net metering applications for you.</p>
+
+                    <blockquote class="blockquote border-start border-primary border-4 ps-4 my-5 fst-italic">
+                        "Solar energy is not just about saving money; it's about investing in a sustainable future for
+                        the next generation."
+                    </blockquote>
+
+                    <h3>Conclusion</h3>
+                    <p>Going solar is a big decision, but with the right information, it's a smooth process. Ready to
+                        start your solar journey? Get a free quote today.</p>
+                </article>
+
+                <!-- Tags & Share -->
+                <div class="border-top border-bottom py-4 my-5 d-flex justify-content-between align-items-center">
+                    <div class="tags">
+                        <span class="fw-bold me-2">Tags:</span>
+                        <a href="#" class="badge bg-light text-dark text-decoration-none border me-1">Solar Tips</a>
+                        <a href="#" class="badge bg-light text-dark text-decoration-none border me-1">Green Energy</a>
+                        <a href="#" class="badge bg-light text-dark text-decoration-none border me-1">Home
+                            Improvement</a>
+                    </div>
+                    <div class="share">
+                        <span class="fw-bold me-2">Share:</span>
+                        <a href="#" class="text-muted me-2"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="text-muted me-2"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-linkedin fa-lg"></i></a>
+                    </div>
+                </div>
+
+                <!-- Related Posts -->
+                <h3 class="mb-4">You Might Also Like</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="#" class="text-decoration-none text-dark">Top 10 Solar
+                                        Myths Debunked</a></h5>
+                                <p class="card-text text-muted small">Separating fact from fiction in the solar
+                                    industry.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="#" class="text-decoration-none text-dark">Solar Panel
+                                        Maintenance Guide</a></h5>
+                                <p class="card-text text-muted small">How to keep your system performing at peak
+                                    efficiency.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,133 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Solar Products - Premium Panels & Inverters{% endblock %}
+
+{% block meta_description %}Explore our range of high-efficiency solar panels, advanced inverters, and battery storage
+solutions from top global brands.{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="page-hero bg-overlay" style="background-image: url('{% static 'website/images/products-hero.jpg' %}');">
+    <div class="container text-center">
+        <h1 class="page-title text-white">Premium Solar Equipment</h1>
+        <p class="page-subtitle text-white">We partner with the world's leading brands to ensure quality and performance
+        </p>
+    </div>
+</section>
+
+<!-- Product Categories -->
+<section class="section-padding">
+    <div class="container">
+        <!-- Solar Panels -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="section-title border-bottom pb-3 mb-4">Solar Panels</h2>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="product-card card border-0 shadow-sm h-100">
+                    <img src="{% static 'website/images/panel-mono.jpg' %}" class="card-img-top"
+                        alt="Monocrystalline Panel">
+                    <div class="card-body">
+                        <h5 class="card-title">Monocrystalline PERC</h5>
+                        <p class="card-text text-muted">High efficiency panels perfect for residential roofs with
+                            limited space.</p>
+                        <ul class="list-unstyled small text-muted">
+                            <li><i class="fas fa-bolt text-warning me-2"></i> 400W - 550W</li>
+                            <li><i class="fas fa-check text-success me-2"></i> 20.5%+ Efficiency</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="product-card card border-0 shadow-sm h-100">
+                    <img src="{% static 'website/images/panel-bifacial.jpg' %}" class="card-img-top"
+                        alt="Bifacial Panel">
+                    <div class="card-body">
+                        <h5 class="card-title">Bifacial Modules</h5>
+                        <p class="card-text text-muted">Generates power from both sides. Ideal for commercial and
+                            ground-mount systems.</p>
+                        <ul class="list-unstyled small text-muted">
+                            <li><i class="fas fa-bolt text-warning me-2"></i> 540W - 600W</li>
+                            <li><i class="fas fa-check text-success me-2"></i> Extra 10-30% yield</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="product-card card border-0 shadow-sm h-100">
+                    <img src="{% static 'website/images/panel-topcon.jpg' %}" class="card-img-top" alt="TOPCon Panel">
+                    <div class="card-body">
+                        <h5 class="card-title">N-Type TOPCon</h5>
+                        <p class="card-text text-muted">Next-gen technology with lower degradation and better low-light
+                            performance.</p>
+                        <ul class="list-unstyled small text-muted">
+                            <li><i class="fas fa-bolt text-warning me-2"></i> 570W+</li>
+                            <li><i class="fas fa-check text-success me-2"></i> 30-Year Warranty</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inverters -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="section-title border-bottom pb-3 mb-4">Inverters</h2>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="d-flex bg-white p-4 rounded shadow-sm border align-items-center">
+                    <img src="{% static 'website/images/inverter-string.jpg' %}" alt="String Inverter"
+                        class="me-4 rounded" style="width: 120px;">
+                    <div>
+                        <h4>String Inverters</h4>
+                        <p class="text-muted">Reliable and cost-effective solutions for standard installations.</p>
+                        <span class="badge bg-primary">Growatt</span>
+                        <span class="badge bg-primary">Solis</span>
+                        <span class="badge bg-primary">Sungrow</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="d-flex bg-white p-4 rounded shadow-sm border align-items-center">
+                    <img src="{% static 'website/images/inverter-micro.jpg' %}" alt="Micro Inverter"
+                        class="me-4 rounded" style="width: 120px;">
+                    <div>
+                        <h4>Micro Inverters</h4>
+                        <p class="text-muted">Module-level optimization for roofs with shading issues.</p>
+                        <span class="badge bg-info text-dark">Enphase</span>
+                        <span class="badge bg-info text-dark">Hoymiles</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Brand Guarantee -->
+<section class="section-padding bg-light text-center">
+    <div class="container">
+        <h2 class="mb-5">Our Technology Partners</h2>
+        <div class="row justify-content-center grayscale-logos">
+            <!-- Add logo images here or use placeholders -->
+            <div class="col-6 col-md-2 mb-4">
+                <div class="p-3"><strong>Trina Solar</strong></div>
+            </div>
+            <div class="col-6 col-md-2 mb-4">
+                <div class="p-3"><strong>Jinko</strong></div>
+            </div>
+            <div class="col-6 col-md-2 mb-4">
+                <div class="p-3"><strong>Longi</strong></div>
+            </div>
+            <div class="col-6 col-md-2 mb-4">
+                <div class="p-3"><strong>Sungrow</strong></div>
+            </div>
+            <div class="col-6 col-md-2 mb-4">
+                <div class="p-3"><strong>Growatt</strong></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

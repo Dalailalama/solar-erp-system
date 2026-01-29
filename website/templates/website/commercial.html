@@ -1,0 +1,131 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Commercial Solar Installation - Reduce Operating Costs{% endblock %}
+
+{% block meta_description %}Maximize your business profitability with commercial solar solutions. Tax benefits, ROI
+analysis, and sustainable energy for your business.{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="page-hero bg-overlay"
+    style="background-image: url('{% static 'website/images/commercial-hero.jpg' %}');">
+    <div class="container text-center">
+        <h1 class="page-title text-white">Power Your Business</h1>
+        <p class="page-subtitle text-white">Smart solar solutions for commercial enterprises</p>
+        <a href="{% url 'website:contact' %}" class="btn btn-primary btn-lg mt-4">Consult a Solar Expert</a>
+    </div>
+</section>
+
+<!-- Business Benefits -->
+<section class="section-padding">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="section-title mb-4">Why Commercial Solar?</h2>
+                <ul class="list-unstyled">
+                    <li class="d-flex mb-4">
+                        <div class="icon-box text-primary me-3"><i class="fas fa-chart-line fa-2x"></i></div>
+                        <div>
+                            <h4>High ROI</h4>
+                            <p>Achieve a Return on Investment (ROI) of 20-30% with payback periods as low as 3-4 years.
+                            </p>
+                        </div>
+                    </li>
+                    <li class="d-flex mb-4">
+                        <div class="icon-box text-primary me-3"><i class="fas fa-file-invoice-dollar fa-2x"></i></div>
+                        <div>
+                            <h4>Accelerated Depreciation</h4>
+                            <p>Benefit from 40% accelerated depreciation tax benefits in the first year.</p>
+                        </div>
+                    </li>
+                    <li class="d-flex mb-4">
+                        <div class="icon-box text-primary me-3"><i class="fas fa-leaf fa-2x"></i></div>
+                        <div>
+                            <h4>Green Brand Image</h4>
+                            <p>Demonstrate your commitment to sustainability and attract necessary ESG ratings.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                <img src="{% static 'website/images/commercial-chart.jpg' %}" alt="ROI Chart"
+                    class="img-fluid rounded shadow">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Industries Served -->
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h2 class="section-title">Industries We Serve</h2>
+        </div>
+        <div class="row g-4 text-center">
+            <div class="col-md-3">
+                <div class="bg-white p-4 rounded shadow-sm h-100">
+                    <i class="fas fa-school fa-3x text-secondary mb-3"></i>
+                    <h5>Schools & Colleges</h5>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="bg-white p-4 rounded shadow-sm h-100">
+                    <i class="fas fa-hospital fa-3x text-secondary mb-3"></i>
+                    <h5>Hospitals</h5>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="bg-white p-4 rounded shadow-sm h-100">
+                    <i class="fas fa-hotel fa-3x text-secondary mb-3"></i>
+                    <h5>Hotels & Resorts</h5>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="bg-white p-4 rounded shadow-sm h-100">
+                    <i class="fas fa-building fa-3x text-secondary mb-3"></i>
+                    <h5>Office Complexes</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Case Study Preview -->
+<section class="section-padding">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Featured Commercial Project</h2>
+        <div class="card border-0 shadow-lg overflow-hidden">
+            <div class="row g-0">
+                <div class="col-md-6">
+                    <img src="{% static 'website/images/project-commercial.jpg' %}"
+                        class="img-fluid h-100 object-fit-cover" alt="Commercial Project">
+                </div>
+                <div class="col-md-6 d-flex align-items-center">
+                    <div class="card-body p-5">
+                        <h3 class="card-title text-primary">Green Valley International School</h3>
+                        <p class="card-text">Detailed engineering and installation of a 100kW rooftop solar plant.</p>
+                        <ul class="list-unstyled mb-4">
+                            <li><strong>Capacity:</strong> 100kW</li>
+                            <li><strong>Annual Savings:</strong> $15,000</li>
+                            <li><strong>CO2 Offset:</strong> 120 Tons/Year</li>
+                        </ul>
+                        <a href="{% url 'website:portfolio' %}" class="btn btn-outline-primary">View More Projects</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section-padding bg-dark text-white text-center">
+    <div class="container">
+        <h2 class="mb-4">Get a Customized Commercial Solar Proposal</h2>
+        <p class="lead mb-4">We offer free site assessments and detailed financial modeling for your business.</p>
+        <a href="{% url 'website:contact' %}" class="btn btn-primary btn-lg">Request Site Audit</a>
+    </div>
+</section>
+
+{% endblock %}

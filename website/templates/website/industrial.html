@@ -1,0 +1,100 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Industrial Solar Solutions - Heavy Duty Power{% endblock %}
+
+{% block meta_description %}Large-scale solar power plants for industries and factories. Reduce overheads and ensure
+consistent power supply.{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="page-hero bg-overlay"
+    style="background-image: url('{% static 'website/images/industrial-hero.jpg' %}');">
+    <div class="container text-center">
+        <h1 class="page-title text-white">Industrial Solar Power</h1>
+        <p class="page-subtitle text-white">Sustainable energy for heavy industries</p>
+    </div>
+</section>
+
+<!-- Scale & Solutions -->
+<section class="section-padding">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h2 class="section-title">Large-Scale Energy Solutions</h2>
+            <p class="section-subtitle">Tailored for manufacturing and production facilities</p>
+        </div>
+        <div class="row g-5">
+            <div class="col-lg-6">
+                <h3>Grid-Connected Solar</h3>
+                <p>Seamlessly integrate solar power with your existing grid connection. Use solar during peak hours to
+                    drastically reduce demand charges.</p>
+                <ul class="list-checked">
+                    <li>Net metering support</li>
+                    <li>Peak load shaving</li>
+                    <li>Zero export options</li>
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                <img src="{% static 'website/images/industrial-grid.jpg' %}" class="img-fluid rounded" alt="Grid Solar">
+            </div>
+        </div>
+        <div class="row g-5 mt-4 flex-row-reverse">
+            <div class="col-lg-6">
+                <h3>Captive Power Plants</h3>
+                <p>Ensure energy security with a dedicated solar power plant on your premises. Protect your production
+                    from grid fluctuations.</p>
+                <ul class="list-checked">
+                    <li>Stable voltage output</li>
+                    <li>Reduced reliance on diesel generators</li>
+                    <li>Long-term energy price hedging</li>
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                <img src="{% static 'website/images/industrial-plant.jpg' %}" class="img-fluid rounded"
+                    alt="Solar Plant">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Technical Expertise -->
+<section class="section-padding bg-light">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Our Technical Expertise</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-box p-4 bg-white shadow-sm border-start border-4 border-primary h-100">
+                    <h4>High Tension (HT) Integration</h4>
+                    <p>Expertise in connecting solar plants to HT lines (11kV/33kV) with necessary approvals and safety
+                        equipment.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box p-4 bg-white shadow-sm border-start border-4 border-primary h-100">
+                    <h4>Advanced Monitoring (SCADA)</h4>
+                    <p>Real-time plant monitoring and control systems to track generation, efficiency, and maintenance
+                        needs.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box p-4 bg-white shadow-sm border-start border-4 border-primary h-100">
+                    <h4>O&M Services</h4>
+                    <p>Comprehensive Operations & Maintenance contracts to ensure maximum plant uptime and performance
+                        ratio.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section section-padding bg-gradient text-white text-center">
+    <div class="container">
+        <h2>Power Your Industry with Solar</h2>
+        <p class="lead mb-4">Let's discuss a technical solution for your facility.</p>
+        <a href="{% url 'website:contact' %}" class="btn btn-white btn-lg text-primary">Talk to an Engineer</a>
+    </div>
+</section>
+
+{% endblock %}

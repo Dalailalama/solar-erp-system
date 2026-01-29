@@ -1,0 +1,153 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Contact Us - Reach Out to Ultra Rays Solar{% endblock %}
+
+{% block meta_description %}Get in touch with Ultra Rays Solar for inquiries, quotes, or support. Call us, visit our
+office, or send us a message today.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'website/css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="page-hero bg-overlay"
+    style="background-image: url('{% static 'website/images/contact-hero.jpg' %}'); background-size: cover; background-position: center; padding: var(--spacing-4xl) 0; position: relative;">
+    <div style="position: absolute; inset: 0; background: var(--gradient-overlay); z-index: 1;"></div>
+    <div class="container text-center" style="position: relative; z-index: 2;">
+        <h1 class="page-title text-white" style="margin-bottom: 1rem;">Contact Us</h1>
+        <p class="page-subtitle text-white" style="font-size: var(--fs-xl); opacity: 0.95;">We're here to
+            answer any questions you may have</p>
+    </div>
+</section>
+
+<!-- Main Contact Section -->
+<section class="contact-section">
+    <div class="container">
+        <div class="contact-grid">
+
+            <!-- Left Side: Contact Form (50%) -->
+            <div class="contact-card">
+                <div class="contact-card-body">
+                    <h3 style="color: var(--deep-blue); margin-bottom: 2rem;">Send us a Message</h3>
+
+                    <form action="#" method="POST">
+                        {% csrf_token %}
+                        <!-- Row 1: Full Name (100%) -->
+                        <div class="solar-form-group">
+                            <label class="solar-label">Full Name</label>
+                            <input type="text" class="solar-form-control" placeholder="Enter your full name" required>
+                        </div>
+
+                        <!-- Row 2: Email & Phone (50% / 50%) -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                            <div class="solar-form-group">
+                                <label class="solar-label">Email Address</label>
+                                <input type="email" class="solar-form-control" placeholder="email@example.com" required>
+                            </div>
+                            <div class="solar-form-group">
+                                <label class="solar-label">Phone Number</label>
+                                <input type="text" class="solar-form-control" placeholder="+91 98765 43210" required>
+                            </div>
+                        </div>
+
+                        <!-- Row 3: Subject (100%) -->
+                        <div class="solar-form-group">
+                            <label class="solar-label">Subject</label>
+                            <select class="solar-form-control solar-select">
+                                <option value="" disabled selected>Select a subject</option>
+                                <option>General Inquiry</option>
+                                <option>Solar Consultation / Quote</option>
+                                <option>Maintenance & Support</option>
+                                <option>Partnership Opportunities</option>
+                                <option>Career Inquiry</option>
+                            </select>
+                        </div>
+
+                        <!-- Row 4: Message (100%) -->
+                        <div class="solar-form-group" style="margin-bottom: 2rem;">
+                            <label class="solar-label">Message</label>
+                            <textarea class="solar-form-control" rows="5" style="min-height: 120px; resize: vertical;"
+                                placeholder="Tell us how we can help you..." required></textarea>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div style="margin-top: auto;">
+                            <button type="submit" class="btn btn-primary btn-lg btn-submit"
+                                style="width: 100%; justify-content: center;">
+                                Send Message <i class="fas fa-paper-plane" style="margin-left: 0.75rem;"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Side: Map & Locator (50%) -->
+            <div id="contact-app" class="contact-card" v-cloak>
+                <!-- Top Section: Branch Selector above map -->
+                <div class="map-header">
+                    <div class="solar-form-group" style="margin-bottom: 0;">
+                        <label class="solar-label" style="color: var(--solar-orange);">Select Branch</label>
+                        <select class="solar-form-control solar-select" v-model="selectedBranch">
+                            <option value="head_office">Bangalore (Head Office)</option>
+                            <option value="mumbai">Mumbai Branch</option>
+                            <option value="delhi">Delhi Branch</option>
+                            <option value="hyderabad">Hyderabad Branch</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Map Section -->
+                <div class="map-container">
+                    <iframe class="map-frame" :src="currentBranch.mapSrc" allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
+
+                <!-- Footer: Branch Details -->
+                <div class="branch-footer">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                        <div class="branch-info-list" style="flex: 1;">
+                            <h4 style="margin-bottom: 1rem; color: var(--deep-blue);">[[ currentBranch.name ]]</h4>
+
+                            <div class="branch-info-item">
+                                <i class="fas fa-location-dot"></i>
+                                <span>[[ currentBranch.address ]], [[ currentBranch.city ]]</span>
+                            </div>
+
+                            <div class="branch-info-item">
+                                <i class="fas fa-clock"></i>
+                                <span>[[ currentBranch.hours ]]</span>
+                            </div>
+
+                            <div class="branch-info-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>[[ currentBranch.email ]]</span>
+                            </div>
+                        </div>
+
+                        <div style="text-align: right; margin-left: var(--spacing-lg);">
+                            <a :href="'tel:' + currentBranch.phone" class="btn-call">
+                                <i class="fas fa-phone"></i> [[ currentBranch.displayPhone ]]
+                            </a>
+                            <p
+                                style="margin-top: 0.5rem; color: var(--medium-gray); font-size: var(--fs-xs); font-weight: var(--fw-medium);">
+                                Call for Support</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<!-- Vue 3 Global Build -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<!-- Contact Page Custom Logic -->
+<script src="{% static 'website/js/contact_us.js' %}"></script>
+{% endblock %}

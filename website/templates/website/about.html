@@ -1,0 +1,220 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}About Us - Ultra Rays Solar Energy Solutions{% endblock %}
+
+{% block meta_description %}Learn about Ultra Rays Solar, our mission to provide clean energy solutions, our expert
+team, and our commitment to a sustainable future.{% endblock %}
+
+{% block meta_keywords %}about ultra rays solar, solar company history, solar team, solar mission, renewable energy
+company{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="page-hero bg-overlay" style="background-image: url('{% static 'website/images/about-hero.png' %}');">
+    <div class="container text-center">
+        <h1 class="page-title text-white">About Ultra Rays Solar</h1>
+        <p class="page-subtitle text-white">Powering the Future with Clean, Renewable Energy</p>
+    </div>
+</section>
+
+<!-- Our Story Section -->
+<section class="section-padding">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="about-image">
+                    <img src="{% static 'website/images/story.jpg' %}" alt="Our Story"
+                        class="img-fluid rounded shadow-lg">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h2 class="section-title">Our Story</h2>
+                <p class="lead">From humble beginnings to an industry leader in solar energy solutions.</p>
+                <p>Founded in 2010, Ultra Rays Solar began with a simple yet powerful vision: to make solar energy
+                    accessible and affordable for everyone. What started as a small team of passionate engineers has
+                    grown into a leading solar installation company serving thousands of homes and businesses across the
+                    state.</p>
+                <p>Over the past decade, we have stayed true to our core belief that sustainable energy is not just a
+                    trend, but a necessity for a cleaner, healthier planet. We take pride in our precision engineering,
+                    customer-centric approach, and unwavering commitment to quality.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission & Vision Section -->
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <div class="feature-card h-100 p-5 bg-white shadow-sm rounded">
+                    <div class="icon-wrapper mb-4 text-primary">
+                        <i class="fas fa-rocket fa-3x"></i>
+                    </div>
+                    <h3>Our Mission</h3>
+                    <p class="mb-0">To accelerate the world's transition to sustainable energy by providing
+                        high-quality, efficient, and affordable solar solutions with exceptional customer service.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-card h-100 p-5 bg-white shadow-sm rounded">
+                    <div class="icon-wrapper mb-4 text-primary">
+                        <i class="fas fa-eye fa-3x"></i>
+                    </div>
+                    <h3>Our Vision</h3>
+                    <p class="mb-0">To be the most trusted and innovative solar energy partner, empowering communities
+                        to achieve energy independence and a carbon-neutral future.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Core Values -->
+<section class="section-padding">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h2 class="section-title">Our Core Values</h2>
+            <p class="section-subtitle">The principles that guide everything we do</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-3 text-center">
+                <div class="value-item">
+                    <div class="icon-box mb-3 text-secondary">
+                        <i class="fas fa-gem fa-2x"></i>
+                    </div>
+                    <h4>Quality</h4>
+                    <p>We use top-tier technology and adhere to the highest standards of installation excellence.</p>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="value-item">
+                    <div class="icon-box mb-3 text-secondary">
+                        <i class="fas fa-handshake fa-2x"></i>
+                    </div>
+                    <h4>Integrity</h4>
+                    <p>We believe in transparent pricing, honest advice, and keeping our promises to customers.</p>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="value-item">
+                    <div class="icon-box mb-3 text-secondary">
+                        <i class="fas fa-lightbulb fa-2x"></i>
+                    </div>
+                    <h4>Innovation</h4>
+                    <p>We continuously adopt the latest solar technologies to deliver maximum efficiency and savings.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="value-item">
+                    <div class="icon-box mb-3 text-secondary">
+                        <i class="fas fa-leaf fa-2x"></i>
+                    </div>
+                    <h4>Sustainability</h4>
+                    <p>Our commitment to the environment goes beyond business; it is our passion and purpose.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h2 class="section-title">Meet Our Team</h2>
+            <p class="section-subtitle">The experts behind your solar success</p>
+        </div>
+        <div class="row">
+            <!-- Team Member 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="team-card bg-white rounded shadow-sm overflow-hidden text-center">
+                    <img src="{% static 'website/images/team-1.jpg' %}" alt="CEO" class="img-fluid w-100"
+                        style="height: 300px; object-fit: cover;">
+                    <div class="p-4">
+                        <h4>Robert Davidson</h4>
+                        <p class="text-muted">Founder & CEO</p>
+                        <div class="social-links">
+                            <a href="#" class="text-dark me-2"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-dark"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Team Member 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="team-card bg-white rounded shadow-sm overflow-hidden text-center">
+                    <img src="{% static 'website/images/team-2.jpg' %}" alt="CTO" class="img-fluid w-100"
+                        style="height: 300px; object-fit: cover;">
+                    <div class="p-4">
+                        <h4>Sarah Jenkins</h4>
+                        <p class="text-muted">Chief Technical Officer</p>
+                        <div class="social-links">
+                            <a href="#" class="text-dark me-2"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-dark"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Team Member 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="team-card bg-white rounded shadow-sm overflow-hidden text-center">
+                    <img src="{% static 'website/images/team-3.jpg' %}" alt="Operations" class="img-fluid w-100"
+                        style="height: 300px; object-fit: cover;">
+                    <div class="p-4">
+                        <h4>Michael Ross</h4>
+                        <p class="text-muted">Head of Operations</p>
+                        <div class="social-links">
+                            <a href="#" class="text-dark me-2"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-dark"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Achievements Section -->
+<section class="section-padding">
+    <div class="container text-center">
+        <h2 class="section-title mb-5">Our Achievements</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="timeline">
+                    <!-- Placeholder Timeline Items -->
+                    <div class="timeline-item mb-4">
+                        <h4 class="text-primary">2010</h4>
+                        <p>Founded Ultra Rays Solar with a small team in a local garage.</p>
+                    </div>
+                    <div class="timeline-item mb-4">
+                        <h4 class="text-primary">2015</h4>
+                        <p>Reached 1,000 residential installations and expanded statewide.</p>
+                    </div>
+                    <div class="timeline-item mb-4">
+                        <h4 class="text-primary">2020</h4>
+                        <p>Awarded "Best Solar Company of the Year" by Green Energy Association.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4 class="text-primary">2025</h4>
+                        <p>Celebrating over 5,000 happy customers and 50MW of installed capacity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section section-padding bg-main text-white text-center">
+    <div class="container">
+        <h2 class="mb-4">Ready to Join the Solar Revolution?</h2>
+        <p class="lead mb-4">Contact our team today for a free consultation and quote.</p>
+        <a href="{% url 'website:contact' %}" class="btn btn-light btn-lg">Contact Us</a>
+    </div>
+</section>
+
+{% endblock %}

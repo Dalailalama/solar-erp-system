@@ -1,0 +1,149 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Solar Subsidies & Government Incentives{% endblock %}
+
+{% block meta_description %}Learn about the latest government subsidies, tax credits, and financial incentives available
+for solar installation in your state.{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="page-hero bg-overlay"
+    style="background-image: url('{% static 'website/images/subsidies-hero.jpg' %}');">
+    <div class="container text-center">
+        <h1 class="page-title text-white">Government Subsidies & Incentives</h1>
+        <p class="page-subtitle text-white">Make your solar transition even more affordable</p>
+    </div>
+</section>
+
+<!-- Central Subsidy Scheme -->
+<section class="section-padding">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <span class="badge bg-success mb-3">New Scheme</span>
+                <h2 class="section-title mb-4">PM Surya Ghar: Muft Bijli Yojana</h2>
+                <p>The latest central government initiative aims to provide free electricity to households through
+                    rooftop solar systems.</p>
+                <div class="card bg-light border-0 shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="text-primary"><i class="fas fa-indian-rupee-sign me-2"></i>Subsidy Structure</h5>
+                        <ul class="mb-0 mt-3 list-unstyled">
+                            <li class="mb-2"><strong>Up to 2kW:</strong> <span class="text-success">₹30,000 per
+                                    kW</span></li>
+                            <li class="mb-2"><strong>Additional capacity (up to 3kW):</strong> <span
+                                    class="text-success">₹18,000 per kW</span></li>
+                            <li><strong>Total cap for >3kW:</strong> <span class="text-success">₹78,000 (Maximum
+                                    Subsidy)</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="https://pmsuryaghar.gov.in" target="_blank" class="btn btn-outline-primary">Visit Official
+                    Portal <i class="fas fa-external-link-alt ms-1"></i></a>
+            </div>
+            <div class="col-lg-6 mt-4 mt-lg-0">
+                <img src="{% static 'website/images/subsidy-scheme.jpg' %}" alt="Solar Subsidy"
+                    class="img-fluid rounded shadow">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Eligibility & Process -->
+<section class="section-padding bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">How to Claim Your Subsidy</h2>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="timeline-steps">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="step-card text-center p-4">
+                                <div class="step-number bg-white shadow-sm text-primary mb-3">1</div>
+                                <h5>Registration</h5>
+                                <p class="small text-muted">Register on the national portal with your electricity
+                                    consumer number.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="step-card text-center p-4">
+                                <div class="step-number bg-white shadow-sm text-primary mb-3">2</div>
+                                <h5>Application</h5>
+                                <p class="small text-muted">Apply for rooftop solar installation and get feasibility
+                                    approval.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="step-card text-center p-4">
+                                <div class="step-number bg-white shadow-sm text-primary mb-3">3</div>
+                                <h5>Installation</h5>
+                                <p class="small text-muted">Get the system installed by a registered vendor (like us!).
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="step-card text-center p-4">
+                                <div class="step-number bg-white shadow-sm text-primary mb-3">4</div>
+                                <h5>Inspection & Release</h5>
+                                <p class="small text-muted">After net meter installation and inspection, subsidy is
+                                    credited to your bank account.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="section-padding">
+    <div class="container">
+        <h3 class="text-center mb-4">Subsidy FAQs</h3>
+        <div class="accordion" id="subsidyAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne">
+                        Is subsidy available for commercial buildings?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#subsidyAccordion">
+                    <div class="accordion-body">
+                        No, central financial assistance (CFA) is currently available only for residential consumers.
+                        Commercial and industrial sectors can avail tax benefits like accelerated depreciation.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo">
+                        How long does it take to get the subsidy?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#subsidyAccordion">
+                    <div class="accordion-body">
+                        Typically, the subsidy is released within 30 days after the commissioning report is submitted
+                        and approved by the portal authorities.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .step-number {
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        border-radius: 50%;
+        font-weight: bold;
+        font-size: 1.25rem;
+        margin: 0 auto;
+    }
+</style>
+
+{% endblock %}

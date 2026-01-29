@@ -1,0 +1,148 @@
+{% load static %}
+{% load django_vite %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- SEO Meta Tags -->
+    <title>{% block title %}Ultra Rays Solar Energy Solutions :: Professional Solar Panel Installation{% endblock %}
+    </title>
+    <meta name="description"
+        content="{% block meta_description %}Leading solar energy company providing professional solar panel installation for homes and businesses. Get free quotes, calculate savings, and go solar today.{% endblock %}">
+    <meta name="keywords"
+        content="{% block meta_keywords %}solar panel installation, residential solar, commercial solar, solar energy, solar calculator, ultra rays solar{% endblock %}">
+    <meta name="author" content="Ultra Rays Solar Energy Solutions">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{% block canonical %}{{ request.build_absolute_uri }}{% endblock %}">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title"
+        content="{% block og_title %}Ultra Rays Solar Energy Solutions :: Professional Solar Panel Installation{% endblock %}">
+    <meta property="og:description"
+        content="{% block og_description %}Leading solar energy company providing professional solar panel installation for homes and businesses.{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{% static 'website/images/og-solar.jpg' %}{% endblock %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Ultra Rays Solar Energy Solutions">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title"
+        content="{% block twitter_title %}Solar Energy Solutions | Professional Solar Panel Installation{% endblock %}">
+    <meta name="twitter:description"
+        content="{% block twitter_description %}Leading solar energy company providing professional solar panel installation for homes and businesses.{% endblock %}">
+    <meta name="twitter:image"
+        content="{% block twitter_image %}{% static 'website/images/og-solar.jpg' %}{% endblock %}">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{% static 'website/images/favicon.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'website/images/apple-touch-icon.png' %}">
+
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'website/css/solar-design-system.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/solar-components.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/solar-responsive.css' %}">
+    {% block extra_css %}{% endblock %}
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Ultra Rays Solar Energy Solutions",
+      "url": "{{ request.scheme }}://{{ request.get_host }}",
+      "logo": "{% static 'website/images/website_logo.png' %}",
+      "description": "Professional solar panel installation company providing clean energy solutions",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "123 Solar Street",
+        "addressLocality": "Your City",
+        "addressRegion": "Your State",
+        "postalCode": "12345",
+        "addressCountry": "US"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-234-567-8900",
+        "contactType": "Customer Service",
+        "email": "info@ultrarayssolar.com"
+      },
+      "sameAs": [
+        "https://facebook.com/ultrarayssolar",
+        "https://twitter.com/ultrarayssolar",
+        "https://linkedin.com/company/ultrarayssolar",
+        "https://instagram.com/ultrarayssolar"
+      ]
+    }
+    </script>
+
+    {% block structured_data %}{% endblock %}
+
+    <!-- Google Analytics (Replace with your GA4 ID) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+
+    <!-- Skip to main content (Accessibility) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    {% include 'website/includes/header.html' %}
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    {% include 'website/includes/footer.html' %}
+
+    <!-- Back to Top Button (Refactored to Vue) -->
+    <!-- <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button> -->
+
+    <!-- Global Vue App Mount Point -->
+    <div id="solar-vue-app"></div>
+
+    <!-- Core JavaScript -->
+    <!-- Removed CDN Vue in favor of Vite Bundle -->
+
+    <!-- Custom JavaScript -->
+    {% vite_asset 'website/app.ts' %}
+
+    <!-- Vue 3 App Integration (if page uses Vue) -->
+    {% block vue_app %}{% endblock %}
+
+    {% block extra_js %}{% endblock %}
+
+</body>
+
+</html>

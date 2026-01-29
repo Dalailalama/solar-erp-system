@@ -1,0 +1,108 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Solar Financing Options - Easy EMI & Loans{% endblock %}
+
+{% block meta_description %}Make solar affordable with our flexible financing options. Low-interest solar loans, zero
+down payment plans, and easy EMI options.{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="page-hero bg-overlay"
+    style="background-image: url('{% static 'website/images/financing-hero.jpg' %}');">
+    <div class="container text-center">
+        <h1 class="page-title text-white">Smart Financing Options</h1>
+        <p class="page-subtitle text-white">Don't let upfront costs stop you from saving money.</p>
+    </div>
+</section>
+
+<!-- Financing Models -->
+<section class="section-padding">
+    <div class="container">
+        <div class="row g-4">
+            <!-- Cash Purchase -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm text-center p-4">
+                    <div class="card-body">
+                        <i class="fas fa-money-bill-wave fa-3x text-primary mb-3"></i>
+                        <h4 class="card-title">Direct Purchase</h4>
+                        <p class="text-muted">Pay upfront and maximize your long-term savings.</p>
+                        <hr>
+                        <ul class="list-unstyled text-start small">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Highest lifetime savings
+                            </li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Instant ownership</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> No interest payments</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Eligible for all tax
+                                benefits</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Solar Loan -->
+            <div class="col-md-4">
+                <div class="card h-100 border-primary border-2 shadow text-center p-4 transform-scale-105">
+                    <div class="card-body">
+                        <i class="fas fa-landmark fa-3x text-primary mb-3"></i>
+                        <h4 class="card-title">Solar Loan</h4>
+                        <p class="text-muted">Own the system with regular EMI payments.</p>
+                        <hr>
+                        <ul class="list-unstyled text-start small">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Zero down payment options
+                            </li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Interest rates from 8-10%
+                            </li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> EMI often lower than current
+                                bill</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Tax benefits applicable</li>
+                        </ul>
+                        <a href="#loan-partners" class="btn btn-primary mt-3">View Banks</a>
+                    </div>
+                </div>
+            </div>
+            <!-- PPA/Lease -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm text-center p-4">
+                    <div class="card-body">
+                        <i class="fas fa-file-contract fa-3x text-primary mb-3"></i>
+                        <h4 class="card-title">PPA / Lease</h4>
+                        <p class="text-muted">Pay for power, not the panels (Commercial Only).</p>
+                        <hr>
+                        <ul class="list-unstyled text-start small">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> No upfront capital</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Maintenance included</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Pay per unit generated</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Fixed rates for 20-25 years
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Loan Partners -->
+<section id="loan-partners" class="section-padding bg-light text-center">
+    <div class="container">
+        <h2 class="mb-5">Our Banking Partners</h2>
+        <div class="row justify-content-center grayscale-logos">
+            <div class="col-6 col-md-2 p-3 border m-2 bg-white rounded"><strong>HDFC Bank</strong></div>
+            <div class="col-6 col-md-2 p-3 border m-2 bg-white rounded"><strong>SBI</strong></div>
+            <div class="col-6 col-md-2 p-3 border m-2 bg-white rounded"><strong>ICICI Bank</strong></div>
+            <div class="col-6 col-md-2 p-3 border m-2 bg-white rounded"><strong>Tata Capital</strong></div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section-padding text-center">
+    <div class="container">
+        <h3>Not sure which option is right for you?</h3>
+        <p class="lead mb-4">Our financial experts can help you choose the best plan.</p>
+        <a href="{% url 'website:contact' %}" class="btn btn-primary">Speak to an Expert</a>
+    </div>
+</section>
+
+{% endblock %}

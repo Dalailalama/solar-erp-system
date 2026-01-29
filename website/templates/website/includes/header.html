@@ -1,0 +1,121 @@
+{% load static %}
+<header class="solar-header" role="banner">
+    <!-- Top Bar (Optional - Contact Info) -->
+    <div class="header-top">
+        <div class="container">
+            <div class="header-top-content">
+                <div class="header-contact">
+                    <a href="tel:+12345678900" class="header-contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (234) 567-8900</span>
+                    </a>
+                    <a href="mailto:info@ultrarayssolar.com" class="header-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@ultrarayssolar.com</span>
+                    </a>
+                </div>
+                <div class="header-social">
+                    <a href="https://facebook.com/ultrarayssolar" target="_blank" rel="noopener noreferrer"
+                        aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://twitter.com/ultrarayssolar" target="_blank" rel="noopener noreferrer"
+                        aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://linkedin.com/company/ultrarayssolar" target="_blank" rel="noopener noreferrer"
+                        aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://instagram.com/ultrarayssolar" target="_blank" rel="noopener noreferrer"
+                        aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="header-nav" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <div class="nav-wrapper">
+                <!-- Logo -->
+                <a href="{% url 'website:home' %}" class="logo">
+                    <img src="{% static 'website/images/website_logo.png' %}"
+                        alt="Ultra Rays Solar Energy Solutions Logo">
+                </a>
+
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                    <span class="hamburger"></span>
+                    <span class="hamburger"></span>
+                    <span class="hamburger"></span>
+                </button>
+
+                <!-- Navigation Menu -->
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="{% url 'website:home' %}"
+                            class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            Services
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'website:residential' %}" class="dropdown-item">Residential Solar</a>
+                            </li>
+                            <li><a href="{% url 'website:commercial' %}" class="dropdown-item">Commercial Solar</a></li>
+                            <li><a href="{% url 'website:industrial' %}" class="dropdown-item">Industrial Solar</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'website:products' %}"
+                            class="nav-link {% if request.resolver_match.url_name == 'products' %}active{% endif %}">
+                            Products
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'website:portfolio' %}"
+                            class="nav-link {% if request.resolver_match.url_name == 'portfolio' %}active{% endif %}">
+                            Portfolio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'website:calculator' %}"
+                            class="nav-link {% if request.resolver_match.url_name == 'calculator' %}active{% endif %}">
+                            Calculator
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'website:blog' %}"
+                            class="nav-link {% if request.resolver_match.url_name == 'blog' %}active{% endif %}">
+                            Blog
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'website:about' %}"
+                            class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+                            About Us
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'website:contact' %}"
+                            class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+                            Contact
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- CTA Button -->
+                <a href="{% url 'website:quote' %}" class="btn btn-primary header-cta">
+                    Get Free Quote
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>

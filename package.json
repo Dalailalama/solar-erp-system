@@ -25,6 +25,7 @@
     "jspdf-autotable": "^5.0.2",
     "lodash": "^4.17.21",
     "mousetrap": "^1.6.5",
+    "pinia": "^2.2.8",
     "quill": "^2.0.3",
     "sortablejs": "^1.15.6",
     "typescript": "^5.9.3",

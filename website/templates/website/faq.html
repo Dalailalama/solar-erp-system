@@ -1,0 +1,135 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Solar FAQ - Frequently Asked Questions{% endblock %}
+
+{% block meta_description %}Get answers to all your questions about solar energy, installation process, costs,
+maintenance, and warranties.{% endblock %}
+
+{% block content %}
+
+<!-- Header -->
+<section class="page-hero bg-primary text-white text-center pb-5" style="padding-top: 120px;">
+    <div class="container">
+        <h1 class="page-title text-white">How Can We Help?</h1>
+        <p class="page-subtitle text-white mb-4">Frequently Asked Questions</p>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="input-group input-group-lg shadow rounded-pill overflow-hidden">
+                    <span class="input-group-text border-0 bg-white ps-4"><i
+                            class="fas fa-search text-muted"></i></span>
+                    <input type="text" class="form-control border-0" placeholder="Search for answers...">
+                    <button class="btn btn-warning px-4 fw-bold">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Accordion -->
+<section class="section-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+
+                <h3 class="mb-4">General Questions</h3>
+                <div class="accordion mb-5" id="faqGeneral">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#gen1">
+                                How do solar panels work?
+                            </button>
+                        </h2>
+                        <div id="gen1" class="accordion-collapse collapse show" data-bs-parent="#faqGeneral">
+                            <div class="accordion-body">
+                                Solar panels allow particles of light (photons) to knock electrons free from atoms,
+                                generating a flow of electricity. This Direct Current (DC) is then converted by an
+                                inverter to Alternating Current (AC), which is what runs the appliances in your home.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#gen2">
+                                Do solar panels work at night?
+                            </button>
+                        </h2>
+                        <div id="gen2" class="accordion-collapse collapse" data-bs-parent="#faqGeneral">
+                            <div class="accordion-body">
+                                No, solar panels require sunlight to generate electricity. However, with a battery
+                                storage system or net metering, you can use stored energy or credits from excess daytime
+                                generation to power your home at night.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="mb-4">Installation & Maintenance</h3>
+                <div class="accordion mb-5" id="faqInstall">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#inst1">
+                                Will solar panels damage my roof?
+                            </button>
+                        </h2>
+                        <div id="inst1" class="accordion-collapse collapse" data-bs-parent="#faqInstall">
+                            <div class="accordion-body">
+                                When installed correctly by professionals, solar panels actually protect the portion of
+                                the roof they cover. We use specialized mounting equipment that ensures structural
+                                integrity and waterproofing is maintained.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#inst2">
+                                How often do I need to clean the panels?
+                            </button>
+                        </h2>
+                        <div id="inst2" class="accordion-collapse collapse" data-bs-parent="#faqInstall">
+                            <div class="accordion-body">
+                                In dusty environments, we recommend cleaning them once every 2-3 months. Often, normal
+                                rainfall is enough to keep them performing well. You can simply hose them down if they
+                                get too dirty.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="mb-4">Costs & Finance</h3>
+                <div class="accordion" id="faqCost">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#cost1">
+                                What is the payback period?
+                            </button>
+                        </h2>
+                        <div id="cost1" class="accordion-collapse collapse" data-bs-parent="#faqCost">
+                            <div class="accordion-body">
+                                The typical ROI or payback period for a residential solar system is 3 to 5 years. Given
+                                that panels last 25+ years, this means you get free electricity for over 20 years.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section-padding bg-light text-center">
+    <div class="container">
+        <h3>Didn't find your answer?</h3>
+        <p class="mb-4">Our support team is just a click away.</p>
+        <a href="{% url 'website:contact' %}" class="btn btn-outline-dark">Contact Support</a>
+    </div>
+</section>
+
+{% endblock %}

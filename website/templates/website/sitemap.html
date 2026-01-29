@@ -1,0 +1,74 @@
+{% extends 'website/base.html' %}
+
+{% block title %}Sitemap - Ultra Rays Solar{% endblock %}
+
+{% block content %}
+<div class="container py-5" style="margin-top: 80px;">
+    <h1 class="mb-5 text-center">Sitemap</h1>
+
+    <div class="row">
+        <div class="col-md-3 mb-4">
+            <h4 class="text-primary border-bottom pb-2">Main</h4>
+            <ul class="list-unstyled mt-3">
+                <li class="mb-2"><a href="{% url 'website:home' %}" class="text-decoration-none text-dark">Home</a></li>
+                <li class="mb-2"><a href="{% url 'website:about' %}" class="text-decoration-none text-dark">About Us</a>
+                </li>
+                <li class="mb-2"><a href="{% url 'website:contact' %}" class="text-decoration-none text-dark">Contact
+                        Us</a></li>
+                <li class="mb-2"><a href="{% url 'website:careers' %}"
+                        class="text-decoration-none text-dark">Careers</a></li>
+            </ul>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <h4 class="text-primary border-bottom pb-2">Services</h4>
+            <ul class="list-unstyled mt-3">
+                <li class="mb-2"><a href="{% url 'website:residential' %}"
+                        class="text-decoration-none text-dark">Residential Solar</a></li>
+                <li class="mb-2"><a href="{% url 'website:commercial' %}"
+                        class="text-decoration-none text-dark">Commercial Solar</a></li>
+                <li class="mb-2"><a href="{% url 'website:industrial' %}"
+                        class="text-decoration-none text-dark">Industrial Solutions</a></li>
+            </ul>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <h4 class="text-primary border-bottom pb-2">Resources</h4>
+            <ul class="list-unstyled mt-3">
+                <li class="mb-2"><a href="{% url 'website:products' %}"
+                        class="text-decoration-none text-dark">Products</a></li>
+                <li class="mb-2"><a href="{% url 'website:portfolio' %}"
+                        class="text-decoration-none text-dark">Portfolio</a></li>
+                <li class="mb-2"><a href="{% url 'website:calculator' %}" class="text-decoration-none text-dark">Savings
+                        Calculator</a></li>
+                <li class="mb-2"><a href="{% url 'website:quote' %}" class="text-decoration-none text-dark">Get a
+                        Quote</a></li>
+            </ul>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <h4 class="text-primary border-bottom pb-2">Information</h4>
+            <ul class="list-unstyled mt-3">
+                <li class="mb-2"><a href="{% url 'website:subsidies' %}"
+                        class="text-decoration-none text-dark">Subsidies</a></li>
+                <li class="mb-2"><a href="{% url 'website:financing' %}"
+                        class="text-decoration-none text-dark">Financing</a></li>
+                <li class="mb-2"><a href="{% url 'website:faq' %}" class="text-decoration-none text-dark">FAQ</a></li>
+                <li class="mb-2"><a href="{% url 'website:blog' %}" class="text-decoration-none text-dark">Blog</a></li>
+                <li class="mb-2"><a href="{% url 'website:support' %}"
+                        class="text-decoration-none text-dark">Support</a></li>
+            </ul>
+        </div>
+
+        <div class="col-12 mt-4">
+            <h4 class="text-primary border-bottom pb-2">Legal</h4>
+            <ul class="list-inline mt-3">
+                <li class="list-inline-item me-4"><a href="{% url 'website:privacy' %}"
+                        class="text-decoration-none text-muted">Privacy Policy</a></li>
+                <li class="list-inline-item me-4"><a href="{% url 'website:terms' %}"
+                        class="text-decoration-none text-muted">Terms of Service</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

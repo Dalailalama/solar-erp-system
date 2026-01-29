@@ -1,0 +1,195 @@
+/* ========================================
+   CONTACT PAGE STYLES - CORPORATE REDESIGN
+   ======================================== */
+
+/* ===== UTILITIES ===== */
+[v-cloak] {
+    display: none !important;
+}
+
+/* ===== LAYOUT ===== */
+.contact-section {
+    padding: var(--spacing-4xl) 0;
+    background-color: var(--gray-50);
+    /* Light background for section to make cards pop */
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    /* 32px gap */
+    align-items: stretch;
+    /* Match heights */
+}
+
+/* ===== CARDS ===== */
+.contact-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: none;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.contact-card-body {
+    padding: var(--spacing-xl);
+    /* Minimum 32px padding */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== FORM STYLES ===== */
+.solar-form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.solar-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: var(--fw-semibold);
+    color: var(--gray-700);
+    font-size: var(--fs-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.solar-form-control {
+    width: 100%;
+    padding: 0.875rem 1.25rem;
+    font-family: var(--font-primary);
+    font-size: var(--fs-base);
+    color: var(--gray-800);
+    background-color: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+}
+
+.solar-form-control:focus {
+    outline: none;
+    border-color: var(--solar-orange);
+    background-color: var(--white);
+    box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+}
+
+.solar-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236B7280' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+}
+
+.btn-submit {
+    height: 52px;
+    font-size: var(--fs-base);
+    font-weight: var(--fw-bold);
+    letter-spacing: 0.5px;
+    transition: all var(--transition-base);
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    filter: brightness(1.05);
+}
+
+/* ===== MAP & BRANCH INFO STYLES ===== */
+.map-header {
+    padding: var(--spacing-xl);
+    background-color: var(--white);
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.map-container {
+    flex: 1;
+    position: relative;
+    height: 300px;
+    /* Specific height for professional look */
+    background-color: var(--gray-100);
+    overflow: hidden;
+}
+
+.map-frame {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+.branch-footer {
+    background: var(--white);
+    padding: var(--spacing-xl);
+    border-top: 1px solid var(--gray-100);
+}
+
+.branch-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.branch-info-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--gray-600);
+    font-size: var(--fs-sm);
+}
+
+.branch-info-item i {
+    color: var(--solar-orange);
+    width: 1.25rem;
+    text-align: center;
+}
+
+.btn-call {
+    background-color: var(--solar-orange);
+    color: var(--white) !important;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-full);
+    /* pill shape */
+    font-weight: var(--fw-bold);
+    font-size: var(--fs-sm);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all var(--transition-base);
+    text-decoration: none;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-call:hover {
+    background-color: var(--solar-orange-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    color: var(--white) !important;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+
+    .contact-section {
+        padding: var(--spacing-2xl) 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-card-body {
+        padding: var(--spacing-lg);
+    }
+
+    .map-container {
+        height: 240px;
+    }
+}

@@ -1,0 +1,127 @@
+{% load static %}
+<footer class="solar-footer" role="contentinfo">
+    <div class="footer-main">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Company Info -->
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="{% static 'website/images/logo-white.png' %}" alt="Your Solar Company" width="180"
+                            height="60">
+                    </div>
+                    <p class="footer-description">
+                        Leading solar energy company providing professional solar panel installation for homes and
+                        businesses.
+                        Harness the power of the sun and start saving today.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://facebook.com/yourcompany" target="_blank" rel="noopener noreferrer"
+                            aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com/yourcompany" target="_blank" rel="noopener noreferrer"
+                            aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://linkedin.com/company/yourcompany" target="_blank" rel="noopener noreferrer"
+                            aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://instagram.com/yourcompany" target="_blank" rel="noopener noreferrer"
+                            aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com/yourcompany" target="_blank" rel="noopener noreferrer"
+                            aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-col">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'website:home' %}">Home</a></li>
+                        <li><a href="{% url 'website:about' %}">About Us</a></li>
+                        <li><a href="{% url 'website:products' %}">Products</a></li>
+                        <li><a href="{% url 'website:portfolio' %}">Portfolio</a></li>
+                        <li><a href="{% url 'website:blog' %}">Blog</a></li>
+                        <li><a href="{% url 'website:careers' %}">Careers</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div class="footer-col">
+                    <h3 class="footer-title">Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'website:residential' %}">Residential Solar</a></li>
+                        <li><a href="{% url 'website:commercial' %}">Commercial Solar</a></li>
+                        <li><a href="{% url 'website:industrial' %}">Industrial Solar</a></li>
+                        <li><a href="{% url 'website:calculator' %}">Solar Calculator</a></li>
+                        <li><a href="{% url 'website:subsidies' %}">Subsidies & Incentives</a></li>
+                        <li><a href="{% url 'website:financing' %}">Financing Options</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="footer-col">
+                    <h3 class="footer-title">Contact Us</h3>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Solar Street<br>Your City, State 12345</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:+12345678900">+1 (234) 567-8900</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:info@yoursolarcompany.com">info@yoursolarcompany.com</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Mon - Fri: 8:00 AM - 6:00 PM<br>Sat: 9:00 AM - 4:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <div class="footer-newsletter">
+        <div class="container">
+            <div class="newsletter-wrapper">
+                <div class="newsletter-content">
+                    <h3>Subscribe to Our Newsletter</h3>
+                    <p>Get the latest solar news, tips, and exclusive offers delivered to your inbox.</p>
+                </div>
+                <form class="newsletter-form" id="newsletter-form">
+                    <input type="email" name="email" placeholder="Enter your email address" required>
+                    <button type="submit" class="btn btn-primary">
+                        Subscribe
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="footer-bottom-content">
+                <p class="copyright">
+                    &copy; {% now "Y" %} Your Solar Company. All rights reserved.
+                </p>
+                <ul class="footer-legal">
+                    <li><a href="{% url 'website:privacy' %}">Privacy Policy</a></li>
+                    <li><a href="{% url 'website:terms' %}">Terms of Service</a></li>
+                    <li><a href="{% url 'website:sitemap' %}">Sitemap</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -57,11 +57,11 @@ export default defineConfig({
         rollupOptions: {
             // Entry point for the application
             input: {
-                app: fileURLToPath(new URL('./core/app.js', import.meta.url)),
-                login: fileURLToPath(new URL('./core/login_app.js', import.meta.url)),
-                user_list: fileURLToPath(new URL('./accounts/UserList.js', import.meta.url)),
-                settings: fileURLToPath(new URL('./accounts/Settings.js', import.meta.url)),
-                landing: fileURLToPath(new URL('./static/js/website/landing.js', import.meta.url))
+                app: fileURLToPath(new URL('./static/js/core/app.js', import.meta.url)),
+                login: fileURLToPath(new URL('./static/js/core/login_app.js', import.meta.url)),
+                user_list: fileURLToPath(new URL('./static/js/accounts/UserList.js', import.meta.url)),
+                settings: fileURLToPath(new URL('./static/js/accounts/Settings.js', import.meta.url)),
+                website: fileURLToPath(new URL('./static/js/website/app.ts', import.meta.url))
             },
             output: {
                 // Output format
@@ -109,7 +109,7 @@ export default defineConfig({
             // Use full build with runtime compiler for template strings
             'vue': 'vue/dist/vue.esm-bundler.js'
         },
-        extensions: ['.js', '.vue', '.json']
+        extensions: ['.js', '.ts', '.vue', '.json']
     },
 
     // Optimize dependencies

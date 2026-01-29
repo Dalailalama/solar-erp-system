@@ -1,0 +1,102 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Get a Free Solar Quote - Ultra Rays Solar{% endblock %}
+
+{% block meta_description %}Request a customized solar quote for your home or business. Fast, free, and no obligation.{%
+endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="page-hero bg-overlay" style="background-image: url('{% static 'website/images/quote-hero.jpg' %}');">
+    <div class="container text-center">
+        <h1 class="page-title text-white">Get Your Free Quote</h1>
+        <p class="page-subtitle text-white">Start your journey to zero energy bills today</p>
+    </div>
+</section>
+
+<!-- Quote Form Container -->
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Progress Indicator (Static for now) -->
+                <div class="position-relative m-4">
+                    <div class="progress" style="height: 2px;">
+                        <div class="progress-bar" role="progressbar" style="width: 25%;"></div>
+                    </div>
+                    <div class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill"
+                        style="width: 2rem; height:2rem;">1</div>
+                    <div class="position-absolute top-0 start-25 translate-middle btn btn-sm btn-primary rounded-pill"
+                        style="width: 2rem; height:2rem;">2</div>
+                    <div class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-secondary rounded-pill"
+                        style="width: 2rem; height:2rem;">3</div>
+                    <div class="position-absolute top-0 start-75 translate-middle btn btn-sm btn-secondary rounded-pill"
+                        style="width: 2rem; height:2rem;">4</div>
+                    <div class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill"
+                        style="width: 2rem; height:2rem;">5</div>
+                </div>
+
+                <div class="card shadow border-0 p-4 p-md-5">
+                    <form action="#" method="POST">
+                        <h3 class="mb-4">Your Contact Details</h3>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Phone Number</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="mt-4 d-flex justify-content-between">
+                            <button type="button" class="btn btn-outline-secondary" disabled>Back</button>
+                            <button type="submit" class="btn btn-primary px-4">Next Step</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Trust Signals -->
+<section class="section-padding">
+    <div class="container">
+        <div class="row text-center g-4">
+            <div class="col-md-4">
+                <div class="p-3">
+                    <i class="fas fa-lock fa-2x text-primary mb-3"></i>
+                    <h5>Privacy Guaranteed</h5>
+                    <p class="text-muted small">Your information is never shared with 3rd parties without consent.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3">
+                    <i class="fas fa-clock fa-2x text-primary mb-3"></i>
+                    <h5>Fast Response</h5>
+                    <p class="text-muted small">Get a detailed proposal within 24 business hours.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3">
+                    <i class="fas fa-check-circle fa-2x text-primary mb-3"></i>
+                    <h5>No Obligation</h5>
+                    <p class="text-muted small">Free consultation and system design.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
