@@ -35,7 +35,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=["127.0.0.1", "localhost", "testserver", ".onrender.com"])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=["127.0.0.1", "localhost", "testserver", "solarproject-ow90.onrender.com"])
 
 
 # Application definition
@@ -89,6 +89,7 @@ CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=[
     "http://localhost:3000",
     "http://localhost:5173",
     "http://127.0.0.1:8000",
+    "http://solarproject-ow90.onrender.com",
 ])
 
 # CSRF Settings
@@ -130,6 +131,7 @@ TEMPLATES = [
     },
 ]
 
+# WSGI application
 WSGI_APPLICATION = 'erp_system_project.wsgi.application'
 
 
@@ -178,9 +180,24 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Use WhiteNoise to serve static files
+# ManifestStaticFilesStorage will throw 500 errors if a file is missing unless strict is False
+WHITENOISE_MANIFEST_STRICT = False
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # Django Vite settings
 DJANGO_VITE_ASSETS_PATH = BASE_DIR / 'static' / 'dist'
 DJANGO_VITE_DEV_MODE = DEBUG
+# Vite 5+ outputs manifest to .vite/manifest.json by default
+DJANGO_VITE_MANIFEST_PATH = DJANGO_VITE_ASSETS_PATH / 'manifest.json' 
+# If Vite 5+ uses the .vite folder, we might need: DJANGO_VITE_ASSETS_PATH / '.vite' / 'manifest.json'
+# Based on your vite.config.js, it should be at the root of dist.
 
