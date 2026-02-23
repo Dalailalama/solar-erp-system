@@ -10,7 +10,7 @@
     min-height: 82vh;
     display: flex;
     align-items: center;
-    background: url('../images/residential-hero.jpg') center/cover no-repeat;
+    background: url('../images/hero-solar.png') center/cover no-repeat;
     padding: 80px 0;
     overflow: hidden;
 }
