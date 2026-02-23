@@ -3,96 +3,472 @@
 
 {% block title %}Get a Free Solar Quote - Ultra Rays Solar{% endblock %}
 
-{% block meta_description %}Request a customized solar quote for your home or business. Fast, free, and no obligation.{%
-endblock %}
+{% block meta_description %}Request a customized solar quote for your home or business. Fast, free, and no
+obligation.{%endblock %}
+
+{% block extra_css %}
+<style>
+    /* Quote Page Comprehensive Senior UI/UX Redesign */
+
+    .page-hero-quote {
+        background: linear-gradient(rgba(10, 20, 30, 0.8), rgba(10, 20, 30, 0.8)),
+        url('{% static "website/images/quote-hero.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        padding: 160px 0 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 480px;
+    }
+
+    .hero-container {
+        width: 100%;
+        max-width: 850px;
+        margin: 0 auto;
+        padding: 0 24px;
+        text-align: center;
+    }
+
+    .hero-badge {
+        background: var(--solar-orange);
+        color: #fff;
+        padding: 8px 24px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        border-radius: 50px;
+        box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+        margin-bottom: 2rem;
+        display: inline-block;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+    }
+
+    .hero-container h1 {
+        color: #fff;
+        font-weight: 800;
+        letter-spacing: -1px;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-container p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.25rem;
+        max-width: 650px;
+        margin: 0 auto;
+    }
+
+    .section-padding {
+        padding: 120px 0;
+    }
+
+    .bg-soft {
+        background-color: #fcfcfc;
+    }
+
+    /* Balanced Card Container */
+    .premium-form-card {
+        background: #ffffff;
+        border-radius: 40px;
+        padding: 80px 64px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(0, 0, 0, 0.02);
+        margin-top: -120px;
+        position: relative;
+        z-index: 10;
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Anchored Progress Stepper */
+    .quote-progress-container {
+        margin-bottom: 64px;
+        background: #fbfbfb;
+        padding: 40px;
+        border-radius: 24px;
+        border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .progress-track {
+        height: 4px;
+        background: #e5e5e5;
+        border-radius: 10px;
+        position: relative;
+        overflow: visible;
+        margin: 0 20px 30px;
+    }
+
+    .progress-bar-fill {
+        height: 100%;
+        background: var(--solar-orange);
+        border-radius: 10px;
+        transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .step-node {
+        width: 40px;
+        height: 40px;
+        background: #fff;
+        border: 2px solid #e5e5e5;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: #888;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 2;
+    }
+
+    .step-node.active {
+        border-color: var(--solar-orange);
+        color: var(--solar-orange);
+        background: #fff;
+        transform: translate(-50%, -50%) scale(1.1);
+        box-shadow: 0 0 20px rgba(255, 107, 53, 0.15);
+    }
+
+    .step-node.completed {
+        background: var(--solar-orange);
+        border-color: var(--solar-orange);
+        color: white;
+    }
+
+    .node-labels-track {
+        position: relative;
+        height: 20px;
+        margin: 0 20px;
+    }
+
+    .step-label {
+        position: absolute;
+        transform: translateX(-50%);
+        font-size: 0.75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #999;
+    }
+
+    .step-label.active {
+        color: var(--solar-orange);
+    }
+
+    /* Form Visual Rhythm */
+    .form-header {
+        margin-bottom: 48px;
+        text-align: center;
+    }
+
+    .form-header h2 {
+        color: var(--deep-blue);
+        font-weight: 800;
+        margin-bottom: 0.75rem;
+    }
+
+    .form-header p {
+        color: #666;
+        font-size: 1.1rem;
+    }
+
+    .form-group-custom {
+        margin-bottom: 32px;
+    }
+
+    .form-label-custom {
+        display: block;
+        font-weight: 700;
+        color: var(--deep-blue);
+        margin-bottom: 12px;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    /* Premium Inputs with Icons */
+    .input-wrapper {
+        position: relative;
+    }
+
+    .input-icon {
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #999;
+        font-size: 1.1rem;
+        transition: color 0.3s ease;
+    }
+
+    .form-control-premium {
+        background: #fcfcfc;
+        border: 2px solid #f0f0f0;
+        border-radius: 18px;
+        padding: 18px 20px 18px 52px;
+        font-size: 1rem;
+        width: 100%;
+        transition: all 0.3s ease;
+        color: var(--deep-blue);
+    }
+
+    .form-control-premium:focus {
+        background: #fff;
+        border-color: var(--solar-orange);
+        box-shadow: 0 10px 30px rgba(255, 107, 53, 0.08);
+        outline: none;
+    }
+
+    .form-control-premium:focus+.input-icon {
+        color: var(--solar-orange);
+    }
+
+    /* Navigation Footer */
+    .form-navigation-footer {
+        margin-top: 64px;
+        padding-top: 40px;
+        border-top: 1px solid #f0f0f0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .btn-prev-step {
+        color: #888;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: color 0.3s ease;
+    }
+
+    .btn-prev-step:hover {
+        color: var(--solar-orange);
+    }
+
+    .btn-next-step {
+        background: var(--gradient-primary);
+        color: #fff !important;
+        padding: 18px 48px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border: none;
+        box-shadow: 0 15px 35px rgba(255, 107, 53, 0.3);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .btn-next-step:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 20px 45px rgba(255, 107, 53, 0.4);
+    }
+
+    /* Trust Signals Grid */
+    .trust-grid {
+        margin-top: 100px;
+    }
+
+    .trust-card-premium {
+        background: #fff;
+        padding: 40px 32px;
+        border-radius: 28px;
+        text-align: center;
+        height: 100%;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .trust-card-premium:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+    }
+
+    .trust-icon-box {
+        width: 64px;
+        height: 64px;
+        background: rgba(255, 107, 53, 0.08);
+        color: var(--solar-orange);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+        font-size: 1.5rem;
+    }
+
+    /* Mobile Adaptivity */
+    @media (max-width: 991px) {
+        .premium-form-card {
+            padding: 56px 32px;
+            margin-top: -80px;
+        }
+
+        .quote-progress-container {
+            padding: 32px 20px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .page-hero-quote {
+            padding: 120px 0 100px;
+            min-height: 400px;
+        }
+
+        .premium-form-card {
+            padding: 48px 24px;
+            border-radius: 32px;
+            margin-top: -60px;
+        }
+
+        .quote-progress-container {
+            display: none;
+        }
+
+        /* Hide on mobile to focus on form */
+        .form-navigation-footer {
+            flex-direction: column-reverse;
+            gap: 24px;
+            text-align: center;
+        }
+
+        .btn-next-step {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+    }
+</style>
+{% endblock %}
 
 {% block content %}
 
 <!-- Hero Section -->
-<section class="page-hero bg-overlay" style="background-image: url('{% static 'website/images/quote-hero.jpg' %}');">
-    <div class="container text-center">
-        <h1 class="page-title text-white">Get Your Free Quote</h1>
-        <p class="page-subtitle text-white">Start your journey to zero energy bills today</p>
+<section class="page-hero-quote">
+    <div class="hero-container">
+        <span class="hero-badge">GET A QUOTE</span>
+        <h1 class="display-5">Custom Solar Proposal</h1>
+        <p>Step closer to clean energy independence. Our engineers are ready to design your system.</p>
     </div>
 </section>
 
 <!-- Quote Form Container -->
-<section class="section-padding bg-light">
+<section class="section-padding bg-soft pb-5">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <!-- Progress Indicator (Static for now) -->
-                <div class="position-relative m-4">
-                    <div class="progress" style="height: 2px;">
-                        <div class="progress-bar" role="progressbar" style="width: 25%;"></div>
+        <div class="premium-form-card">
+
+            <!-- Anchored Progress Stepper -->
+            <div class="quote-progress-container">
+                <div class="progress-track">
+                    <div class="progress-bar-fill" style="width: 25%;"></div>
+                    <div class="step-node completed" style="left: 0%;">1</div>
+                    <div class="step-node active" style="left: 25%;">2</div>
+                    <div class="step-node" style="left: 50%;">3</div>
+                    <div class="step-node" style="left: 75%;">4</div>
+                    <div class="step-node" style="left: 100%;">5</div>
+                </div>
+                <div class="node-labels-track">
+                    <span class="step-label" style="left: 0%;">Start</span>
+                    <span class="step-label active" style="left: 25%;">Details</span>
+                    <span class="step-label" style="left: 50%;">Design</span>
+                    <span class="step-label" style="left: 75%;">Review</span>
+                    <span class="step-label" style="left: 100%;">Final</span>
+                </div>
+            </div>
+
+            <!-- Form Header -->
+            <div class="form-header">
+                <h2>Step 2: Contact Details</h2>
+                <p>We'll use these details to secure your engineering consultation.</p>
+            </div>
+
+            <form action="#" method="POST">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="form-group-custom">
+                            <label class="form-label-custom">First Name</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-user input-icon"></i>
+                                <input type="text" class="form-control-premium" placeholder="e.g. John" required>
+                            </div>
+                        </div>
                     </div>
-                    <div class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill"
-                        style="width: 2rem; height:2rem;">1</div>
-                    <div class="position-absolute top-0 start-25 translate-middle btn btn-sm btn-primary rounded-pill"
-                        style="width: 2rem; height:2rem;">2</div>
-                    <div class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-secondary rounded-pill"
-                        style="width: 2rem; height:2rem;">3</div>
-                    <div class="position-absolute top-0 start-75 translate-middle btn btn-sm btn-secondary rounded-pill"
-                        style="width: 2rem; height:2rem;">4</div>
-                    <div class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill"
-                        style="width: 2rem; height:2rem;">5</div>
+                    <div class="col-md-6">
+                        <div class="form-group-custom">
+                            <label class="form-label-custom">Last Name</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-id-card input-icon"></i>
+                                <input type="text" class="form-control-premium" placeholder="e.g. Doe" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group-custom">
+                            <label class="form-label-custom">Email Address</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-envelope input-icon"></i>
+                                <input type="email" class="form-control-premium" placeholder="name@company.com"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group-custom">
+                            <label class="form-label-custom">Phone Number</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-phone-alt input-icon"></i>
+                                <input type="tel" class="form-control-premium" placeholder="+1 (555) 000-0000" required>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="card shadow border-0 p-4 p-md-5">
-                    <form action="#" method="POST">
-                        <h3 class="mb-4">Your Contact Details</h3>
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label">First Name</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Last Name</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="col-md-12">
-                                <label class="form-label">Email Address</label>
-                                <input type="email" class="form-control" required>
-                            </div>
-                            <div class="col-md-12">
-                                <label class="form-label">Phone Number</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="mt-4 d-flex justify-content-between">
-                            <button type="button" class="btn btn-outline-secondary" disabled>Back</button>
-                            <button type="submit" class="btn btn-primary px-4">Next Step</button>
-                        </div>
-                    </form>
+                <!-- Footer Navigation -->
+                <div class="form-navigation-footer">
+                    <a href="#" class="btn-prev-step">
+                        <i class="fas fa-chevron-left me-2"></i> Previous Step
+                    </a>
+                    <button type="submit" class="btn-next-step">
+                        Secure Next Step <i class="fas fa-arrow-right"></i>
+                    </button>
                 </div>
-            </div>
+            </form>
         </div>
-    </div>
-</section>
 
-<!-- Trust Signals -->
-<section class="section-padding">
-    <div class="container">
-        <div class="row text-center g-4">
-            <div class="col-md-4">
-                <div class="p-3">
-                    <i class="fas fa-lock fa-2x text-primary mb-3"></i>
-                    <h5>Privacy Guaranteed</h5>
-                    <p class="text-muted small">Your information is never shared with 3rd parties without consent.</p>
+        <!-- Trust Grid -->
+        <div class="trust-grid">
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="trust-card-premium">
+                        <div class="trust-icon-box"><i class="fas fa-shield-alt"></i></div>
+                        <h5 class="fw-bold mb-3">Privacy Guarded</h5>
+                        <p class="text-muted small mb-0">Your data is encrypted and handled under strict solar industry
+                            privacy protocols.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="p-3">
-                    <i class="fas fa-clock fa-2x text-primary mb-3"></i>
-                    <h5>Fast Response</h5>
-                    <p class="text-muted small">Get a detailed proposal within 24 business hours.</p>
+                <div class="col-lg-4 col-md-6">
+                    <div class="trust-card-premium">
+                        <div class="trust-icon-box"><i class="fas fa-bolt"></i></div>
+                        <h5 class="fw-bold mb-3">Instant ROI Analysis</h5>
+                        <p class="text-muted small mb-0">Get a professional engineering breakdown and ROI projection
+                            within 24 hours.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="p-3">
-                    <i class="fas fa-check-circle fa-2x text-primary mb-3"></i>
-                    <h5>No Obligation</h5>
-                    <p class="text-muted small">Free consultation and system design.</p>
+                <div class="col-lg-4 col-md-6">
+                    <div class="trust-card-premium">
+                        <div class="trust-icon-box"><i class="fas fa-calendar-check"></i></div>
+                        <h5 class="fw-bold mb-3">Zero Commitment</h5>
+                        <p class="text-muted small mb-0">Your quote is a free educational session. No contracts until
+                            you are ready.</p>
+                    </div>
                 </div>
             </div>
         </div>

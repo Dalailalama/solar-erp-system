@@ -1,100 +1,323 @@
 {% extends 'website/base.html' %}
 {% load static %}
 
-{% block title %}Industrial Solar Solutions - Heavy Duty Power{% endblock %}
+{% block title %}Industrial Solar Solutions - Heavy Duty Power ROI{% endblock %}
 
-{% block meta_description %}Large-scale solar power plants for industries and factories. Reduce overheads and ensure
-consistent power supply.{% endblock %}
+{% block meta_description %}Large-scale solar power plants for Indian industries and factories. Reduce overheads and
+ensure consistent power supply with MNRE approved engineering.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'website/css/industrial.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endblock %}
 
 {% block content %}
 
-<!-- Hero Section -->
-<section class="page-hero bg-overlay"
-    style="background-image: url('{% static 'website/images/industrial-hero.jpg' %}');">
-    <div class="container text-center">
-        <h1 class="page-title text-white">Industrial Solar Power</h1>
-        <p class="page-subtitle text-white">Sustainable energy for heavy industries</p>
-    </div>
-</section>
+<!-- HERO SECTION: Scale & Power -->
+<section class="industrial-hero">
+    <div class="hero-content">
+        <div class="hero-text">
+            <span class="kicker">ENTERPRISE GRADE</span>
+            <h1 class="hero-title">Large-Scale Energy Solutions</h1>
+            <p class="hero-subtitle">Engineered for heavy-duty manufacturing and production facilities requiring
+                MW-scale energy independence.</p>
 
-<!-- Scale & Solutions -->
-<section class="section-padding">
-    <div class="container">
-        <div class="section-header text-center mb-5">
-            <h2 class="section-title">Large-Scale Energy Solutions</h2>
-            <p class="section-subtitle">Tailored for manufacturing and production facilities</p>
-        </div>
-        <div class="row g-5">
-            <div class="col-lg-6">
-                <h3>Grid-Connected Solar</h3>
-                <p>Seamlessly integrate solar power with your existing grid connection. Use solar during peak hours to
-                    drastically reduce demand charges.</p>
-                <ul class="list-checked">
-                    <li>Net metering support</li>
-                    <li>Peak load shaving</li>
-                    <li>Zero export options</li>
-                </ul>
+            <div class="btn-group">
+                <a href="#architectures" class="btn-primary">
+                    Explore Solutions <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="{% url 'website:portfolio' %}" class="btn-secondary">
+                    View Projects
+                </a>
             </div>
-            <div class="col-lg-6">
-                <img src="{% static 'website/images/industrial-grid.jpg' %}" class="img-fluid rounded" alt="Grid Solar">
+
+            <!-- Floating Metric Card -->
+            <div class="floating-stats">
+                <div class="stats-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="stats-info">
+                    <strong>500+ MW</strong>
+                    <span>Installations Nationwide</span>
+                </div>
             </div>
         </div>
-        <div class="row g-5 mt-4 flex-row-reverse">
-            <div class="col-lg-6">
-                <h3>Captive Power Plants</h3>
-                <p>Ensure energy security with a dedicated solar power plant on your premises. Protect your production
-                    from grid fluctuations.</p>
-                <ul class="list-checked">
-                    <li>Stable voltage output</li>
-                    <li>Reduced reliance on diesel generators</li>
-                    <li>Long-term energy price hedging</li>
-                </ul>
-            </div>
-            <div class="col-lg-6">
-                <img src="{% static 'website/images/industrial-plant.jpg' %}" class="img-fluid rounded"
-                    alt="Solar Plant">
+
+        <!-- Hero Visual (Hidden on mobile via CSS) -->
+        <div class="hero-visual d-none d-lg-block">
+            <!-- Replacing static image with CSS animated illustration placeholder -->
+            <div
+                style="width: 100%; height: 400px; background: url('{% static 'website/images/industrial-hero-illustration.svg' %}') no-repeat center/contain;">
             </div>
         </div>
     </div>
 </section>
 
-<!-- Technical Expertise -->
-<section class="section-padding bg-light">
-    <div class="container">
-        <h2 class="section-title text-center mb-5">Our Technical Expertise</h2>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="feature-box p-4 bg-white shadow-sm border-start border-4 border-primary h-100">
-                    <h4>High Tension (HT) Integration</h4>
-                    <p>Expertise in connecting solar plants to HT lines (11kV/33kV) with necessary approvals and safety
-                        equipment.</p>
+<!-- ENTERPRISE ARCHITECTURES: Asymmetric Grid -->
+<section id="architectures" class="architectures-section">
+    <div class="section-header">
+        <h2>Enterprise Power Architectures</h2>
+        <p class="text-slate">Tailored to your facility's energy profile and electrical infrastructure.</p>
+    </div>
+
+    <div class="arch-grid">
+        <!-- Grid Connected Card (Dominant) -->
+        <div class="arch-card grid-solar">
+            <div class="card-header">
+                <div class="icon-box">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <div class="tag">
+                    <i class="fas fa-sun"></i> Grid Solar
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="feature-box p-4 bg-white shadow-sm border-start border-4 border-primary h-100">
-                    <h4>Advanced Monitoring (SCADA)</h4>
-                    <p>Real-time plant monitoring and control systems to track generation, efficiency, and maintenance
-                        needs.</p>
+            <h3>Grid-Connected Solar</h3>
+            <p>Seamlessly integrate solar power with your existing HT/LT grid connection. Offset high demand charges
+                during peak hours.</p>
+
+            <ul class="feature-list">
+                <li><i class="fas fa-check-circle"></i> Open Access Support</li>
+                <li><i class="fas fa-check-circle"></i> Peak Load Shaving</li>
+                <li><i class="fas fa-check-circle"></i> Zero Export Capability</li>
+            </ul>
+
+            <div class="card-visual">
+                [Interactive Grid Diagram Placeholder]
+            </div>
+        </div>
+
+        <!-- Captive Power Card (Offset) -->
+        <div class="arch-card captive-power">
+            <div class="card-header">
+                <div class="icon-box">
+                    <i class="fas fa-battery-full"></i>
+                </div>
+                <div class="tag">
+                    <i class="fas fa-infinity"></i> Solar Plant
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="feature-box p-4 bg-white shadow-sm border-start border-4 border-primary h-100">
-                    <h4>O&M Services</h4>
-                    <p>Comprehensive Operations & Maintenance contracts to ensure maximum plant uptime and performance
-                        ratio.</p>
-                </div>
+            <h3>Captive Power Plants</h3>
+            <p>Ensure 24/7 energy security with a dedicated onsite solar power plant. Protect critical lines from
+                voltage fluctuations.</p>
+
+            <ul class="feature-list">
+                <li><i class="fas fa-check-circle"></i> Stable HT Voltage Output</li>
+                <li><i class="fas fa-check-circle"></i> Reduced Diesel Dependance</li>
+            </ul>
+
+            <div class="card-visual">
+                [Uptime Animation Placeholder]
             </div>
         </div>
     </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section section-padding bg-gradient text-white text-center">
-    <div class="container">
-        <h2>Power Your Industry with Solar</h2>
-        <p class="lead mb-4">Let's discuss a technical solution for your facility.</p>
-        <a href="{% url 'website:contact' %}" class="btn btn-white btn-lg text-primary">Talk to an Engineer</a>
+<!-- BENEFITS SECTION: Technical Value -->
+<section class="benefits-section">
+    <div class="benefits-layout">
+        <div class="section-header">
+            <h2>Why Industrial Solar?</h2>
+        </div>
+
+        <div class="benefits-grid mobile-scroll">
+            <!-- Tax Benefit -->
+            <div class="benefit-card tax-benefit">
+                <div class="benefit-icon">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <span class="benefit-metric">40%</span>
+                <h3>Tax Advantage</h3>
+                <p>Accelerated depreciation in Year 1 significantly lowers corporate tax liability.</p>
+                <a href="#" class="expand-link">Calculate Savings <i class="fas fa-chevron-right"></i></a>
+            </div>
+
+            <!-- ESG Benefit -->
+            <div class="benefit-card esg-benefit">
+                <div class="benefit-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <span class="benefit-metric">ESG</span>
+                <h3>Carbon Compliance</h3>
+                <p>Meet international sustainability benchmarks and certification standards.</p>
+                <a href="#" class="expand-link">View Methodology <i class="fas fa-chevron-right"></i></a>
+            </div>
+
+            <!-- ROI Benefit -->
+            <div class="benefit-card roi-benefit">
+                <div class="benefit-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <span class="benefit-metric">4 Yr</span>
+                <h3>ROI Average</h3>
+                <p>Most MW-scale projects achieve full capital payback within 3.5 to 4 years.</p>
+                <a href="#" class="expand-link">See Proof <i class="fas fa-chevron-right"></i></a>
+            </div>
+        </div>
     </div>
 </section>
+
+<!-- ENGINEERING EXPERTISE: Interactive Specs -->
+<section class="expertise-section">
+    <div class="section-header">
+        <h2>Engineering Expertise</h2>
+        <p>Utility-grade engineering for complex industrial grids.</p>
+    </div>
+
+    <div class="expertise-grid">
+        <!-- HT Integration -->
+        <div class="spec-card">
+            <div class="spec-header">
+                <div class="spec-title">HT Integration</div>
+                <i class="fas fa-bolt"></i>
+            </div>
+            <div class="spec-body">
+                <div class="spec-visual">
+                    [Voltage Diagram 11kV/33kV]
+                </div>
+                <table class="spec-table">
+                    <tr>
+                        <td>Voltage Level</td>
+                        <td>11kV / 33kV</td>
+                    </tr>
+                    <tr>
+                        <td>Synchronisation</td>
+                        <td>Auto / Manual</td>
+                    </tr>
+                    <tr>
+                        <td>Protection</td>
+                        <td>IEC 61400</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- SCADA Monitoring -->
+        <div class="spec-card">
+            <div class="spec-header">
+                <div class="spec-title">SCADA Monitoring</div>
+                <i class="fas fa-chart-bar"></i>
+            </div>
+            <div class="spec-body">
+                <div class="spec-visual">
+                    [Real-time Chart Animation]
+                </div>
+                <table class="spec-table">
+                    <tr>
+                        <td>Data Interval</td>
+                        <td>5 Mins</td>
+                    </tr>
+                    <tr>
+                        <td>Cloud Access</td>
+                        <td>24/7 Remote</td>
+                    </tr>
+                    <tr>
+                        <td>Uptime</td>
+                        <td>99.9%</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Expert O&M -->
+        <div class="spec-card">
+            <div class="spec-header">
+                <div class="spec-title">Expert O&M</div>
+                <i class="fas fa-tools"></i>
+            </div>
+            <div class="spec-body">
+                <div class="spec-visual">
+                    [Timeline Visualization]
+                </div>
+                <table class="spec-table">
+                    <tr>
+                        <td>Contract Term</td>
+                        <td>5-25 Years</td>
+                    </tr>
+                    <tr>
+                        <td>Response Time</td>
+                        <td>
+                            < 4 Hours</td>
+                    </tr>
+                    <tr>
+                        <td>Performance</td>
+                        <td>Guaranteed</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA FOOTER: Feasibility Study -->
+<section class="cta-footer">
+    <div class="cta-container">
+        <div class="cta-grid">
+            <!-- Content Left -->
+            <div class="cta-content">
+                <span class="cta-badge">FREE CONSULTATION</span>
+                <h2>Request a Grid Feasibility Study</h2>
+                <p>Our engineering team will analyze your Single Line Diagram (SLD) and load profile to suggest the
+                    optimal solar integration strategy.</p>
+
+                <div class="trust-signals">
+                    <div class="trust-item"><i class="fas fa-check-circle"></i> Response within 24h</div>
+                    <div class="trust-item"><i class="fas fa-check-circle"></i> No Obligation</div>
+                    <div class="trust-item"><i class="fas fa-check-circle"></i> NABCEP Certified Engineers</div>
+                </div>
+            </div>
+
+            <!-- Form Right -->
+            <div class="cta-form-card">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Company Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-input" placeholder="Work Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" class="form-input" placeholder="Phone Number" required>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-input">
+                            <option value="" disabled selected>Avg. Monthly Bill</option>
+                            <option value="1-5L">₹1L - ₹5L</option>
+                            <option value="5-20L">₹5L - ₹20L</option>
+                            <option value="20L+">₹20L+</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-submit">Request Feasibility Study</button>
+
+                    <div class="alt-cta">
+                        <a href="{% url 'website:download_brochure' %}">Or download technical brochure <i class="fas fa-file-pdf"></i></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Inline JS for Interactions -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Simple Interaction: Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Hover Effect Logic for Spec Cards (Optional: Add class on touch for mobile)
+        const specCards = document.querySelectorAll('.spec-card');
+        specCards.forEach(card => {
+            card.addEventListener('touchstart', function () {
+                this.classList.toggle('hover');
+            });
+        });
+    });
+</script>
 
 {% endblock %}

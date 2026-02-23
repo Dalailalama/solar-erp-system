@@ -1,22 +1,44 @@
 <template>
-  <section class="stats-section section-padding bg-gradient" ref="statsSection">
-    <div class="container">
-      <div class="stats-grid">
-        <div v-for="stat in stats" :key="stat.label" class="stat-box">
-          <div class="stat-icon">
-            <i :class="stat.icon"></i>
+  <Teleport to="#stats-app" v-if="isMounted">
+    <section class="stats-section section-padding bg-gradient" ref="statsSection">
+      <div class="container">
+        <div class="stats-grid">
+          <div v-for="stat in stats" :key="stat.label" class="stat-box">
+            <div class="stat-icon">
+              <i :class="stat.icon"></i>
+            </div>
+            <div class="stat-value">{{ stat.displayValue }}</div>
+            <div v-if="stat.suffix" class="stat-suffix">{{ stat.suffix }}</div>
+            <div class="stat-label">{{ stat.label }}</div>
           </div>
-          <div class="stat-value">{{ stat.displayValue }}</div>
-          <div v-if="stat.suffix" class="stat-suffix">{{ stat.suffix }}</div>
-          <div class="stat-label">{{ stat.label }}</div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue';
+
+const isMounted = ref(false);
+
+onMounted(() => {
+  isMounted.value = !!document.querySelector('#stats-app');
+});
+
+const statsSection = ref<HTMLElement | null>(null);
+const hasAnimated = ref(false);
+
+// Watch for statsSection availability to set up observer
+watch(statsSection, (newVal) => {
+  if (newVal && !observer) {
+    observer = new IntersectionObserver(handleIntersection, {
+      threshold: 0.5,
+      rootMargin: '0px',
+    });
+    observer.observe(newVal);
+  }
+});
 
 interface Stat {
   icon: string;
@@ -25,9 +47,6 @@ interface Stat {
   suffix?: string;
   label: string;
 }
-
-const statsSection = ref<HTMLElement | null>(null);
-const hasAnimated = ref(false);
 
 const stats = ref<Stat[]>([
   {
@@ -89,15 +108,7 @@ const handleIntersection = (entries: IntersectionObserverEntry[]) => {
 
 let observer: IntersectionObserver | null = null;
 
-onMounted(() => {
-  if (statsSection.value) {
-    observer = new IntersectionObserver(handleIntersection, {
-      threshold: 0.5,
-      rootMargin: '0px',
-    });
-    observer.observe(statsSection.value);
-  }
-});
+// Lifecycle moved to top for clarity
 
 onUnmounted(() => {
   if (observer && statsSection.value) {

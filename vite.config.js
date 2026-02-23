@@ -61,7 +61,8 @@ export default defineConfig({
                 login: fileURLToPath(new URL('./static/js/core/login_app.js', import.meta.url)),
                 user_list: fileURLToPath(new URL('./static/js/accounts/UserList.js', import.meta.url)),
                 settings: fileURLToPath(new URL('./static/js/accounts/Settings.js', import.meta.url)),
-                website: fileURLToPath(new URL('./static/js/website/app.ts', import.meta.url))
+                website: fileURLToPath(new URL('./static/js/website/app.ts', import.meta.url)),
+                contact_form: fileURLToPath(new URL('./static/js/website/contact_form.js', import.meta.url))
             },
             output: {
                 // Output format
@@ -103,9 +104,9 @@ export default defineConfig({
     // Resolve configuration
     resolve: {
         alias: {
-            '@': fileURLToPath(new URL('./', import.meta.url)),
-            '@core': fileURLToPath(new URL('./core', import.meta.url)),
-            '@components': fileURLToPath(new URL('./core/components', import.meta.url)),
+            '@': fileURLToPath(new URL('./static/js', import.meta.url)),
+            '@core': fileURLToPath(new URL('./static/js/core', import.meta.url)),
+            '@components': fileURLToPath(new URL('./static/js/core/components', import.meta.url)),
             // Use full build with runtime compiler for template strings
             'vue': 'vue/dist/vue.esm-bundler.js'
         },

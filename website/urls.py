@@ -39,4 +39,6 @@ urlpatterns = [
     path('privacy/', views.privacy, name='privacy'),
     path('terms/', views.terms, name='terms'),
     path('sitemap/', views.sitemap, name='sitemap'),
+    
+    path('download_brochure/', views.download_brochure, name='download_brochure'),
 ]

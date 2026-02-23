@@ -1,118 +1,416 @@
 {% extends 'website/base.html' %}
 {% load static %}
 
-{% block title %}Solar FAQ - Frequently Asked Questions{% endblock %}
+{% block title %}Solar FAQ - Frequently Asked Questions | Ultra Rays Solar{% endblock %}
 
 {% block meta_description %}Get answers to all your questions about solar energy, installation process, costs,
-maintenance, and warranties.{% endblock %}
+maintenance, and warranties. Expert advice from Ultra Rays Solar.{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* FAQ Refined Styles - Senior UI/UX Implementation */
+
+    .page-hero-faq {
+        background: linear-gradient(rgba(26, 37, 47, 0.88), rgba(26, 37, 47, 0.88)),
+        url('{% static "website/images/faq-hero.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        padding: 120px 0 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 440px;
+    }
+
+    .hero-container {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* Category Titles */
+    .faq-category-title {
+        position: relative;
+        padding-left: 24px;
+        margin: 48px 0 32px 0;
+        color: var(--deep-blue);
+        font-weight: 700;
+        font-size: 1.75rem;
+        display: block;
+        width: 100%;
+        line-height: 1.2;
+    }
+
+    .faq-category-title::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 4px;
+        bottom: 4px;
+        width: 4px;
+        background: var(--gradient-primary);
+        border-radius: 2px;
+    }
+
+    /* Premium Accordion */
+    .faq-accordion .accordion-item {
+        border: none;
+        margin-bottom: 20px;
+        border-radius: 16px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        background: white;
+    }
+
+    .faq-accordion .accordion-item:hover {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        transform: translateY(-2px);
+    }
+
+    .faq-accordion .accordion-button {
+        padding: 24px 28px;
+        font-weight: 600;
+        color: var(--deep-blue);
+        background-color: white;
+        box-shadow: none;
+        font-family: var(--font-secondary);
+        display: flex;
+        align-items: center;
+        border: none;
+        text-align: left;
+    }
+
+    .faq-accordion .accordion-button:not(.collapsed) {
+        color: var(--solar-orange);
+        background-color: #fafafa;
+    }
+
+    .faq-accordion .accordion-button i {
+        min-width: 24px;
+        margin-right: 20px;
+        font-size: 1.2rem;
+        color: var(--solar-orange);
+    }
+
+    .faq-accordion .accordion-body {
+        padding: 0 28px 28px 72px;
+        color: var(--gray-700);
+        line-height: 1.8;
+        background-color: #fafafa;
+        font-size: 1.05rem;
+    }
+
+    /* Search Bar */
+    .search-container {
+        width: 100%;
+        max-width: 650px;
+        margin-top: 40px;
+    }
+
+    .search-box {
+        background: white;
+        padding: 8px;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .search-box .search-icon {
+        color: var(--medium-gray);
+        margin-left: 20px;
+    }
+
+    .search-box input {
+        background: transparent;
+        border: none;
+        padding: 12px 15px;
+        flex: 1;
+        font-size: 1.05rem;
+        outline: none;
+    }
+
+    .search-box .btn-search {
+        background: var(--gradient-primary);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 12px 32px;
+        font-weight: 700;
+        transition: all 0.3s ease;
+    }
+
+    /* Redesigned Premium Contact Card */
+    .premium-contact-card {
+        background: #ffffff;
+        border-radius: 40px;
+        padding: 64px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.04);
+        border: 1px solid rgba(0, 0, 0, 0.03);
+        max-width: 950px;
+        margin: 0 auto;
+    }
+
+    .support-badge {
+        width: 72px;
+        height: 72px;
+        background: rgba(255, 107, 53, 0.08);
+        color: var(--solar-orange);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 32px;
+        font-size: 1.75rem;
+        transition: transform 0.3s ease;
+    }
+
+    .contact-option-block {
+        padding: 32px 24px;
+        border-radius: 24px;
+        transition: all 0.3s ease;
+        background: #fbfbfb;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-option-block:hover {
+        background: #ffffff;
+        box-shadow: 0 15px 35px rgba(255, 107, 53, 0.08);
+        transform: translateY(-5px);
+    }
+
+    .contact-icon-small {
+        width: 54px;
+        height: 54px;
+        background: #fff;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        font-size: 1.4rem;
+        color: var(--solar-orange);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.04);
+    }
+
+    .accent-link {
+        color: var(--solar-orange);
+        text-decoration: none;
+        font-weight: 700;
+    }
+
+    .btn-premium-cta {
+        background: var(--gradient-primary);
+        color: white !important;
+        border-radius: 50px;
+        padding: 18px 56px;
+        font-weight: 700;
+        font-size: 1.15rem;
+        box-shadow: 0 12px 25px rgba(255, 107, 53, 0.3);
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 48px;
+    }
+
+    .btn-premium-cta:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 18px 40px rgba(255, 107, 53, 0.45);
+    }
+
+    /* Responsiveness */
+    @media (max-width: 768px) {
+        .page-hero-faq {
+            padding: 100px 0 80px;
+            min-height: 380px;
+        }
+
+        .premium-contact-card {
+            padding: 48px 24px;
+            border-radius: 32px;
+        }
+
+        .faq-accordion .accordion-body {
+            padding: 0 24px 24px 24px;
+        }
+
+        .btn-premium-cta {
+            width: 100%;
+            padding: 14px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .search-box {
+            flex-direction: column;
+            border-radius: 24px;
+            padding: 20px;
+            gap: 16px;
+        }
+
+        .search-box input {
+            text-align: center;
+        }
+
+        .search-box .btn-search {
+            width: 100%;
+        }
+    }
+
+    .section-padding {
+        padding: 80px 0;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
 
-<!-- Header -->
-<section class="page-hero bg-primary text-white text-center pb-5" style="padding-top: 120px;">
-    <div class="container">
-        <h1 class="page-title text-white">How Can We Help?</h1>
-        <p class="page-subtitle text-white mb-4">Frequently Asked Questions</p>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="input-group input-group-lg shadow rounded-pill overflow-hidden">
-                    <span class="input-group-text border-0 bg-white ps-4"><i
-                            class="fas fa-search text-muted"></i></span>
-                    <input type="text" class="form-control border-0" placeholder="Search for answers...">
-                    <button class="btn btn-warning px-4 fw-bold">Search</button>
-                </div>
+<!-- Hero Section -->
+<section class="page-hero-faq">
+    <div class="hero-container">
+        <span class="badge bg-warning text-dark mb-4 px-3 py-2 rounded-pill fw-bold">KNOWLEDGE BASE</span>
+        <h1 class="display-5 fw-extrabold mb-3 text-white">How Can We Help You?</h1>
+        <p class="lead mb-2 text-white opacity-90 mx-auto" style="max-width: 600px;">Everything you need to know about
+            switching to solar energy. Clear, honest answers for your home or business.</p>
+
+        <div class="search-container">
+            <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" placeholder="Search for answers or keywords...">
+                <button class="btn-search">Search</button>
             </div>
         </div>
     </div>
 </section>
 
-<!-- FAQ Accordion -->
-<section class="section-padding">
+<!-- Main FAQ Section -->
+<section class="section-padding bg-light">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
+            <div class="col-lg-10 col-xl-9">
 
-                <h3 class="mb-4">General Questions</h3>
-                <div class="accordion mb-5" id="faqGeneral">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#gen1">
-                                How do solar panels work?
-                            </button>
-                        </h2>
-                        <div id="gen1" class="accordion-collapse collapse show" data-bs-parent="#faqGeneral">
-                            <div class="accordion-body">
-                                Solar panels allow particles of light (photons) to knock electrons free from atoms,
-                                generating a flow of electricity. This Direct Current (DC) is then converted by an
-                                inverter to Alternating Current (AC), which is what runs the appliances in your home.
+                <!-- Category: General -->
+                <div class="faq-group mb-5">
+                    <h3 class="faq-category-title">General Questions</h3>
+                    <div class="accordion faq-accordion" id="faqGeneral">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#gen1" aria-expanded="true">
+                                    <i class="fas fa-sun"></i> <span>How do solar panels work exactly?</span>
+                                </button>
+                            </h2>
+                            <div id="gen1" class="accordion-collapse collapse show" data-bs-parent="#faqGeneral">
+                                <div class="accordion-body">
+                                    Solar panels allow particles of light (photons) to knock electrons free from atoms,
+                                    generating a flow of electricity. This Direct Current (DC) is then converted by a
+                                    high-efficiency inverter to Alternating Current (AC), which is the standard form of
+                                    electricity that runs all your home appliances.
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#gen2">
-                                Do solar panels work at night?
-                            </button>
-                        </h2>
-                        <div id="gen2" class="accordion-collapse collapse" data-bs-parent="#faqGeneral">
-                            <div class="accordion-body">
-                                No, solar panels require sunlight to generate electricity. However, with a battery
-                                storage system or net metering, you can use stored energy or credits from excess daytime
-                                generation to power your home at night.
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#gen2">
+                                    <i class="fas fa-moon"></i> <span>Do solar panels still work at night?</span>
+                                </button>
+                            </h2>
+                            <div id="gen2" class="accordion-collapse collapse" data-bs-parent="#faqGeneral">
+                                <div class="accordion-body">
+                                    While solar panels require sunlight to generate power and do not work at night, your
+                                    home stays powered through <strong>Net Metering</strong>, where you use credits
+                                    earned from excess daytime production, or a <strong>Battery Storage System</strong>,
+                                    which stores daytime energy specifically for night use.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#gen3">
+                                    <i class="fas fa-cloud-rain"></i> <span>What happens during cloudy or rainy
+                                        days?</span>
+                                </button>
+                            </h2>
+                            <div id="gen3" class="accordion-collapse collapse" data-bs-parent="#faqGeneral">
+                                <div class="accordion-body">
+                                    Solar panels still work during cloudy or rainy days, but their efficiency is
+                                    reduced. Modern high-quality panels can still produce 10-25% of their rated capacity
+                                    on very cloudy days. Rain actually helps keep your panels clean of dust!
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <h3 class="mb-4">Installation & Maintenance</h3>
-                <div class="accordion mb-5" id="faqInstall">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#inst1">
-                                Will solar panels damage my roof?
-                            </button>
-                        </h2>
-                        <div id="inst1" class="accordion-collapse collapse" data-bs-parent="#faqInstall">
-                            <div class="accordion-body">
-                                When installed correctly by professionals, solar panels actually protect the portion of
-                                the roof they cover. We use specialized mounting equipment that ensures structural
-                                integrity and waterproofing is maintained.
+                <!-- Category: Technical -->
+                <div class="faq-group mb-5">
+                    <h3 class="faq-category-title">Installation & Maintenance</h3>
+                    <div class="accordion faq-accordion" id="faqInstall">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#inst1">
+                                    <i class="fas fa-home"></i> <span>Will solar panels damage my roof?</span>
+                                </button>
+                            </h2>
+                            <div id="inst1" class="accordion-collapse collapse" data-bs-parent="#faqInstall">
+                                <div class="accordion-body">
+                                    No. When installed correctly by our certified professionals, solar panels actually
+                                    protect the portion of the roof they cover. We use advanced mounting systems with
+                                    multi-layer waterproofing to ensure your roof's integrity remains perfect.
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#inst2">
-                                How often do I need to clean the panels?
-                            </button>
-                        </h2>
-                        <div id="inst2" class="accordion-collapse collapse" data-bs-parent="#faqInstall">
-                            <div class="accordion-body">
-                                In dusty environments, we recommend cleaning them once every 2-3 months. Often, normal
-                                rainfall is enough to keep them performing well. You can simply hose them down if they
-                                get too dirty.
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#inst2">
+                                    <i class="fas fa-tools"></i> <span>How much maintenance do they require?</span>
+                                </button>
+                            </h2>
+                            <div id="inst2" class="accordion-collapse collapse" data-bs-parent="#faqInstall">
+                                <div class="accordion-body">
+                                    Solar systems are remarkably low-maintenance because they have no moving parts.
+                                    Generally, a professional inspection once every 2 years is sufficient. In most
+                                    areas, normal rainfall is enough to keep the panels performing well.
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <h3 class="mb-4">Costs & Finance</h3>
-                <div class="accordion" id="faqCost">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#cost1">
-                                What is the payback period?
-                            </button>
-                        </h2>
-                        <div id="cost1" class="accordion-collapse collapse" data-bs-parent="#faqCost">
-                            <div class="accordion-body">
-                                The typical ROI or payback period for a residential solar system is 3 to 5 years. Given
-                                that panels last 25+ years, this means you get free electricity for over 20 years.
+                <!-- Category: Financial -->
+                <div class="faq-group">
+                    <h3 class="faq-category-title">Investment & Savings</h3>
+                    <div class="accordion faq-accordion" id="faqCost">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#cost1">
+                                    <i class="fas fa-hand-holding-usd"></i> <span>What is the typical payback
+                                        period?</span>
+                                </button>
+                            </h2>
+                            <div id="cost1" class="accordion-collapse collapse" data-bs-parent="#faqCost">
+                                <div class="accordion-body">
+                                    For most systems, the Return on Investment (ROI) typically ranges from <strong>3 to
+                                        5 years</strong>. Considering that panels are warrantied for 25 years, you will
+                                    enjoy at least 20 years of essentially free electricity.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -123,12 +421,59 @@ maintenance, and warranties.{% endblock %}
     </div>
 </section>
 
-<!-- CTA -->
-<section class="section-padding bg-light text-center">
+<!-- Redesigned Contact Section -->
+<section class="section-padding bg-white">
     <div class="container">
-        <h3>Didn't find your answer?</h3>
-        <p class="mb-4">Our support team is just a click away.</p>
-        <a href="{% url 'website:contact' %}" class="btn btn-outline-dark">Contact Support</a>
+        <div class="premium-contact-card text-center">
+            <div class="support-badge">
+                <i class="fas fa-headset"></i>
+            </div>
+
+            <h2 class="display-6 fw-extrabold mb-3" style="color: var(--deep-blue); letter-spacing: -0.5px;">Still have
+                questions?</h2>
+            <p class="text-muted mb-5 lead mx-auto" style="max-width: 650px; font-size: 1.2rem;">Our expert solar
+                consultants are ready to provide you with a personalized consultation and answer all your concerns.</p>
+
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4">
+                    <div class="contact-option-block">
+                        <div class="contact-icon-small">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h5 class="fw-bold mb-1" style="color: var(--deep-blue);">Call Us</h5>
+                        <p class="small text-muted mb-3">Speak with a specialist</p>
+                        <a href="tel:+12345678900" class="accent-link">+1 (234) 567-8900</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-option-block">
+                        <div class="contact-icon-small">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h5 class="fw-bold mb-1" style="color: var(--deep-blue);">Email Us</h5>
+                        <p class="small text-muted mb-3">Response in &lt; 2 hours</p>
+                        <a href="mailto:support@ultrarayssolar.com" class="accent-link">support@ultrarayssolar.com</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-option-block">
+                        <div class="contact-icon-small">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h5 class="fw-bold mb-1" style="color: var(--deep-blue);">Book a Demo</h5>
+                        <p class="small text-muted mb-2">Free site analysis</p>
+                        <span class="badge bg-warning text-dark px-3 py-1 rounded-pill small">Recommended</span>
+                    </div>
+                </div>
+            </div>
+
+            <a href="{% url 'website:quote' %}" class="btn-premium-cta">Book Now</a>
+
+            <div class="mt-5 pt-4 border-top" style="border-color: rgba(0,0,0,0.05) !important;">
+                <p class="mb-0 text-muted">Or visit our <a href="{% url 'website:contact' %}"
+                        class="fw-bold text-primary text-decoration-none">Contact Page</a> for more options.</p>
+            </div>
+        </div>
     </div>
 </section>
 

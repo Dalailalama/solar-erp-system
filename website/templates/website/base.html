@@ -61,6 +61,7 @@
     <!-- CSS Files -->
     <link rel="stylesheet" href="{% static 'website/css/solar-design-system.css' %}">
     <link rel="stylesheet" href="{% static 'website/css/solar-components.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/hero.css' %}">
     <link rel="stylesheet" href="{% static 'website/css/solar-responsive.css' %}">
     {% block extra_css %}{% endblock %}
 
@@ -124,10 +125,6 @@
     <!-- Footer -->
     {% include 'website/includes/footer.html' %}
 
-    <!-- Back to Top Button (Refactored to Vue) -->
-    <!-- <button id="back-to-top" class="back-to-top" aria-label="Back to top">
-        <i class="fas fa-arrow-up"></i>
-    </button> -->
 
     <!-- Global Vue App Mount Point -->
     <div id="solar-vue-app"></div>

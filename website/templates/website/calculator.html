@@ -1,97 +1,280 @@
 {% extends 'website/base.html' %}
 {% load static %}
 
-{% block title %}Free Solar Cost Calculator - Estimate Your Savings{% endblock %}
+{% block title %}Solar Savings Calculator - Estimate Your ROI in India{% endblock %}
 
 {% block meta_description %}Calculate your potential solar savings, payback period, and system cost instantly with our
-advanced solar calculator.{% endblock %}
+advanced solar calculator tailored for Indian homes and businesses.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'website/css/calculator.css' %}">
+{% endblock %}
 
 {% block content %}
 
-<!-- Hero Section -->
-<section class="page-hero bg-overlay"
-    style="background-image: url('{% static 'website/images/calculator-hero.jpg' %}');">
-    <div class="container text-center">
-        <h1 class="page-title text-white">Solar Savings Calculator</h1>
-        <p class="page-subtitle text-white">Find out how much you can save by switching to solar</p>
-    </div>
-</section>
+<div class="calculator-page">
+    <div class="calculator-container">
 
-<!-- Calculator App Container -->
-<section class="section-padding bg-light">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="card shadow-lg border-0 rounded-lg overflow-hidden">
-                    <div class="card-header bg-primary text-white p-4 text-center">
-                        <h3 class="mb-0">Estimate Your Solar Potential</h3>
-                    </div>
-                    <div class="card-body p-5">
-                        <!-- 
-                            Vue Component Mount Point 
-                            The actual interactive calculator will be mounted here by Vue.
-                            For SEO, we provide a basic fallback form or text.
-                        -->
-                        <div id="solar-calculator-app">
-                            <form>
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold">Monthly Electricity Bill (Avg)</label>
-                                    <div class="input-group input-group-lg">
-                                        <span class="input-group-text">$</span>
-                                        <input type="number" class="form-control" placeholder="e.g. 150">
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold">Roof Type</label>
-                                    <select class="form-select form-select-lg">
-                                        <option>Flat Concrete</option>
-                                        <option>Sloped Metal</option>
-                                        <option>Tiled</option>
-                                    </select>
-                                </div>
-                                <div class="d-grid">
-                                    <button class="btn btn-primary btn-lg" type="button">Calculate Savings</button>
-                                </div>
-                                <p class="text-muted text-center mt-3 small">
-                                    <i class="fas fa-info-circle me-1"></i> Interactive calculator loading...
-                                </p>
-                            </form>
+        <!-- Header -->
+        <div class="calc-header">
+            <h1>Solar Savings Calculator</h1>
+            <p>Calculate your potential savings, payback period, and recommended system size instantly.</p>
+        </div>
+
+        <!-- Calculator App -->
+        <div class="calculator-app">
+
+            <!-- Left Panel: Inputs -->
+            <div class="calc-panel-left">
+                <div class="input-section-title">
+                    <i class="fas fa-sliders-h"></i> Customize Your System
+                </div>
+
+                <!-- Bill Slider -->
+                <div class="form-group mb-4">
+                    <label>Monthly/Bi-monthly Electricity Bill</label>
+                    <div class="bill-control-group">
+                        <div class="bill-header">
+                            <span class="text-muted small">Swipe to adjust amount</span>
+                            <div class="bill-value-box">
+                                <span class="currency-symbol">₹</span>
+                                <input type="number" id="billNumberInput" value="5000" min="500" max="100000"
+                                    class="bill-input-field">
+                            </div>
+                        </div>
+                        <input type="range" id="billSlider" min="500" max="100000" step="100" value="5000"
+                            class="range-slider">
+                        <div class="range-labels">
+                            <span>₹500</span>
+                            <span>₹1 Lakh+</span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- How It Works -->
-<section class="section-padding">
-    <div class="container">
-        <h2 class="section-title text-center mb-5">How We Calculate Savings</h2>
-        <div class="row g-4">
-            <div class="col-md-4 text-center">
-                <div class="p-4">
-                    <i class="fas fa-sun fa-3x text-warning mb-3"></i>
-                    <h5>Sunlight Hours</h5>
-                    <p>We analyze local weather data to estimate annual solar production for your region.</p>
-                </div>
-            </div>
-            <div class="col-md-4 text-center">
-                <div class="p-4">
-                    <i class="fas fa-plug fa-3x text-warning mb-3"></i>
-                    <h5>Energy Usage</h5>
-                    <p>Your current bill helps us size the perfect system to offset your consumption.</p>
-                </div>
-            </div>
-            <div class="col-md-4 text-center">
-                <div class="p-4">
-                    <i class="fas fa-hand-holding-dollar fa-3x text-warning mb-3"></i>
-                    <h5>Incentives</h5>
-                    <p>We factor in federal tax credits and local rebates to show true net cost.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+                <!-- Form Grid -->
+                <div class="form-grid">
+                    <!-- State -->
+                    <div class="form-group">
+                        <label>Select State</label>
+                        <div class="custom-select-wrapper">
+                            <select id="stateSelect" class="custom-select">
+                                <option value="mh">Maharashtra</option>
+                                <option value="gj">Gujarat</option>
+                                <option value="ka">Karnataka</option>
+                                <option value="dl">Delhi</option>
+                                <option value="rj">Rajasthan</option>
+                                <option value="tn">Tamil Nadu</option>
+                            </select>
+                            <i class="fas fa-chevron-down select-arrow"></i>
+                        </div>
+                    </div>
 
+                    <!-- Property Type -->
+                    <div class="form-group">
+                        <label>Property Type</label>
+                        <div class="custom-select-wrapper">
+                            <select id="propertySelect" class="custom-select">
+                                <option value="residential">Residential</option>
+                                <option value="commercial">Commercial</option>
+                                <option value="industrial">Industrial</option>
+                            </select>
+                            <i class="fas fa-chevron-down select-arrow"></i>
+                        </div>
+                    </div>
+
+                    <!-- Roof Type -->
+                    <div class="form-group">
+                        <label>Roof Type</label>
+                        <div class="custom-select-wrapper">
+                            <select id="roofSelect" class="custom-select">
+                                <option value="flat">Flat Concrete</option>
+                                <option value="tiled">Tiled / Sloped</option>
+                                <option value="metal">Metal Shed</option>
+                            </select>
+                            <i class="fas fa-chevron-down select-arrow"></i>
+                        </div>
+                        <span class="helper-txt">Affects structure cost</span>
+                    </div>
+
+                    <!-- Provider -->
+                    <div class="form-group">
+                        <label>Discom Provider</label>
+                        <div class="custom-select-wrapper">
+                            <select id="discomSelect" class="custom-select">
+                                <option value="adani">Adani Electricity</option>
+                                <option value="tata">Tata Power</option>
+                                <option value="msedcl">MSEDCL</option>
+                                <option value="bescom">BESCOM</option>
+                            </select>
+                            <i class="fas fa-chevron-down select-arrow"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-recalc" id="recalculateBtn" onclick="calculateSolar()">
+                    Recalculate Savings <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+
+            <!-- Right Panel: Results -->
+            <div class="calc-panel-right">
+                <div class="input-section-title">
+                    <i class="fas fa-chart-pie"></i> Estimated Benefits
+                </div>
+
+                <div class="results-grid">
+                    <!-- System Size -->
+                    <div class="result-card">
+                        <div class="res-icon"><i class="fas fa-solar-panel"></i></div>
+                        <div class="res-value"><span id="res-size">0</span> <small style="font-size:0.5em">kW</small>
+                        </div>
+                        <div class="res-label">System Size</div>
+                    </div>
+
+                    <!-- Payback -->
+                    <div class="result-card">
+                        <div class="res-icon"><i class="fas fa-hourglass-half"></i></div>
+                        <div class="res-value"><span id="res-payback">0</span> <small
+                                style="font-size:0.5em">Years</small></div>
+                        <div class="res-label">Payback Period</div>
+                    </div>
+
+                    <!-- Monthly Savings -->
+                    <div class="result-card highlight">
+                        <div class="res-icon"><i class="fas fa-wallet"></i></div>
+                        <div class="res-value" id="res-monthly">₹0</div>
+                        <div class="res-label">Monthly Savings</div>
+                    </div>
+
+                    <!-- Annual Savings -->
+                    <div class="result-card">
+                        <div class="res-icon"><i class="fas fa-piggy-bank"></i></div>
+                        <div class="res-value" id="res-annual">₹0</div>
+                        <div class="res-label">Annual Savings</div>
+                    </div>
+                </div>
+
+                <div class="trust-indicators">
+                    <div class="trust-item"><i class="fas fa-check-circle"></i> MNRE Approved Benchmark Costs</div>
+                    <div class="trust-item"><i class="fas fa-check-circle"></i> Based on Local Solar Irradiance Data
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <a href="{% url 'website:quote' %}" class="btn-action btn-primary-solid">
+                        Get Free Consultation <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <button class="btn-action btn-outline">
+                        Download Report <i class="fas fa-download"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="disclaimer-text">
+            *Estimates are approximate based on average sun hours and current electricity tariffs in your region.
+            Actual savings may vary based on shade-free area and panel orientation.
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const slider = document.getElementById('billSlider');
+        const numInput = document.getElementById('billNumberInput');
+
+        // Results Elements
+        const elSize = document.getElementById('res-size');
+        const elPayback = document.getElementById('res-payback');
+        const elMonthly = document.getElementById('res-monthly');
+        const elAnnual = document.getElementById('res-annual');
+
+        // Logic Constants (Approximate for Indian Market)
+        const RATE_PER_UNIT = 10;
+        const UNITS_PER_KW_MONTH = 120;
+        const COST_PER_KW = 55000;
+
+        // Helper: Format Large Numbers (Lakh/Cr)
+        const formatCurrencySmart = (num) => {
+            if (num >= 10000000) { // 1 Crore
+                return '₹' + (num / 10000000).toFixed(2) + ' Cr';
+            } else if (num >= 100000) { // 1 Lakh
+                return '₹' + (num / 100000).toFixed(2) + ' L';
+            } else {
+                return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(num);
+            }
+        };
+
+        const formatDecimal = (num) => {
+            return parseFloat(num).toFixed(1);
+        }
+
+        // Calculation Function
+        window.calculateSolar = function () { // Make global for button onclick
+            // Cap the input value
+            let rawValue = parseInt(numInput.value) || 0;
+            if (rawValue > 5000000) rawValue = 5000000;
+
+            let billAmount = rawValue;
+
+            // Core Logic
+            let unitsConsumed = billAmount / RATE_PER_UNIT;
+            let systemSize = unitsConsumed / UNITS_PER_KW_MONTH;
+
+            // Round system size
+            if (systemSize < 1 && systemSize > 0) systemSize = 1;
+
+            // Savings
+            let monthlySavings = unitsConsumed * RATE_PER_UNIT * 0.90;
+            if (monthlySavings > billAmount) monthlySavings = billAmount;
+
+            let annualSavings = monthlySavings * 12;
+
+            let systemCost = systemSize * COST_PER_KW;
+            let paybackYears = (annualSavings > 0) ? (systemCost / annualSavings) : 0;
+
+            if (paybackYears > 20) paybackYears = 20; // Cap visual payback
+
+            // Update UI
+            elSize.textContent = formatDecimal(systemSize);
+            elPayback.textContent = paybackYears.toFixed(1);
+            elMonthly.textContent = formatCurrencySmart(Math.round(monthlySavings));
+            elAnnual.textContent = formatCurrencySmart(Math.round(annualSavings));
+        }
+
+        // Sync Logic
+        slider.addEventListener('input', function () {
+            numInput.value = this.value;
+            calculateSolar();
+        });
+
+        numInput.addEventListener('input', function () {
+            let val = parseInt(this.value);
+            if (val >= 500 && val <= 100000) {
+                slider.value = val;
+            } else if (val > 100000) {
+                slider.value = 100000;
+            }
+            calculateSolar();
+        });
+
+        // Initial Run
+        calculateSolar();
+
+        // Button Animation
+        const btn = document.getElementById('recalculateBtn');
+        btn.addEventListener('click', function () {
+            btn.innerHTML = 'Calculating... <i class="fas fa-spinner fa-spin"></i>';
+            setTimeout(() => {
+                calculateSolar();
+                btn.innerHTML = 'Recalculate Savings <i class="fas fa-sync-alt"></i>';
+            }, 600);
+        });
+    });
+</script>
 {% endblock %}

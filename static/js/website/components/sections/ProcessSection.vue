@@ -1,27 +1,35 @@
 <template>
-  <section class="process-section section-padding bg-light">
-    <div class="container">
-      <div class="section-header text-center">
-        <h2 class="section-title">How Solar Installation Works</h2>
-        <p class="section-subtitle">
-          Our simple 6-step process makes going solar easy and hassle-free
-        </p>
-      </div>
-      <div class="process-timeline">
-        <div v-for="(step, index) in steps" :key="index" class="process-step">
-          <div class="step-number">{{ index + 1 }}</div>
-          <div class="step-content">
-            <h3>{{ step.title }}</h3>
-            <p>{{ step.description }}</p>
+  <Teleport to="#process-app" v-if="isMounted">
+    <section class="process-section section-padding bg-light">
+      <div class="container">
+        <div class="section-header text-center">
+          <h2 class="section-title">How Solar Installation Works</h2>
+          <p class="section-subtitle">
+            Our simple 6-step process makes going solar easy and hassle-free
+          </p>
+        </div>
+        <div class="process-timeline">
+          <div v-for="(step, index) in steps" :key="index" class="process-step">
+            <div class="step-number">{{ index + 1 }}</div>
+            <div class="step-content">
+              <h3>{{ step.title }}</h3>
+              <p>{{ step.description }}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+
+const isMounted = ref(false);
+
+onMounted(() => {
+  isMounted.value = !!document.querySelector('#process-app');
+});
 
 interface ProcessStep {
   title: string;

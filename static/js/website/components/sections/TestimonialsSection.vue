@@ -1,33 +1,41 @@
 <template>
-  <section class="testimonials-section section-padding">
-    <div class="container">
-      <div class="section-header text-center">
-        <h2 class="section-title">What Our Customers Say</h2>
-        <p class="section-subtitle">
-          Don't just take our word for it - hear from our satisfied customers
-        </p>
-      </div>
-      <div class="testimonials-slider">
-        <div v-for="testimonial in testimonials" :key="testimonial.name" class="testimonial-card">
-          <div class="testimonial-rating">
-            <i v-for="n in 5" :key="n" class="fas fa-star"></i>
-          </div>
-          <p class="testimonial-text">{{ testimonial.text }}</p>
-          <div class="testimonial-author">
-            <img :src="testimonial.image" :alt="testimonial.name" loading="lazy">
-            <div class="author-info">
-              <h4>{{ testimonial.name }}</h4>
-              <p>{{ testimonial.location }}</p>
+  <Teleport to="#testimonials-app" v-if="isMounted">
+    <section class="testimonials-section section-padding">
+      <div class="container">
+        <div class="section-header text-center">
+          <h2 class="section-title">What Our Customers Say</h2>
+          <p class="section-subtitle">
+            Don't just take our word for it - hear from our satisfied customers
+          </p>
+        </div>
+        <div class="testimonials-slider">
+          <div v-for="testimonial in testimonials" :key="testimonial.name" class="testimonial-card">
+            <div class="testimonial-rating">
+              <i v-for="n in 5" :key="n" class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">{{ testimonial.text }}</p>
+            <div class="testimonial-author">
+              <img :src="testimonial.image" :alt="testimonial.name" loading="lazy">
+              <div class="author-info">
+                <h4>{{ testimonial.name }}</h4>
+                <p>{{ testimonial.location }}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+
+const isMounted = ref(false);
+
+onMounted(() => {
+  isMounted.value = !!document.querySelector('#testimonials-app');
+});
 
 interface Testimonial {
   name: string;

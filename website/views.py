@@ -1,7 +1,10 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import JsonResponse
+from django.http import JsonResponse, FileResponse, Http404
 from django.views.decorators.http import require_http_methods
 from login_required import login_not_required
+import os
+from django.conf import settings
+# from django.http import 
 
 # ===== MAIN PAGES =====
 
@@ -194,8 +197,12 @@ def contact(request):
     Contact Page
     Contact form and company information
     """
+    from CRM.models import Category
+    project_categories = Category.objects.filter(group='project_type', is_active=True)
+    
     context = {
         'page_title': 'Contact Us - Get in Touch',
+        'project_categories': project_categories,
     }
     return render(request, 'website/contact.html', context)
 
@@ -282,3 +289,19 @@ def newsletter_subscribe(request):
     
     except Exception as e:
         return JsonResponse({'success': False, 'message': str(e)}, status=500)
+
+
+@login_not_required   # use your decorator here
+def download_brochure(request):
+    relative_path = 'website/files/brochure-small.pdf'
+    file_path = os.path.join(settings.MEDIA_ROOT, relative_path)
+
+    if not os.path.exists(file_path):
+        raise Http404("Brochure not found")
+
+    return FileResponse(
+        open(file_path, 'rb'),
+        as_attachment=True,
+        filename='solar-brochure.pdf',  # what user sees
+        content_type='application/pdf',
+    )

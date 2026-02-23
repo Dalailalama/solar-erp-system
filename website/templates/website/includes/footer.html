@@ -6,8 +6,34 @@
                 <!-- Company Info -->
                 <div class="footer-col">
                     <div class="footer-logo">
-                        <img src="{% static 'website/images/logo-white.png' %}" alt="Your Solar Company" width="180"
-                            height="60">
+                        <a href="{% url 'website:home' %}" class="logo">
+                            <div class="solar-brand">
+                                <div class="brand-icon">
+                                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                        <!-- Core Circle -->
+                                        <circle cx="50" cy="62" r="18" fill="none" stroke="currentColor"
+                                            stroke-width="6" />
+                                        <!-- 4 Blunt Fanned Rays exactly as in design -->
+                                        <g fill="currentColor">
+                                            <rect x="44" y="10" width="12" height="18" rx="2"
+                                                transform="rotate(-45 50 62)" />
+                                            <rect x="44" y="6" width="12" height="18" rx="2"
+                                                transform="rotate(-15 50 62)" />
+                                            <rect x="44" y="6" width="12" height="18" rx="2"
+                                                transform="rotate(15 50 62)" />
+                                            <rect x="44" y="10" width="12" height="18" rx="2"
+                                                transform="rotate(45 50 62)" />
+                                        </g>
+                                        <!-- Precise Bolt (White for dark footer) -->
+                                        <path d="M54 48 L42 62 H50 L46 76 L60 58 H52 L54 48Z" fill="#FFF" />
+                                    </svg>
+                                </div>
+                                <div class="brand-text">
+                                    <span class="brand-main">Ultra Rays</span>
+                                    <span class="brand-sub">Energy Solution</span>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                     <p class="footer-description">
                         Leading solar energy company providing professional solar panel installation for homes and
@@ -70,19 +96,19 @@
                     <ul class="footer-contact">
                         <li>
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>123 Solar Street<br>Your City, State 12345</span>
+                            <span>B-409, Celebration City Center, South Bopal<br>Ahmedabad, Gujarat 380058</span>
                         </li>
                         <li>
                             <i class="fas fa-phone"></i>
-                            <a href="tel:+12345678900">+1 (234) 567-8900</a>
+                            <a href="tel:+917984482472">+917984482472</a>
                         </li>
                         <li>
                             <i class="fas fa-envelope"></i>
-                            <a href="mailto:info@yoursolarcompany.com">info@yoursolarcompany.com</a>
+                            <a href="mailto:info@ultrarayssolar.com">info@ultrarayssolar.com</a>
                         </li>
                         <li>
                             <i class="fas fa-clock"></i>
-                            <span>Mon - Fri: 8:00 AM - 6:00 PM<br>Sat: 9:00 AM - 4:00 PM</span>
+                            <span>Mon - Sat: 8:00 AM - 6:00 PM</span>
                         </li>
                     </ul>
                 </div>
@@ -114,7 +140,7 @@
         <div class="container">
             <div class="footer-bottom-content">
                 <p class="copyright">
-                    &copy; {% now "Y" %} Your Solar Company. All rights reserved.
+                    &copy; {% now "Y" %} Ultra Rays Solar Energy Solutions. All rights reserved.
                 </p>
                 <ul class="footer-legal">
                     <li><a href="{% url 'website:privacy' %}">Privacy Policy</a></li>

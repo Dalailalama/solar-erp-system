@@ -7,31 +7,31 @@
   --solar-orange: #FF6B35;
   --solar-orange-light: #FF8A5C;
   --solar-orange-dark: #E65420;
-  
+
   --solar-yellow: #F7B801;
   --solar-yellow-light: #FFD23F;
   --solar-yellow-dark: #D99F00;
-  
+
   --energy-green: #2ECC71;
   --energy-green-light: #58D68D;
   --energy-green-dark: #27AE60;
-  
+
   /* ===== SECONDARY COLORS ===== */
   --sky-blue: #3498DB;
   --sky-blue-light: #5DADE2;
   --sky-blue-dark: #2980B9;
-  
+
   --deep-blue: #2C3E50;
   --deep-blue-light: #34495E;
   --deep-blue-dark: #1A252F;
-  
+
   /* ===== NEUTRAL COLORS ===== */
   --white: #FFFFFF;
   --light-gray: #F8F9FA;
   --medium-gray: #6C757D;
   --dark-gray: #343A40;
   --black: #000000;
-  
+
   --gray-50: #F9FAFB;
   --gray-100: #F3F4F6;
   --gray-200: #E5E7EB;
@@ -42,30 +42,41 @@
   --gray-700: #374151;
   --gray-800: #1F2937;
   --gray-900: #111827;
-  
+
   /* ===== GRADIENTS ===== */
   --gradient-primary: linear-gradient(135deg, #FF6B35 0%, #F7B801 100%);
   --gradient-secondary: linear-gradient(135deg, #3498DB 0%, #2ECC71 100%);
   --gradient-overlay: linear-gradient(135deg, rgba(255, 107, 53, 0.9) 0%, rgba(247, 184, 1, 0.9) 100%);
   --gradient-dark: linear-gradient(135deg, rgba(44, 62, 80, 0.95) 0%, rgba(26, 37, 47, 0.95) 100%);
-  
+
   /* ===== TYPOGRAPHY ===== */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-secondary: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  
+
   /* Font Sizes */
-  --fs-xs: 0.75rem;      /* 12px */
-  --fs-sm: 0.875rem;     /* 14px */
-  --fs-base: 1rem;       /* 16px */
-  --fs-lg: 1.125rem;     /* 18px */
-  --fs-xl: 1.25rem;      /* 20px */
-  --fs-2xl: 1.5rem;      /* 24px */
-  --fs-3xl: 1.875rem;    /* 30px */
-  --fs-4xl: 2.25rem;     /* 36px */
-  --fs-5xl: 3rem;        /* 48px */
-  --fs-6xl: 3.75rem;     /* 60px */
-  --fs-7xl: 4.5rem;      /* 72px */
-  
+  --fs-xs: 0.75rem;
+  /* 12px */
+  --fs-sm: 0.875rem;
+  /* 14px */
+  --fs-base: 1rem;
+  /* 16px */
+  --fs-lg: 1.125rem;
+  /* 18px */
+  --fs-xl: 1.25rem;
+  /* 20px */
+  --fs-2xl: 1.5rem;
+  /* 24px */
+  --fs-3xl: 1.875rem;
+  /* 30px */
+  --fs-4xl: 2.25rem;
+  /* 36px */
+  --fs-5xl: 3rem;
+  /* 48px */
+  --fs-6xl: 3.75rem;
+  /* 60px */
+  --fs-7xl: 4.5rem;
+  /* 72px */
+
   /* Font Weights */
   --fw-light: 300;
   --fw-regular: 400;
@@ -73,24 +84,33 @@
   --fw-semibold: 600;
   --fw-bold: 700;
   --fw-extrabold: 800;
-  
+
   /* Line Heights */
   --lh-tight: 1.25;
   --lh-normal: 1.5;
   --lh-relaxed: 1.75;
   --lh-loose: 2;
-  
+
   /* ===== SPACING ===== */
-  --spacing-xs: 0.25rem;   /* 4px */
-  --spacing-sm: 0.5rem;    /* 8px */
-  --spacing-md: 1rem;      /* 16px */
-  --spacing-lg: 1.5rem;    /* 24px */
-  --spacing-xl: 2rem;      /* 32px */
-  --spacing-2xl: 3rem;     /* 48px */
-  --spacing-3xl: 4rem;     /* 64px */
-  --spacing-4xl: 6rem;     /* 96px */
-  --spacing-5xl: 8rem;     /* 128px */
-  
+  --spacing-xs: 0.25rem;
+  /* 4px */
+  --spacing-sm: 0.5rem;
+  /* 8px */
+  --spacing-md: 1rem;
+  /* 16px */
+  --spacing-lg: 1.5rem;
+  /* 24px */
+  --spacing-xl: 2rem;
+  /* 32px */
+  --spacing-2xl: 3rem;
+  /* 48px */
+  --spacing-3xl: 4rem;
+  /* 64px */
+  --spacing-4xl: 6rem;
+  /* 96px */
+  --spacing-5xl: 8rem;
+  /* 128px */
+
   /* ===== SHADOWS ===== */
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -98,20 +118,25 @@
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
   --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
   --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.25);
-  
+
   /* ===== BORDER RADIUS ===== */
-  --radius-sm: 0.25rem;    /* 4px */
-  --radius-md: 0.5rem;     /* 8px */
-  --radius-lg: 1rem;       /* 16px */
-  --radius-xl: 1.5rem;     /* 24px */
-  --radius-2xl: 2rem;      /* 32px */
+  --radius-sm: 0.25rem;
+  /* 4px */
+  --radius-md: 0.5rem;
+  /* 8px */
+  --radius-lg: 1rem;
+  /* 16px */
+  --radius-xl: 1.5rem;
+  /* 24px */
+  --radius-2xl: 2rem;
+  /* 32px */
   --radius-full: 9999px;
-  
+
   /* ===== TRANSITIONS ===== */
   --transition-fast: 150ms ease-in-out;
   --transition-base: 300ms ease-in-out;
   --transition-slow: 500ms ease-in-out;
-  
+
   /* ===== Z-INDEX ===== */
   --z-dropdown: 1000;
   --z-sticky: 1020;
@@ -120,7 +145,7 @@
   --z-modal: 1050;
   --z-popover: 1060;
   --z-tooltip: 1070;
-  
+
   /* ===== LAYOUT ===== */
   --container-max-width: 1200px;
   --container-padding: 1rem;
@@ -157,7 +182,12 @@ body {
 
 /* ===== TYPOGRAPHY ===== */
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-secondary);
   font-weight: var(--fw-bold);
   line-height: var(--lh-tight);
@@ -165,12 +195,29 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1rem;
 }
 
-h1 { font-size: var(--fs-5xl); }
-h2 { font-size: var(--fs-4xl); }
-h3 { font-size: var(--fs-3xl); }
-h4 { font-size: var(--fs-2xl); }
-h5 { font-size: var(--fs-xl); }
-h6 { font-size: var(--fs-lg); }
+h1 {
+  font-size: var(--fs-5xl);
+}
+
+h2 {
+  font-size: var(--fs-4xl);
+}
+
+h3 {
+  font-size: var(--fs-3xl);
+}
+
+h4 {
+  font-size: var(--fs-2xl);
+}
+
+h5 {
+  font-size: var(--fs-xl);
+}
+
+h6 {
+  font-size: var(--fs-lg);
+}
 
 p {
   margin-bottom: 1rem;
@@ -192,7 +239,8 @@ a:focus {
   outline-offset: 2px;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -387,60 +435,38 @@ img {
   top: 0;
 }
 
-/* ===== BACK TO TOP BUTTON ===== */
-
-.back-to-top {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 50px;
-  height: 50px;
-  background: var(--gradient-primary);
-  color: var(--white);
-  border: none;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--fs-xl);
-  box-shadow: var(--shadow-lg);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-  transition: all var(--transition-base);
-  z-index: var(--z-fixed);
-}
-
-.back-to-top.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.back-to-top:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-xl);
-}
+/* Back to Top functionality is now handled by Vue (BackToTop.vue) */
 
 /* ===== RESPONSIVE TYPOGRAPHY ===== */
 
 @media (max-width: 768px) {
   :root {
-    --fs-5xl: 2.5rem;    /* 40px */
-    --fs-4xl: 2rem;      /* 32px */
-    --fs-3xl: 1.5rem;    /* 24px */
-    --fs-2xl: 1.25rem;   /* 20px */
+    --fs-5xl: 2.5rem;
+    /* 40px */
+    --fs-4xl: 2rem;
+    /* 32px */
+    --fs-3xl: 1.5rem;
+    /* 24px */
+    --fs-2xl: 1.25rem;
+    /* 20px */
   }
-  
-  h1 { font-size: var(--fs-4xl); }
-  h2 { font-size: var(--fs-3xl); }
-  h3 { font-size: var(--fs-2xl); }
-  
+
+  h1 {
+    font-size: var(--fs-4xl);
+  }
+
+  h2 {
+    font-size: var(--fs-3xl);
+  }
+
+  h3 {
+    font-size: var(--fs-2xl);
+  }
+
   .section-padding {
     padding: var(--spacing-3xl) 0;
   }
-  
+
   .section-title {
     font-size: var(--fs-3xl);
   }
@@ -450,7 +476,7 @@ img {
   :root {
     --container-padding: 1rem;
   }
-  
+
   .section-padding {
     padding: var(--spacing-2xl) 0;
   }

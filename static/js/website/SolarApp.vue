@@ -9,8 +9,23 @@
     <!-- Back to Top Button -->
     <BackToTop :show="showBackToTop" />
     
-    <!-- Core Notification Toast Container -->
-    <ToastContainer position="top-right" />
+    <!-- Notification Toast -->
+    <NotificationToast 
+      v-if="activeNotification"
+      :message="activeNotification.message"
+      :type="activeNotification.type"
+      @close="activeNotification = null"
+    />
+
+    <!-- Section Teleports -->
+    <HeroSection />
+    <BenefitsSection />
+    <ProcessSection />
+    <ServicesSection />
+    <StatsSection />
+    <TestimonialsSection />
+    <CTASection />
+    <FAQSection />
   </div>
 </template>
 
@@ -19,15 +34,25 @@ import { ref, onMounted, onUnmounted, provide } from 'vue';
 import { useSolarStore } from './stores/solarStore';
 import MobileMenu from './components/MobileMenu.vue';
 import BackToTop from './components/BackToTop.vue';
-import { ToastContainer, useToast } from './website_base';
+import NotificationToast from './components/NotificationToast.vue';
+import HeroSection from './components/sections/HeroSection.vue';
+import BenefitsSection from './components/sections/BenefitsSection.vue';
+import ProcessSection from './components/sections/ProcessSection.vue';
+import ServicesSection from './components/sections/ServicesSection.vue';
+import StatsSection from './components/sections/StatsSection.vue';
+import TestimonialsSection from './components/sections/TestimonialsSection.vue';
+import CTASection from './components/sections/CTASection.vue';
+import FAQSection from './components/sections/FAQSection.vue';
+// import { ToastContainer, useToast } from './website_base'; // Removed in favor of custom toast
 
 // Store
 const store = useSolarStore;
-const toast = useToast;
+// const toast = useToast; // Removed
 
 // State
 const isMobileMenuOpen = ref(false);
 const showBackToTop = ref(false);
+const activeNotification = ref<{ message: string; type: 'success' | 'error' | 'info' | 'warning' } | null>(null);
 
 // Mobile menu toggle
 const toggleMobileMenu = () => {
@@ -43,10 +68,12 @@ const closeMobileMenu = () => {
 // Back to top visibility
 const handleScroll = () => {
   const scrollY = window.pageYOffset;
+  // console.log('[SolarApp] Scroll position:', scrollY);
   store.updateScrollPosition(scrollY);
   const shouldShow = scrollY > 300;
   
   if (showBackToTop.value !== shouldShow) {
+      console.log('[SolarApp] BackToTop visibility changing to:', shouldShow);
       showBackToTop.value = shouldShow;
   }
   
@@ -63,13 +90,20 @@ const handleScroll = () => {
   }
 };
 
-// Show notification (Proxy to Core Toast)
-const showNotification = (message: string, type: 'info' | 'error' | 'success' | 'warning' = 'info') => {
-  if (type === 'error') toast.error(message);
-  else if (type === 'success') toast.success(message);
-  else if (type === 'warning') toast.warning(message);
-  else toast.info(message);
+// Show notification
+const showNotification = (message: string, type: 'success' | 'error' | 'info' | 'warning' = 'info') => {
+  activeNotification.value = { message, type };
+  
+  // Auto-close after 5 seconds
+  setTimeout(() => {
+    if (activeNotification.value?.message === message) {
+      activeNotification.value = null;
+    }
+  }, 5000);
 };
+
+// Expose to window for legacy JS (solar-main.js)
+(window as any).showNotification = showNotification;
 
 // Provide global functions
 provide('toggleMobileMenu', toggleMobileMenu);

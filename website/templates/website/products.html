@@ -6,128 +6,235 @@
 {% block meta_description %}Explore our range of high-efficiency solar panels, advanced inverters, and battery storage
 solutions from top global brands.{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'website/css/products.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endblock %}
+
 {% block content %}
 
-<!-- Hero Section -->
-<section class="page-hero bg-overlay" style="background-image: url('{% static 'website/images/products-hero.jpg' %}');">
-    <div class="container text-center">
-        <h1 class="page-title text-white">Premium Solar Equipment</h1>
-        <p class="page-subtitle text-white">We partner with the world's leading brands to ensure quality and performance
-        </p>
-    </div>
-</section>
+<div class="products-page">
 
-<!-- Product Categories -->
-<section class="section-padding">
-    <div class="container">
-        <!-- Solar Panels -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <h2 class="section-title border-bottom pb-3 mb-4">Solar Panels</h2>
+    <!-- 1. HERO SECTION -->
+    <section class="prod-hero">
+        <div class="container-prod">
+            <div class="hero-content">
+                <span class="hero-badge">Solar Equipment</span>
+                <h1 class="hero-title">Premium Solar Infrastructure</h1>
+                <p class="hero-desc">
+                    Harnessing global innovation to deliver high-yield solar systems for Indian conditions.
+                    Engineered for efficiency, built for durability.
+                </p>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="product-card card border-0 shadow-sm h-100">
-                    <img src="{% static 'website/images/panel-mono.jpg' %}" class="card-img-top"
-                        alt="Monocrystalline Panel">
-                    <div class="card-body">
-                        <h5 class="card-title">Monocrystalline PERC</h5>
-                        <p class="card-text text-muted">High efficiency panels perfect for residential roofs with
-                            limited space.</p>
-                        <ul class="list-unstyled small text-muted">
-                            <li><i class="fas fa-bolt text-warning me-2"></i> 400W - 550W</li>
-                            <li><i class="fas fa-check text-success me-2"></i> 20.5%+ Efficiency</li>
-                        </ul>
+        </div>
+        <div class="hero-curve"></div>
+    </section>
+
+    <!-- 2. ADVANCED SOLAR MODULES -->
+    <section class="modules-section">
+        <div class="container-prod">
+            <div class="sec-header">
+                <h2 class="sec-title">Advanced Solar Modules</h2>
+                <p class="sec-desc">Tier-1 panels featuring the latest Mono PERC and Bifacial technologies for maximum
+                    energy generation.</p>
+            </div>
+
+            <div class="module-grid">
+                <!-- Card 1: Mono PERC -->
+                <div class="mod-card">
+                    <div class="mod-img-box">
+                        <img src="{% static 'website/images/panel-mono.jpg' %}" alt="Mono PERC" class="mod-img">
+                    </div>
+                    <div class="mod-content">
+                        <h3 class="mod-title">Monocrystalline PERC</h3>
+                        <p class="mod-text">High-efficiency half-cut cells designed for residential rooftops where space
+                            optimization is critical.</p>
+
+                        <div class="spec-box">
+                            <div class="spec-mini">
+                                <span class="sm-lbl">Range</span>
+                                <span class="sm-val">400W - 550W</span>
+                            </div>
+                            <div class="spec-mini">
+                                <span class="sm-lbl">Efficiency</span>
+                                <span class="sm-val">21.5%+</span>
+                            </div>
+                            <div class="spec-mini">
+                                <span class="sm-lbl">Warranty</span>
+                                <span class="sm-val">25 Years</span>
+                            </div>
+                            <div class="spec-mini">
+                                <span class="sm-lbl">Tech</span>
+                                <span class="sm-val">Half-Cut</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="product-card card border-0 shadow-sm h-100">
-                    <img src="{% static 'website/images/panel-bifacial.jpg' %}" class="card-img-top"
-                        alt="Bifacial Panel">
-                    <div class="card-body">
-                        <h5 class="card-title">Bifacial Modules</h5>
-                        <p class="card-text text-muted">Generates power from both sides. Ideal for commercial and
-                            ground-mount systems.</p>
-                        <ul class="list-unstyled small text-muted">
-                            <li><i class="fas fa-bolt text-warning me-2"></i> 540W - 600W</li>
-                            <li><i class="fas fa-check text-success me-2"></i> Extra 10-30% yield</li>
-                        </ul>
+
+                <!-- Card 2: Bifacial -->
+                <div class="mod-card">
+                    <div class="mod-img-box">
+                        <img src="{% static 'website/images/panel-bifacial.jpg' %}" alt="Bifacial Module"
+                            class="mod-img">
+                    </div>
+                    <div class="mod-content">
+                        <h3 class="mod-title">Bifacial Modules</h3>
+                        <p class="mod-text">Dual-glass design capturing sunlight from both sides. Ideal for carports and
+                            reflective ground surfaces.</p>
+
+                        <div class="spec-box">
+                            <div class="spec-mini">
+                                <span class="sm-lbl">Gain</span>
+                                <span class="sm-val">Up to 30%</span>
+                            </div>
+                            <div class="spec-mini">
+                                <span class="sm-lbl">Durability</span>
+                                <span class="sm-val">Dual Glass</span>
+                            </div>
+                            <div class="spec-mini">
+                                <span class="sm-lbl">Warranty</span>
+                                <span class="sm-val">30 Years</span>
+                            </div>
+                            <div class="spec-mini">
+                                <span class="sm-lbl">Application</span>
+                                <span class="sm-val">Commercial</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="product-card card border-0 shadow-sm h-100">
-                    <img src="{% static 'website/images/panel-topcon.jpg' %}" class="card-img-top" alt="TOPCon Panel">
-                    <div class="card-body">
-                        <h5 class="card-title">N-Type TOPCon</h5>
-                        <p class="card-text text-muted">Next-gen technology with lower degradation and better low-light
-                            performance.</p>
-                        <ul class="list-unstyled small text-muted">
-                            <li><i class="fas fa-bolt text-warning me-2"></i> 570W+</li>
-                            <li><i class="fas fa-check text-success me-2"></i> 30-Year Warranty</li>
-                        </ul>
+
+                <!-- Card 3: TOPCon -->
+                <div class="mod-card">
+                    <div class="mod-img-box">
+                        <img src="{% static 'website/images/panel-topcon.jpg' %}" alt="N-Type TOPCon" class="mod-img">
+                    </div>
+                    <div class="mod-content">
+                        <h3 class="mod-title">N-Type TOPCon</h3>
+                        <p class="mod-text">Next-gen technology delivering superior low-light performance and minimal
+                            degradation over time.</p>
+
+                        <div class="spec-box">
+                            <div class="spec-mini">
+                                <span class="sm-lbl">Power</span>
+                                <span class="sm-val">580W+</span>
+                            </div>
+                            <div class="spec-mini">
+                                <span class="sm-lbl">Degradation</span>
+                                <span class="sm-val">
+                                    < 0.4%/yr</span>
+                            </div>
+                            <div class="spec-mini">
+                                <span class="sm-lbl">Temp Coeff</span>
+                                <span class="sm-val">-0.30%</span>
+                            </div>
+                            <div class="spec-mini">
+                                <span class="sm-lbl">Grade</span>
+                                <span class="sm-val">Ultra Premium</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Inverters -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <h2 class="section-title border-bottom pb-3 mb-4">Inverters</h2>
+    <!-- 3. INVERTER INTELLIGENCE -->
+    <section class="inverters-section">
+        <div class="container-prod">
+            <div class="sec-header">
+                <h2 class="sec-title">Intelligence & Conversion</h2>
+                <p class="sec-desc">Smart inverters that act as the brain of your solar system.</p>
             </div>
-            <div class="col-md-6 mb-4">
-                <div class="d-flex bg-white p-4 rounded shadow-sm border align-items-center">
-                    <img src="{% static 'website/images/inverter-string.jpg' %}" alt="String Inverter"
-                        class="me-4 rounded" style="width: 120px;">
-                    <div>
-                        <h4>String Inverters</h4>
-                        <p class="text-muted">Reliable and cost-effective solutions for standard installations.</p>
-                        <span class="badge bg-primary">Growatt</span>
-                        <span class="badge bg-primary">Solis</span>
-                        <span class="badge bg-primary">Sungrow</span>
+
+            <div class="inv-grid">
+                <!-- String Inverters -->
+                <div class="inv-card">
+                    <div class="inv-header">
+                        <img src="{% static 'website/images/inverter-string.jpg' %}" alt="String Inverter"
+                            class="inv-icon">
+                        <div class="inv-info">
+                            <h3>String Inverters</h3>
+                            <span class="text-muted small">Standard Efficiency</span>
+                        </div>
+                    </div>
+                    <p class="inv-desc">
+                        Gold standard for residential and commercial systems. Features dual MPPT trackers and integrated
+                        Wi-Fi for remote monitoring via mobile app.
+                    </p>
+                    <div class="inv-tags">
+                        <span class="tag-pill">Reliable</span>
+                        <span class="tag-pill">Cost-Effective</span>
+                        <span class="tag-pill">Growatt / Solis</span>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 mb-4">
-                <div class="d-flex bg-white p-4 rounded shadow-sm border align-items-center">
-                    <img src="{% static 'website/images/inverter-micro.jpg' %}" alt="Micro Inverter"
-                        class="me-4 rounded" style="width: 120px;">
-                    <div>
-                        <h4>Micro Inverters</h4>
-                        <p class="text-muted">Module-level optimization for roofs with shading issues.</p>
-                        <span class="badge bg-info text-dark">Enphase</span>
-                        <span class="badge bg-info text-dark">Hoymiles</span>
+
+                <!-- Micro Inverters -->
+                <div class="inv-card">
+                    <div class="inv-header">
+                        <img src="{% static 'website/images/inverter-micro.jpg' %}" alt="Micro Inverter"
+                            class="inv-icon">
+                        <div class="inv-info">
+                            <h3>Micro Inverters</h3>
+                            <span class="text-muted small">Panel-Level Optimization</span>
+                        </div>
+                    </div>
+                    <p class="inv-desc">
+                        Advanced technology attached to each panel. Eliminates shading losses and provides detailed
+                        monitoring for every single module on your roof.
+                    </p>
+                    <div class="inv-tags">
+                        <span class="tag-pill">Shade Tolerant</span>
+                        <span class="tag-pill">Safety+</span>
+                        <span class="tag-pill">Enphase</span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Brand Guarantee -->
-<section class="section-padding bg-light text-center">
-    <div class="container">
-        <h2 class="mb-5">Our Technology Partners</h2>
-        <div class="row justify-content-center grayscale-logos">
-            <!-- Add logo images here or use placeholders -->
-            <div class="col-6 col-md-2 mb-4">
-                <div class="p-3"><strong>Trina Solar</strong></div>
+    <!-- 4. GLOBAL PARTNERS -->
+    <section class="partners-section">
+        <div class="container-prod">
+            <div class="sec-header">
+                <h2 class="sec-title">Global Technology Partners</h2>
             </div>
-            <div class="col-6 col-md-2 mb-4">
-                <div class="p-3"><strong>Jinko</strong></div>
-            </div>
-            <div class="col-6 col-md-2 mb-4">
-                <div class="p-3"><strong>Longi</strong></div>
-            </div>
-            <div class="col-6 col-md-2 mb-4">
-                <div class="p-3"><strong>Sungrow</strong></div>
-            </div>
-            <div class="col-6 col-md-2 mb-4">
-                <div class="p-3"><strong>Growatt</strong></div>
+
+            <div class="logo-grid">
+                <!-- Using text placeholders styled as logos, replace with actual SVGs/Images as needed -->
+                <div class="logo-item">TRINA</div>
+                <div class="logo-item">JINKO</div>
+                <div class="logo-item">LONGI</div>
+                <div class="logo-item">ADANI</div>
+                <div class="logo-item">WAREE</div>
+                <div class="logo-item">GROWATT</div>
+                <div class="logo-item">ENPHASE</div>
+                <div class="logo-item">SOLIS</div>
+                <div class="logo-item">SUNGROW</div>
+                <div class="logo-item">HAVELLS</div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    <!-- 5. FINAL CTA -->
+    <section class="prod-cta">
+        <div class="container-prod">
+            <div class="cta-box">
+                <h2 class="cta-head">Unsure Which Equipment to Choose?</h2>
+                <p class="cta-sub">Our engineering team will design the optimal configuration for your specific roof and
+                    energy needs.</p>
+
+                <div class="cta-btns">
+                    <a href="{% url 'website:quote' %}" class="btn-prod btn-prod-primary">
+                        <i class="fas fa-headset"></i> Talk to Technical Advisor
+                    </a>
+                    <button class="btn-prod btn-prod-outline">
+                        <i class="fas fa-file-download"></i> Download Spec Sheets
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
 
 {% endblock %}

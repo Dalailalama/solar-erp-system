@@ -1,38 +1,46 @@
 <template>
-  <section class="services-section section-padding">
-    <div class="container">
-      <div class="section-header text-center">
-        <h2 class="section-title">Our Solar Solutions</h2>
-        <p class="section-subtitle">
-          Comprehensive solar energy solutions for every need
-        </p>
-      </div>
-      <div class="services-grid">
-        <div v-for="service in services" :key="service.title" class="service-card">
-          <div class="service-image">
-            <img :src="service.image" :alt="service.title" loading="lazy">
-          </div>
-          <div class="service-content">
-            <h3>{{ service.title }}</h3>
-            <p>{{ service.description }}</p>
-            <ul class="service-features">
-              <li v-for="feature in service.features" :key="feature">
-                <i class="fas fa-check"></i> {{ feature }}
-              </li>
-            </ul>
-            <a :href="service.link" class="btn btn-outline">
-              Learn More
-              <i class="fas fa-arrow-right"></i>
-            </a>
+  <Teleport to="#services-app" v-if="isMounted">
+    <section class="services-section section-padding">
+      <div class="container">
+        <div class="section-header text-center">
+          <h2 class="section-title">Our Solar Solutions</h2>
+          <p class="section-subtitle">
+            Comprehensive solar energy solutions for every need
+          </p>
+        </div>
+        <div class="services-grid">
+          <div v-for="service in services" :key="service.title" class="service-card">
+            <div class="service-image">
+              <img :src="service.image" :alt="service.title" loading="lazy">
+            </div>
+            <div class="service-content">
+              <h3>{{ service.title }}</h3>
+              <p>{{ service.description }}</p>
+              <ul class="service-features">
+                <li v-for="feature in service.features" :key="feature">
+                  <i class="fas fa-check"></i> {{ feature }}
+                </li>
+              </ul>
+              <a :href="service.link" class="btn btn-outline">
+                Learn More
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+
+const isMounted = ref(false);
+
+onMounted(() => {
+  isMounted.value = !!document.querySelector('#services-app');
+});
 
 interface Service {
   title: string;

@@ -6,164 +6,231 @@
 {% block meta_description %}Transform your home with clean solar energy. Save up to 70% on electricity bills with our
 customized residential solar solutions.{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'website/css/residential.css' %}">
+{% endblock %}
+
 {% block content %}
 
-<!-- Hero Section -->
-<section class="page-hero bg-overlay"
-    style="background-image: url('{% static 'website/images/residential-hero.jpg' %}');">
-    <div class="container text-center">
-        <h1 class="page-title text-white">Residential Solar Solutions</h1>
-        <p class="page-subtitle text-white">Power your home with clean energy and zero electricity bills</p>
-        <a href="{% url 'website:quote' %}" class="btn btn-primary btn-lg mt-4">Get a Free Quote</a>
-    </div>
-</section>
+<!-- Hero Section - Modern Split Layout -->
+<section class="residential-hero">
+    <div class="hero-split-container">
+        <div class="hero-content-left">
+            <span class="hero-badge">Residential Solar</span>
+            <h1>Power Your Home with Clean Solar Energy</h1>
+            <p>Eliminate your monthly electricity bills and achieve energy independence with our premium residential
+                solar solutions.</p>
 
-<!-- Benefits Section -->
-<section class="section-padding">
-    <div class="container">
-        <div class="section-header text-center mb-5">
-            <h2 class="section-title">Why Switch to Solar?</h2>
-            <p class="section-subtitle">Benefits for Homeowners</p>
+            <div class="hero-cta-group">
+                <a href="{% url 'website:quote' %}" class="btn-hero-primary">Get Free Quote</a>
+                <a href="{% url 'website:calculator' %}" class="btn-hero-secondary">Calculate Savings</a>
+            </div>
+
+            <div class="hero-trust-indicators">
+                <div class="trust-indicator">
+                    <i class="fas fa-check-circle"></i>
+                    <span>25 Year Warranty</span>
+                </div>
+                <div class="trust-indicator">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Certified Installers</span>
+                </div>
+                <div class="trust-indicator">
+                    <i class="fas fa-check-circle"></i>
+                    <span>1000+ Homes Powered</span>
+                </div>
+            </div>
         </div>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="benefit-card text-center p-4 shadow-sm rounded h-100">
-                    <div class="icon-box text-primary mb-3">
-                        <i class="fas fa-wallet fa-3x"></i>
-                    </div>
-                    <h4>Save Money</h4>
-                    <p>Drastically reduce or even eliminate your monthly electricity bills. Solar pays for itself over
-                        time.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="benefit-card text-center p-4 shadow-sm rounded h-100">
-                    <div class="icon-box text-success mb-3">
-                        <i class="fas fa-arrow-trend-up fa-3x"></i>
-                    </div>
-                    <h4>Increase Home Value</h4>
-                    <p>Homes with solar panels sell faster and for a premium compared to homes without them.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="benefit-card text-center p-4 shadow-sm rounded h-100">
-                    <div class="icon-box text-warning mb-3">
-                        <i class="fas fa-shield-halved fa-3x"></i>
-                    </div>
-                    <h4>Energy Independence</h4>
-                    <p>Protect yourself from rising utility rates and grid outages with your own power source.</p>
-                </div>
+
+        <div class="hero-content-right">
+            <div class="hero-visual">
+                <i class="fas fa-solar-panel" style="font-size: 6rem; color: rgba(255, 107, 53, 0.3);"></i>
             </div>
         </div>
     </div>
 </section>
 
-<!-- System Sizes -->
-<section class="section-padding bg-light">
-    <div class="container">
-        <h2 class="section-title text-center mb-5">Popular System Sizes</h2>
-        <div class="row">
-            <div class="col-lg-4 mb-4">
-                <div class="pricing-card bg-white p-5 rounded shadow-sm text-center">
-                    <h3 class="text-primary mb-3">3kW System</h3>
-                    <p class="text-muted mb-4">Ideal for small homes (2-3 BHK)</p>
-                    <ul class="list-unstyled mb-4 text-start">
-                        <li><i class="fas fa-check text-success me-2"></i> Generates ~12 units/day</li>
-                        <li><i class="fas fa-check text-success me-2"></i> Saves ₹3,000/month</li>
-                        <li><i class="fas fa-check text-success me-2"></i> Requires ~300 sq. ft. roof</li>
-                    </ul>
-                    <a href="{% url 'website:quote' %}" class="btn btn-outline-primary w-100">Get Price</a>
-                </div>
+<!-- Benefits Section - 3 Column Grid -->
+<section class="benefits-section">
+    <div class="section-header">
+        <h2>Why Switch to Solar Today?</h2>
+        <p>Experience the significant financial and environmental benefits of residential solar energy.</p>
+    </div>
+
+    <div class="benefits-grid">
+        <div class="benefit-card">
+            <div class="benefit-icon">
+                <i class="fas fa-wallet"></i>
             </div>
-            <div class="col-lg-4 mb-4">
-                <div
-                    class="pricing-card bg-white p-5 rounded shadow-lg text-center transform-scale-105 border-primary border">
-                    <div class="badge bg-warning position-absolute top-0 start-50 translate-middle mt-3">Most Popular
-                    </div>
-                    <h3 class="text-primary mb-3">5kW System</h3>
-                    <p class="text-muted mb-4">Perfect for medium homes (3-4 BHK)</p>
-                    <ul class="list-unstyled mb-4 text-start">
-                        <li><i class="fas fa-check text-success me-2"></i> Generates ~20 units/day</li>
-                        <li><i class="fas fa-check text-success me-2"></i> Saves ₹5,000/month</li>
-                        <li><i class="fas fa-check text-success me-2"></i> Requires ~500 sq. ft. roof</li>
-                    </ul>
-                    <a href="{% url 'website:quote' %}" class="btn btn-primary w-100">Get Price</a>
-                </div>
+            <h4>Save Money</h4>
+            <p>Drastically reduce or eliminate your monthly bills. Solar pays for itself through immediate energy
+                savings.</p>
+        </div>
+
+        <div class="benefit-card">
+            <div class="benefit-icon">
+                <i class="fas fa-arrow-trend-up"></i>
             </div>
-            <div class="col-lg-4 mb-4">
-                <div class="pricing-card bg-white p-5 rounded shadow-sm text-center">
-                    <h3 class="text-primary mb-3">10kW System</h3>
-                    <p class="text-muted mb-4">For large homes & villas</p>
-                    <ul class="list-unstyled mb-4 text-start">
-                        <li><i class="fas fa-check text-success me-2"></i> Generates ~40 units/day</li>
-                        <li><i class="fas fa-check text-success me-2"></i> Saves ₹10,000/month</li>
-                        <li><i class="fas fa-check text-success me-2"></i> Requires ~1000 sq. ft. roof</li>
-                    </ul>
-                    <a href="{% url 'website:quote' %}" class="btn btn-outline-primary w-100">Get Price</a>
-                </div>
+            <h4>Increase Home Value</h4>
+            <p>Homes equipped with solar panels sell faster and at a premium price compared to traditional homes.</p>
+        </div>
+
+        <div class="benefit-card">
+            <div class="benefit-icon">
+                <i class="fas fa-shield-halved"></i>
+            </div>
+            <h4>Energy Independence</h4>
+            <p>Protect your family from rising utility rates and grid instability with your own reliable power source.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- System Sizes - Pricing Cards -->
+<section class="system-sizes-section">
+    <div class="section-header">
+        <h2>Popular System Sizes</h2>
+        <p>Tailored solutions designed to fit your home's energy consumption needs.</p>
+    </div>
+
+    <div class="pricing-cards-container">
+        <!-- 3kW System -->
+        <div class="pricing-card">
+            <h3>3kW System</h3>
+            <p class="system-subtitle">Ideal for Small Homes (2-3 BHK)</p>
+
+            <ul class="pricing-features">
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span>Generates ~12 units/day</span>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span>Saves ₹3,000/month</span>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span>Requires ~300 sq. ft. roof</span>
+                </li>
+            </ul>
+
+            <a href="{% url 'website:quote' %}" class="btn-pricing btn-pricing-outline">Get Price</a>
+        </div>
+
+        <!-- 5kW System - Most Popular -->
+        <div class="pricing-card featured">
+            <div class="popular-badge">Most Popular</div>
+            <h3>5kW System</h3>
+            <p class="system-subtitle">Perfect for Medium Homes (3-4 BHK)</p>
+
+            <ul class="pricing-features">
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span>Generates ~20 units/day</span>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span>Saves ₹5,000/month</span>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span>Requires ~500 sq. ft. roof</span>
+                </li>
+            </ul>
+
+            <a href="{% url 'website:quote' %}" class="btn-pricing btn-pricing-solid">Get Price</a>
+        </div>
+
+        <!-- 10kW System -->
+        <div class="pricing-card">
+            <h3>10kW System</h3>
+            <p class="system-subtitle">For Large Homes & Villas</p>
+
+            <ul class="pricing-features">
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span>Generates ~40 units/day</span>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span>Saves ₹10,000/month</span>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span>Requires ~1000 sq. ft. roof</span>
+                </li>
+            </ul>
+
+            <a href="{% url 'website:quote' %}" class="btn-pricing btn-pricing-outline">Get Price</a>
+        </div>
+    </div>
+</section>
+
+<!-- Calculator Section - Split Layout -->
+<section class="calculator-section">
+    <div class="calculator-split-container">
+        <div class="calculator-visual">
+            <div class="calculator-icon-large">
+                <i class="fas fa-calculator"></i>
+            </div>
+        </div>
+
+        <div class="calculator-content">
+            <h2>Calculate Your Savings Instantly</h2>
+            <p>Find out exactly how much you can save based on your location and monthly electricity consumption. Get
+                personalized results in seconds.</p>
+            <a href="{% url 'website:calculator' %}" class="btn-calculator">
+                <i class="fas fa-calculator"></i>
+                <span>Open Solar Calculator</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Installation Journey - Timeline -->
+<section class="installation-section">
+    <div class="section-header">
+        <h2>Seamless Installation Journey</h2>
+        <p>We manage every detail of your solar transition, from survey to activation.</p>
+    </div>
+
+    <div class="timeline-container">
+        <div class="timeline-horizontal">
+            <div class="timeline-step">
+                <div class="step-number">1</div>
+                <h4>Site Survey</h4>
+                <p>We analyze your roof structure and specific energy needs.</p>
+            </div>
+
+            <div class="timeline-step">
+                <div class="step-number">2</div>
+                <h4>System Design</h4>
+                <p>Custom engineering and financial ROI projections.</p>
+            </div>
+
+            <div class="timeline-step">
+                <div class="step-number">3</div>
+                <h4>Professional Install</h4>
+                <p>Fast, clean installation by our certified technicians.</p>
+            </div>
+
+            <div class="timeline-step">
+                <div class="step-number">4</div>
+                <h4>System Turn-on</h4>
+                <p>Grid connection and final system activation.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Calculator Preview -->
-<section class="section-padding bg-primary text-white text-center">
-    <div class="container">
-        <h2 class="mb-4">Calculate Your Savings Instantly</h2>
-        <p class="lead mb-4">Find out exactly how much you can save based on your location and electricity bill.</p>
-        <a href="{% url 'website:calculator' %}" class="btn btn-light btn-lg"><i class="fas fa-calculator me-2"></i>Open
-            Solar Calculator</a>
-    </div>
-</section>
-
-<!-- Installation Process -->
-<section class="section-padding">
-    <div class="container">
-        <div class="section-header text-center mb-5">
-            <h2 class="section-title">Seamless Installation Process</h2>
-            <p class="section-subtitle">We handle everything from start to finish</p>
-        </div>
-        <div class="row">
-            <div class="col-md-3 text-center">
-                <div class="process-step">
-                    <div class="step-icon bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
-                        style="width: 80px; height: 80px;">
-                        <span class="h2 text-primary mb-0">1</span>
-                    </div>
-                    <h4>Site Survey</h4>
-                    <p class="small text-muted">We analyze your roof and energy needs.</p>
-                </div>
-            </div>
-            <div class="col-md-3 text-center">
-                <div class="process-step">
-                    <div class="step-icon bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
-                        style="width: 80px; height: 80px;">
-                        <span class="h2 text-primary mb-0">2</span>
-                    </div>
-                    <h4>Design & Proposal</h4>
-                    <p class="small text-muted">Custom system design and financial savings report.</p>
-                </div>
-            </div>
-            <div class="col-md-3 text-center">
-                <div class="process-step">
-                    <div class="step-icon bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
-                        style="width: 80px; height: 80px;">
-                        <span class="h2 text-primary mb-0">3</span>
-                    </div>
-                    <h4>Installation</h4>
-                    <p class="small text-muted">1-3 days install by certified professionals.</p>
-                </div>
-            </div>
-            <div class="col-md-3 text-center">
-                <div class="process-step">
-                    <div class="step-icon bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
-                        style="width: 80px; height: 80px;">
-                        <span class="h2 text-primary mb-0">4</span>
-                    </div>
-                    <h4>Activation</h4>
-                    <p class="small text-muted">Grid connection and system turn-on.</p>
-                </div>
-            </div>
+<!-- Final CTA Section -->
+<section class="final-cta-section">
+    <div class="final-cta-container">
+        <h2>Ready to Power Your Home?</h2>
+        <p>Get a personalized solar quote and start saving on your electricity bills today.</p>
+        <a href="{% url 'website:quote' %}" class="btn-final-cta">Get Your Free Quote</a>
+        <div class="trust-line">
+            Certified Installers • Premium Hardware • 25 Year Warranty
         </div>
     </div>
 </section>

@@ -7,7 +7,7 @@
                 <div class="header-contact">
                     <a href="tel:+12345678900" class="header-contact-item">
                         <i class="fas fa-phone"></i>
-                        <span>+1 (234) 567-8900</span>
+                        <span>+917984482472</span>
                     </a>
                     <a href="mailto:info@ultrarayssolar.com" class="header-contact-item">
                         <i class="fas fa-envelope"></i>
@@ -41,9 +41,28 @@
         <div class="container">
             <div class="nav-wrapper">
                 <!-- Logo -->
-                <a href="{% url 'website:home' %}" class="logo">
-                    <img src="{% static 'website/images/website_logo.png' %}"
-                        alt="Ultra Rays Solar Energy Solutions Logo">
+                <a href="{% url 'website:home' %}" class="logo" aria-label="Ultra Rays Home">
+                    <div class="solar-brand">
+                        <div class="brand-icon">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Core Circle -->
+                                <circle cx="50" cy="62" r="18" fill="none" stroke="currentColor" stroke-width="6" />
+                                <!-- 4 Blunt Fanned Rays exactly as in design -->
+                                <g fill="currentColor">
+                                    <rect x="44" y="10" width="12" height="18" rx="2" transform="rotate(-45 50 62)" />
+                                    <rect x="44" y="6" width="12" height="18" rx="2" transform="rotate(-15 50 62)" />
+                                    <rect x="44" y="6" width="12" height="18" rx="2" transform="rotate(15 50 62)" />
+                                    <rect x="44" y="10" width="12" height="18" rx="2" transform="rotate(45 50 62)" />
+                                </g>
+                                <!-- Precise Bolt -->
+                                <path d="M54 48 L42 62 H50 L46 76 L60 58 H52 L54 48Z" fill="#000" />
+                            </svg>
+                        </div>
+                        <div class="brand-text">
+                            <span class="brand-main">Ultra Rays</span>
+                            <span class="brand-sub">Energy Solution</span>
+                        </div>
+                    </div>
                 </a>
 
                 <!-- Mobile Menu Toggle -->

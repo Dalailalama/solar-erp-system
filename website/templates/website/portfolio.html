@@ -4,118 +4,314 @@
 {% block title %}Our Solar Portfolio - Installation Gallery{% endblock %}
 
 {% block meta_description %}Browse our completed solar projects. From residential rooftops to commercial power plants,
-see the quality of our work.{% endblock %}
+see the quality of our work across India.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'website/css/portfolio.css' %}">
+{% endblock %}
 
 {% block content %}
 
-<!-- Hero Section -->
-<section class="page-hero bg-overlay"
-    style="background-image: url('{% static 'website/images/portfolio-hero.jpg' %}');">
-    <div class="container text-center">
-        <h1 class="page-title text-white">Our Work Speaks for Itself</h1>
-        <p class="page-subtitle text-white">Explore our recent installations and success stories</p>
-    </div>
-</section>
+<div class="portfolio-page">
 
-<!-- Portfolio Grid -->
-<section class="section-padding">
-    <div class="container">
-        <!-- Filter Buttons (Optional functionality can be added with Vue/JS) -->
-        <div class="text-center mb-5">
-            <button class="btn btn-primary me-2 rounded-pill">All Projects</button>
-            <button class="btn btn-outline-primary me-2 rounded-pill">Residential</button>
-            <button class="btn btn-outline-primary me-2 rounded-pill">Commercial</button>
-            <button class="btn btn-outline-primary rounded-pill">Industrial</button>
-        </div>
+    <!-- 1. HERO SECTION -->
+    <section class="port-hero">
+        <div class="container-port">
+            <div class="hero-split">
+                <!-- Content Left -->
+                <div class="hero-left">
+                    <span class="hero-label">Portfolio Gallery</span>
+                    <h1>Our Works Speak For Itself</h1>
+                    <p class="hero-desc">
+                        Explore our featured installations across residential, commercial, and industrial sectors.
+                        We deliver <strong>high-performance solar solutions</strong> engineered for maximum ROI.
+                    </p>
 
-        <div class="row g-4">
-            <!-- Project 1 -->
-            <div class="col-md-4">
-                <div class="project-card position-relative overflow-hidden rounded shadow-sm group-hover">
-                    <img src="{% static 'website/images/project-1.jpg' %}" class="img-fluid w-100" alt="Project 1">
-                    <div
-                        class="project-overlay position-absolute bottom-0 start-0 w-100 p-4 bg-gradient-dark text-white">
-                        <h5 class="mb-1">Modern Villa Installation</h5>
-                        <p class="mb-0 small opacity-75">5kW Residential - Palm City</p>
+                    <div class="hero-stats-row">
+                        <div class="h-stat">
+                            <strong data-target="500">500+</strong>
+                            <span>Projects</span>
+                        </div>
+                        <div class="h-stat">
+                            <strong data-target="50">50MW</strong>
+                            <span>Capacity</span>
+                        </div>
+                        <div class="h-stat">
+                            <strong data-target="25">25+</strong>
+                            <span>Cities</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- Project 2 -->
-            <div class="col-md-4">
-                <div class="project-card position-relative overflow-hidden rounded shadow-sm group-hover">
-                    <img src="{% static 'website/images/project-2.jpg' %}" class="img-fluid w-100" alt="Project 2">
-                    <div
-                        class="project-overlay position-absolute bottom-0 start-0 w-100 p-4 bg-gradient-dark text-white">
-                        <h5 class="mb-1">Warehouse Solar Roof</h5>
-                        <p class="mb-0 small opacity-75">50kW Commercial - Industrial Park</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Project 3 -->
-            <div class="col-md-4">
-                <div class="project-card position-relative overflow-hidden rounded shadow-sm group-hover">
-                    <img src="{% static 'website/images/project-3.jpg' %}" class="img-fluid w-100" alt="Project 3">
-                    <div
-                        class="project-overlay position-absolute bottom-0 start-0 w-100 p-4 bg-gradient-dark text-white">
-                        <h5 class="mb-1">School Campus</h5>
-                        <p class="mb-0 small opacity-75">25kW Institutional - City Center</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Project 4 -->
-            <div class="col-md-4">
-                <div class="project-card position-relative overflow-hidden rounded shadow-sm group-hover">
-                    <img src="{% static 'website/images/project-4.jpg' %}" class="img-fluid w-100" alt="Project 4">
-                    <div
-                        class="project-overlay position-absolute bottom-0 start-0 w-100 p-4 bg-gradient-dark text-white">
-                        <h5 class="mb-1">Farm House Hybrid</h5>
-                        <p class="mb-0 small opacity-75">10kW Hybrid - Rural District</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Project 5 -->
-            <div class="col-md-4">
-                <div class="project-card position-relative overflow-hidden rounded shadow-sm group-hover">
-                    <img src="{% static 'website/images/project-5.jpg' %}" class="img-fluid w-100" alt="Project 5">
-                    <div
-                        class="project-overlay position-absolute bottom-0 start-0 w-100 p-4 bg-gradient-dark text-white">
-                        <h5 class="mb-1">Apartment Complex</h5>
-                        <p class="mb-0 small opacity-75">100kW Grid-Tie - Metro Area</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Project 6 -->
-            <div class="col-md-4">
-                <div class="project-card position-relative overflow-hidden rounded shadow-sm group-hover">
-                    <img src="{% static 'website/images/project-6.jpg' %}" class="img-fluid w-100" alt="Project 6">
-                    <div
-                        class="project-overlay position-absolute bottom-0 start-0 w-100 p-4 bg-gradient-dark text-white">
-                        <h5 class="mb-1">Factory Shed</h5>
-                        <p class="mb-0 small opacity-75">200kW Industrial - Special Economic Zone</p>
+
+                <!-- Featured Card Right -->
+                <div class="hero-card-wrapper">
+                    <div class="poly-card">
+                        <span class="poly-badge"><i class="fas fa-star text-warning me-1"></i> Featured Case
+                            Study</span>
+                        <img src="{% static 'website/images/project-featured.jpg' %}" alt="Industrial Solar Park"
+                            class="poly-img">
+                        <div class="poly-content">
+                            <h3 class="h5 fw-bold mb-1">2MW Industrial Solar Park</h3>
+                            <p class="text-muted small mb-0"><i class="fas fa-map-marker-alt text-danger me-1"></i>
+                                Surat, Gujarat</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- 2. FILTER & SORT BAR -->
+    <div class="filter-sticky">
+        <div class="container-port">
+            <div class="filter-flex">
+                <div class="filter-pills">
+                    <button class="f-btn active" data-filter="all">All Projects</button>
+                    <button class="f-btn" data-filter="residential">Residential</button>
+                    <button class="f-btn" data-filter="commercial">Commercial</button>
+                    <button class="f-btn" data-filter="industrial">Industrial</button>
+                </div>
+
+                <div class="view-opts">
+                    <div class="v-icon active" title="Grid View"><i class="fas fa-th-large"></i></div>
+                    <div class="v-icon" title="Map View"><i class="fas fa-map-marked-alt"></i></div>
+                </div>
+            </div>
+        </div>
     </div>
-</section>
 
-<!-- CTA -->
-<section class="section-padding bg-main text-white text-center">
-    <div class="container">
-        <h2 class="mb-3">Want to see your roof here?</h2>
-        <a href="{% url 'website:quote' %}" class="btn btn-warning btn-lg">Start Your Project</a>
-    </div>
-</section>
+    <!-- 3. PROJECT GRID -->
+    <section class="container-port">
+        <div class="project-grid" id="projectGrid">
 
-<style>
-    .bg-gradient-dark {
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
-    }
+            <!-- Item 1: Residential -->
+            <div class="p-card" data-category="residential">
+                <div class="p-img-box">
+                    <span class="cat-badge cat-res">Residential</span>
+                    <img src="{% static 'website/images/project-1.jpg' %}" alt="Modern Villa" class="p-img">
+                </div>
+                <div class="p-content">
+                    <h3 class="p-title">Modern Villa Installation</h3>
+                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Pune, MH</div>
 
-    .group-hover:hover .img-fluid {
-        transform: scale(1.05);
-        transition: transform 0.3s ease;
-    }
-</style>
+                    <div class="p-specs">
+                        <div class="spec-item">
+                            <span class="spec-lbl">Size</span>
+                            <span class="spec-val">5 kW</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Savings</span>
+                            <span class="spec-val">₹60k/yr</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Type</span>
+                            <span class="spec-val">Rooftop</span>
+                        </div>
+                    </div>
 
+                    <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Item 2: Commercial -->
+            <div class="p-card" data-category="commercial">
+                <div class="p-img-box">
+                    <span class="cat-badge cat-com">Commercial</span>
+                    <img src="{% static 'website/images/project-2.jpg' %}" alt="Warehouse Solar" class="p-img">
+                </div>
+                <div class="p-content">
+                    <h3 class="p-title">Logistics Warehouse Roof</h3>
+                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Ahmedabad, GJ</div>
+
+                    <div class="p-specs">
+                        <div class="spec-item">
+                            <span class="spec-lbl">Size</span>
+                            <span class="spec-val">200 kW</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">ROI</span>
+                            <span class="spec-val">3.5 Yrs</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Type</span>
+                            <span class="spec-val">Industrial</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Item 3: Industrial -->
+            <div class="p-card" data-category="industrial">
+                <div class="p-img-box">
+                    <span class="cat-badge cat-ind">Industrial</span>
+                    <img src="{% static 'website/images/project-3.jpg' %}" alt="Textile Plant" class="p-img">
+                </div>
+                <div class="p-content">
+                    <h3 class="p-title">Textile Manufacturing Unit</h3>
+                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Surat, GJ</div>
+
+                    <div class="p-specs">
+                        <div class="spec-item">
+                            <span class="spec-lbl">Size</span>
+                            <span class="spec-val">500 kW</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Savings</span>
+                            <span class="spec-val">₹40L/yr</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Type</span>
+                            <span class="spec-val">Ground</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Item 4: Residential -->
+            <div class="p-card" data-category="residential">
+                <div class="p-img-box">
+                    <span class="cat-badge cat-res">Residential</span>
+                    <img src="{% static 'website/images/project-4.jpg' %}" alt="Farm House" class="p-img">
+                </div>
+                <div class="p-content">
+                    <h3 class="p-title">Off-Grid Farm House</h3>
+                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Nashik, MH</div>
+
+                    <div class="p-specs">
+                        <div class="spec-item">
+                            <span class="spec-lbl">Size</span>
+                            <span class="spec-val">10 kW</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Status</span>
+                            <span class="spec-val">100% Off-Grid</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Type</span>
+                            <span class="spec-val">Hybrid</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Item 5: Commercial -->
+            <div class="p-card" data-category="commercial">
+                <div class="p-img-box">
+                    <span class="cat-badge cat-com">Commercial</span>
+                    <img src="{% static 'website/images/project-5.jpg' %}" alt="IT Park" class="p-img">
+                </div>
+                <div class="p-content">
+                    <h3 class="p-title">IT Park Carport System</h3>
+                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Bangalore, KA</div>
+
+                    <div class="p-specs">
+                        <div class="spec-item">
+                            <span class="spec-lbl">Size</span>
+                            <span class="spec-val">150 kW</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Benefit</span>
+                            <span class="spec-val">EV Ready</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Type</span>
+                            <span class="spec-val">Carport</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Item 6: Industrial -->
+            <div class="p-card" data-category="industrial">
+                <div class="p-img-box">
+                    <span class="cat-badge cat-ind">Industrial</span>
+                    <img src="{% static 'website/images/project-6.jpg' %}" alt="Steel Plant" class="p-img">
+                </div>
+                <div class="p-content">
+                    <h3 class="p-title">Steel Processing Plant</h3>
+                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Jamshedpur, JH</div>
+
+                    <div class="p-specs">
+                        <div class="spec-item">
+                            <span class="spec-lbl">Size</span>
+                            <span class="spec-val">1.2 MW</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Grid</span>
+                            <span class="spec-val">Synced</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Type</span>
+                            <span class="spec-val">Rooftop</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 4. FINAL CTA -->
+    <section class="final-cta">
+        <div class="container-port">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Join Our Success Stories?</h2>
+                <p class="cta-text">Start your solar journey today and see verified returns within months. We handle
+                    everything from engineering to installation.</p>
+
+                <div class="trust-row">
+                    <div class="t-badge"><i class="fas fa-check-circle"></i> MNRE Approved</div>
+                    <div class="t-badge"><i class="fas fa-check-circle"></i> ISO Certified</div>
+                    <div class="t-badge"><i class="fas fa-check-circle"></i> 500+ Happy Clients</div>
+                </div>
+
+                <a href="{% url 'website:quote' %}" class="btn-cta-lg">
+                    Start Your Project <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Simple Filter Logic
+    document.addEventListener('DOMContentLoaded', () => {
+        const buttons = document.querySelectorAll('.f-btn');
+        const cards = document.querySelectorAll('.p-card');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Active Class
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                cards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    if (filter === 'all' || category === filter) {
+                        card.style.display = 'flex';
+                        // Add fade in animation class if desirable
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    });
+</script>
 {% endblock %}

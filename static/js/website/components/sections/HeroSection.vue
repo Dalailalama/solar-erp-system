@@ -1,57 +1,65 @@
 <template>
-  <section class="hero-section">
-    <div class="hero-background">
-      <img :src="heroImage" alt="Solar panels on residential roof" loading="eager">
-      <div class="hero-overlay"></div>
-    </div>
-    <div class="container">
-      <div class="hero-content">
-        <h1 class="hero-title">
-          Power Your Future with
-          <span class="highlight">Clean Solar Energy</span>
-        </h1>
-        <p class="hero-subtitle">
-          Professional solar panel installation for homes and businesses. 
-          Save up to 70% on electricity bills with our premium solar solutions.
-        </p>
-        <div class="hero-stats">
-          <div v-for="stat in stats" :key="stat.label" class="stat-item">
-            <div class="stat-number">{{ stat.number }}</div>
-            <div class="stat-label">{{ stat.label }}</div>
+  <Teleport to="#hero-app" v-if="isMounted">
+    <section class="hero-section">
+      <div class="hero-background">
+        <img :src="heroImage" alt="Solar panels on residential roof" loading="eager">
+        <div class="hero-overlay"></div>
+      </div>
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="hero-title">
+            Power Your Future with
+            <span class="highlight">Clean Solar Energy</span>
+          </h1>
+          <p class="hero-subtitle">
+            Professional solar panel installation for homes and businesses. 
+            Save up to 70% on electricity bills with our premium solar solutions.
+          </p>
+          <div class="hero-stats">
+            <div v-for="stat in stats" :key="stat.label" class="stat-item">
+              <div class="stat-number">{{ stat.number }}</div>
+              <div class="stat-label">{{ stat.label }}</div>
+            </div>
+          </div>
+          <div class="hero-cta">
+            <a href="/quote" class="btn btn-primary btn-lg" @click.prevent="navigateToQuote">
+              <i class="fas fa-calculator"></i>
+              Get Free Quote
+            </a>
+            <a href="/calculator" class="btn btn-secondary btn-lg" @click.prevent="navigateToCalculator">
+              <i class="fas fa-chart-line"></i>
+              Calculate Savings
+            </a>
+          </div>
+          <div class="hero-trust">
+            <p>
+              <i class="fas fa-shield-alt"></i>
+              Certified & Insured | 
+              <i class="fas fa-award"></i>
+              Award-Winning Service | 
+              <i class="fas fa-star"></i>
+              4.8/5 Rating
+            </p>
           </div>
         </div>
-        <div class="hero-cta">
-          <a href="/quote" class="btn btn-primary btn-lg" @click.prevent="navigateToQuote">
-            <i class="fas fa-calculator"></i>
-            Get Free Quote
-          </a>
-          <a href="/calculator" class="btn btn-secondary btn-lg" @click.prevent="navigateToCalculator">
-            <i class="fas fa-chart-line"></i>
-            Calculate Savings
-          </a>
-        </div>
-        <div class="hero-trust">
-          <p>
-            <i class="fas fa-shield-alt"></i>
-            Certified & Insured | 
-            <i class="fas fa-award"></i>
-            Award-Winning Service | 
-            <i class="fas fa-star"></i>
-            4.8/5 Rating
-          </p>
-        </div>
       </div>
-    </div>
-    <div class="hero-scroll">
-      <a href="#benefits" class="scroll-indicator" @click.prevent="scrollToBenefits">
-        <i class="fas fa-chevron-down"></i>
-      </a>
-    </div>
-  </section>
+      <div class="hero-scroll">
+        <a href="#benefits" class="scroll-indicator" @click.prevent="scrollToBenefits">
+          <i class="fas fa-chevron-down"></i>
+        </a>
+      </div>
+    </section>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue';
+import { ref, onMounted, getCurrentInstance } from 'vue';
+
+const isMounted = ref(false);
+
+onMounted(() => {
+  isMounted.value = !!document.querySelector('#hero-app');
+});
 
 const heroImage = ref('/static/website/images/hero-solar.jpg');
 

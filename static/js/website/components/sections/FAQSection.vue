@@ -1,40 +1,48 @@
 <template>
-  <section class="faq-section section-padding">
-    <div class="container">
-      <div class="section-header text-center">
-        <h2 class="section-title">Frequently Asked Questions</h2>
-        <p class="section-subtitle">
-          Find answers to common questions about solar panel installation
-        </p>
-      </div>
-      <div class="faq-grid">
-        <div 
-          v-for="(faq, index) in faqs" 
-          :key="index" 
-          class="faq-item"
-          :class="{ active: activeIndex === index }"
-        >
-          <button class="faq-question" @click="toggleFAQ(index)">
-            <span>{{ faq.question }}</span>
-            <i class="fas fa-chevron-down"></i>
-          </button>
-          <div class="faq-answer">
-            <p v-html="faq.answer"></p>
+  <Teleport to="#faq-app" v-if="isMounted">
+    <section class="faq-section section-padding">
+      <div class="container">
+        <div class="section-header text-center">
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-subtitle">
+            Find answers to common questions about solar panel installation
+          </p>
+        </div>
+        <div class="faq-grid">
+          <div 
+            v-for="(faq, index) in faqs" 
+            :key="index" 
+            class="faq-item"
+            :class="{ active: activeIndex === index }"
+          >
+            <button class="faq-question" @click="toggleFAQ(index)">
+              <span>{{ faq.question }}</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p v-html="faq.answer"></p>
+            </div>
           </div>
         </div>
+        <div class="text-center" style="margin-top: 2rem;">
+          <a href="/faq" class="btn btn-outline">
+            View All FAQs
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
       </div>
-      <div class="text-center" style="margin-top: 2rem;">
-        <a href="/faq" class="btn btn-outline">
-          View All FAQs
-          <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
-    </div>
-  </section>
+    </section>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+
+const isMounted = ref(false);
+
+onMounted(() => {
+  isMounted.value = !!document.querySelector('#faq-app');
+});
 
 interface FAQ {
   question: string;

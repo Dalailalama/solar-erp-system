@@ -1,131 +1,237 @@
 {% extends 'website/base.html' %}
 {% load static %}
 
-{% block title %}Solar Energy Blog - Latest News & Insights{% endblock %}
+{% block title %}Solar Insights - Ultra Rays Solar Engineering{% endblock %}
 
-{% block meta_description %}Stay updated with the latest trends, news, and tips about solar energy, installation, and
-sustainability.{% endblock %}
+{% block meta_description %}Technical engineering analysis, ROI modeling, and policy updates for Indian renewable energy
+assets.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'website/css/blog.css' %}">
+{% endblock %}
 
 {% block content %}
 
-<!-- Hero Section -->
-<section class="page-hero bg-overlay" style="background-image: url('{% static 'website/images/blog-hero.jpg' %}');">
-    <div class="container text-center">
-        <h1 class="page-title text-white">Solar Insights</h1>
-        <p class="page-subtitle text-white">Latest news, guides, and updates from the world of renewable energy</p>
+<!-- 1️⃣ HERO SECTION -->
+<section class="blog-hero">
+    <div class="container">
+        <div class="blog-hero-content">
+            <h1>Solar Insights & Editorial</h1>
+            <p class="lead">
+                In-depth analysis, market trends, and technical engineering reports from the leaders in renewable
+                energy.
+            </p>
+        </div>
     </div>
 </section>
 
-<!-- Blog Listing -->
-<section class="section-padding">
+<!-- 2️⃣ SEARCH & FILTER SECTION -->
+<div class="blog-search-filter sticky-top" style="top: var(--header-height); z-index: 1010;">
     <div class="container">
-        <div class="row g-4">
-            <!-- Sidebar -->
-            <div class="col-lg-4 order-lg-2">
-                <div class="blog-sidebar sticky-top" style="top: 100px;">
-                    <!-- Search -->
-                    <div class="card border-0 shadow-sm mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title mb-3">Search</h5>
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search articles...">
-                                <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                            </div>
-                        </div>
+        <!-- Search -->
+        <div class="search-container">
+            <div class="search-input-wrapper">
+                <input type="text" class="search-input" placeholder="Search articles, topics, or keywords...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-container">
+            <a href="#" class="filter-chip active">All Insights</a>
+            <a href="#" class="filter-chip">Market Trends</a>
+            <a href="#" class="filter-chip">Technology</a>
+            <a href="#" class="filter-chip">Policy & Regulations</a>
+            <a href="#" class="filter-chip">Case Studies</a>
+            <a href="#" class="filter-chip">Company News</a>
+        </div>
+    </div>
+</div>
+
+<!-- 3️⃣ FEATURED ARTICLE SECTION -->
+<section class="featured-section">
+    <div class="container">
+        <div class="featured-card">
+            <!-- Image Side -->
+            <a href="{% url 'website:blog_post' slug='benefits-of-solar' %}" class="featured-image-link">
+                <img src="{% static 'website/images/blog-1.jpg' %}" alt="Featured Article" class="featured-image">
+            </a>
+
+            <!-- Content Side -->
+            <div class="featured-content">
+                <div>
+                    <span class="category-badge">Featured Report</span>
+                    <h2>
+                        <a href="{% url 'website:blog_post' slug='benefits-of-solar' %}">The Future of Solar Energy in
+                            2026: Trends to Watch</a>
+                    </h2>
+                    <p class="featured-excerpt">
+                        As we move towards a cleaner future, solar technology is evolving at a rapid pace. Discover the
+                        key trends shaping the industry, from high-efficiency bifacial modules to advanced storage
+                        solutions.
+                    </p>
+                </div>
+
+                <a href="{% url 'website:blog_post' slug='benefits-of-solar' %}" class="read-more-btn">
+                    Read Full Report <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 4️⃣ BLOG GRID SECTION -->
+<section class="blog-list-section">
+    <div class="container">
+        <div class="blog-grid">
+
+            <!-- Card 1 -->
+            <article class="blog-card">
+                <a href="#" class="card-img-wrapper">
+                    <img src="{% static 'website/images/blog-2.jpg' %}" alt="Solar ROI" class="card-img">
+                </a>
+                <div class="card-body">
+                    <div class="card-meta">
+                        <span class="card-category">Finance</span>
+                        <span class="card-date">Feb 28, 2024</span>
                     </div>
-                    <!-- Categories -->
-                    <div class="card border-0 shadow-sm mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title mb-3">Categories</h5>
-                            <ul class="list-unstyled mb-0">
-                                <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Residential Solar
-                                        (12)</a></li>
-                                <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Commercial News
-                                        (5)</a></li>
-                                <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Subsidies & Policy
-                                        (8)</a></li>
-                                <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Technology (4)</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Popular Posts -->
-                    <div class="card border-0 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title mb-3">Popular Posts</h5>
-                            <div class="d-flex mb-3 align-items-center">
-                                <img src="{% static 'website/images/blog-thumb-1.jpg' %}" class="rounded me-3"
-                                    width="60" height="60" style="object-fit: cover;">
-                                <div>
-                                    <h6 class="mb-1"><a href="#" class="text-dark text-decoration-none">Top 5 Benefits
-                                            of Going Solar</a></h6>
-                                    <small class="text-muted">Jan 15, 2024</small>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <img src="{% static 'website/images/blog-thumb-2.jpg' %}" class="rounded me-3"
-                                    width="60" height="60" style="object-fit: cover;">
-                                <div>
-                                    <h6 class="mb-1"><a href="#" class="text-dark text-decoration-none">Understanding
-                                            Net Metering</a></h6>
-                                    <small class="text-muted">Feb 02, 2024</small>
-                                </div>
-                            </div>
-                        </div>
+                    <h3 class="card-title">
+                        <a href="#">Maximizing ROI: A Guide for Commercial Solar</a>
+                    </h3>
+                    <p class="card-excerpt">
+                        Understanding the financial benefits of commercial solar installations, including tax
+                        incentives, depreciation, and long-term savings.
+                    </p>
+                    <div class="card-footer">
+                        <a href="#" class="card-link">Read Analysis <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-            </div>
+            </article>
 
-            <!-- Posts Grid -->
-            <div class="col-lg-8 order-lg-1">
-                <!-- Blog Post 1 -->
-                <article class="card border-0 shadow-sm mb-4 overflow-hidden">
-                    <img src="{% static 'website/images/blog-1.jpg' %}" class="card-img-top" alt="Blog Post 1"
-                        style="height: 400px; object-fit: cover;">
-                    <div class="card-body p-4">
-                        <div class="mb-2">
-                            <span class="badge bg-light text-primary me-2">Installation</span>
-                            <small class="text-muted"><i class="far fa-calendar me-1"></i> March 10, 2024</small>
-                        </div>
-                        <h2 class="card-title h3"><a href="{% url 'website:blog_post' slug='benefits-of-solar' %}"
-                                class="text-dark text-decoration-none">Everything You Need to Know Before Installing
-                                Solar</a></h2>
-                        <p class="card-text text-muted">Thinking about switching to solar energy? Here is a
-                            comprehensive guide on costs, benefits, and the installation process to help you make an
-                            informed decision.</p>
-                        <a href="{% url 'website:blog_post' slug='benefits-of-solar' %}"
-                            class="btn btn-outline-primary btn-sm">Read More</a>
+            <!-- Card 2 -->
+            <article class="blog-card">
+                <a href="#" class="card-img-wrapper">
+                    <img src="{% static 'website/images/blog-thumb-1.jpg' %}" alt="Policy Update" class="card-img">
+                </a>
+                <div class="card-body">
+                    <div class="card-meta">
+                        <span class="card-category">Policy</span>
+                        <span class="card-date">Jan 15, 2024</span>
                     </div>
-                </article>
-
-                <!-- Blog Post 2 -->
-                <article class="card border-0 shadow-sm mb-4 overflow-hidden">
-                    <img src="{% static 'website/images/blog-2.jpg' %}" class="card-img-top" alt="Blog Post 2"
-                        style="height: 400px; object-fit: cover;">
-                    <div class="card-body p-4">
-                        <div class="mb-2">
-                            <span class="badge bg-light text-primary me-2">Finance</span>
-                            <small class="text-muted"><i class="far fa-calendar me-1"></i> Feb 28, 2024</small>
-                        </div>
-                        <h2 class="card-title h3"><a href="#" class="text-dark text-decoration-none">How to calculate
-                                your Solar ROI?</a></h2>
-                        <p class="card-text text-muted">Understanding the financial returns of your solar investment is
-                            crucial. Learn how to calculate payback periods and lifetime savings.</p>
-                        <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
+                    <h3 class="card-title">
+                        <a href="#">New Government Subsidies for Residential Solar</a>
+                    </h3>
+                    <p class="card-excerpt">
+                        A detailed breakdown of the latest government policies and subsidies available for homeowners
+                        looking to switch to solar energy.
+                    </p>
+                    <div class="card-footer">
+                        <a href="#" class="card-link">Read Analysis <i class="fas fa-arrow-right"></i></a>
                     </div>
-                </article>
+                </div>
+            </article>
 
-                <!-- Pagination -->
-                <nav aria-label="Page navigation" class="mt-5">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
-                </nav>
-            </div>
+            <!-- Card 3 -->
+            <article class="blog-card">
+                <a href="#" class="card-img-wrapper">
+                    <img src="{% static 'website/images/blog-thumb-2.jpg' %}" alt="Tech Deep Dive" class="card-img">
+                </a>
+                <div class="card-body">
+                    <div class="card-meta">
+                        <span class="card-category">Technology</span>
+                        <span class="card-date">Dec 10, 2023</span>
+                    </div>
+                    <h3 class="card-title">
+                        <a href="#">Bifacial Solar Panels: Are They Worth the Investment?</a>
+                    </h3>
+                    <p class="card-excerpt">
+                        Comparing traditional monofacial panels with bifacial technology. Real-world performance data
+                        and cost-benefit analysis.
+                    </p>
+                    <div class="card-footer">
+                        <a href="#" class="card-link">Read Analysis <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 4 -->
+            <article class="blog-card">
+                <a href="#" class="card-img-wrapper">
+                    <img src="{% static 'website/images/industrial-hero.jpg' %}" alt="Case Study" class="card-img">
+                </a>
+                <div class="card-body">
+                    <div class="card-meta">
+                        <span class="card-category">Case Study</span>
+                        <span class="card-date">Nov 22, 2023</span>
+                    </div>
+                    <h3 class="card-title">
+                        <a href="#">Industrial Power Transition: The Tata Plant Project</a>
+                    </h3>
+                    <p class="card-excerpt">
+                        How we helped a major manufacturing plant reduce their carbon footprint by 40% and cut energy
+                        costs by half.
+                    </p>
+                    <div class="card-footer">
+                        <a href="#" class="card-link">Read Analysis <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 5 -->
+            <article class="blog-card">
+                <a href="#" class="card-img-wrapper">
+                    <img src="{% static 'website/images/portfolio-1.jpg' %}" alt="Maintenance" class="card-img">
+                </a>
+                <div class="card-body">
+                    <div class="card-meta">
+                        <span class="card-category">Operations</span>
+                        <span class="card-date">Oct 05, 2023</span>
+                    </div>
+                    <h3 class="card-title">
+                        <a href="#">Solar Plant Maintenance: Best Practices</a>
+                    </h3>
+                    <p class="card-excerpt">
+                        Ensuring peak performance of your solar assets through regular maintenance, cleaning, and
+                        monitoring strategies.
+                    </p>
+                    <div class="card-footer">
+                        <a href="#" class="card-link">Read Analysis <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 6 -->
+            <article class="blog-card">
+                <a href="#" class="card-img-wrapper">
+                    <img src="{% static 'website/images/portfolio-2.jpg' %}" alt="Battery Storage" class="card-img">
+                </a>
+                <div class="card-body">
+                    <div class="card-meta">
+                        <span class="card-category">Storage</span>
+                        <span class="card-date">Sep 18, 2023</span>
+                    </div>
+                    <h3 class="card-title">
+                        <a href="#">The Rise of Battery Energy Storage Systems (BESS)</a>
+                    </h3>
+                    <p class="card-excerpt">
+                        Why hybrid solar systems with battery storage are becoming the new standard for reliable, 24/7
+                        power supply.
+                    </p>
+                    <div class="card-footer">
+                        <a href="#" class="card-link">Read Analysis <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- 5️⃣ PAGINATION SECTION -->
+        <div class="pagination-wrapper">
+            <a href="#" class="page-btn"><i class="fas fa-chevron-left"></i></a>
+            <a href="#" class="page-btn active">1</a>
+            <a href="#" class="page-btn">2</a>
+            <a href="#" class="page-btn">3</a>
+            <a href="#" class="page-btn"><i class="fas fa-chevron-right"></i></a>
         </div>
     </div>
 </section>

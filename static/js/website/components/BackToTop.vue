@@ -1,12 +1,14 @@
 <template>
-  <button
-    v-if="show"
-    class="back-to-top"
-    @click="scrollToTop"
-    aria-label="Back to top"
-  >
-    <i class="fas fa-arrow-up"></i>
-  </button>
+  <Transition name="fade">
+    <button
+      v-if="show"
+      class="back-to-top visible"
+      @click="scrollToTop"
+      aria-label="Back to top"
+    >
+      <i class="fas fa-arrow-up"></i>
+    </button>
+  </Transition>
 </template>
 
 <script setup lang="ts">
