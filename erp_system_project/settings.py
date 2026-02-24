@@ -196,9 +196,13 @@ STORAGES = {
 
 # Django Vite settings
 DJANGO_VITE_ASSETS_PATH = BASE_DIR / 'static' / 'dist'
-DJANGO_VITE_DEV_MODE = DEBUG
+
+# Detect if we are running on Render
+IS_RENDER = os.environ.get('RENDER', 'False') == 'True'
+
+# Explicitly disable dev mode on Render even if DEBUG is accidentally True
+DJANGO_VITE_DEV_MODE = DEBUG and not IS_RENDER
+
 # Vite 5+ outputs manifest to .vite/manifest.json by default
-DJANGO_VITE_MANIFEST_PATH = DJANGO_VITE_ASSETS_PATH / '.vite' / 'manifest.json' 
-# If Vite 5+ uses the .vite folder, we might need: DJANGO_VITE_ASSETS_PATH / '.vite' / 'manifest.json'
-# Based on your vite.config.js, it should be at the root of dist.
+DJANGO_VITE_MANIFEST_PATH = DJANGO_VITE_ASSETS_PATH / '.vite' / 'manifest.json'
 
