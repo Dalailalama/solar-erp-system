@@ -1,1 +1,1 @@
-web: gunicorn erp_system_project.wsgi:application
+gunicorn erp_system_project.asgi:application -k uvicorn.workers.UvicornWorker
