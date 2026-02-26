@@ -89,7 +89,7 @@ CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=[
     "http://localhost:3000",
     "http://localhost:5173",
     "http://127.0.0.1:8000",
-    "solarproject-ow90.onrender.com",
+    "https://solarproject-ow90.onrender.com",
 ])
 
 # CSRF Settings
@@ -97,7 +97,7 @@ CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[
     "http://localhost:8000",
     "http://127.0.0.1:8000",
     "http://localhost:5173",
-    "solarproject-ow90.onrender.com"
+    "https://solarproject-ow90.onrender.com"
 ])
 
 # Login Required Middleware Settings
@@ -198,10 +198,11 @@ STORAGES = {
 DJANGO_VITE_ASSETS_PATH = BASE_DIR / 'static' / 'dist'
 
 # Detect if we are running on Render
-IS_RENDER = os.environ.get('RENDER', 'False') == 'True'
+# IS_RENDER = os.environ.get('RENDER', 'False') == 'True'
 
 # Explicitly disable dev mode on Render even if DEBUG is accidentally True
-DJANGO_VITE_DEV_MODE = DEBUG and not IS_RENDER
+# DJANGO_VITE_DEV_MODE = DEBUG and not IS_RENDER
+DJANGO_VITE_DEV_MODE=False
 
 # Vite 5+ outputs manifest to .vite/manifest.json by default
 DJANGO_VITE_MANIFEST_PATH = DJANGO_VITE_ASSETS_PATH / '.vite' / 'manifest.json'
