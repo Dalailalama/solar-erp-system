@@ -53,28 +53,18 @@ export default defineConfig(({ mode }) => {
 
       rollupOptions: {
         input: {
-          app: fileURLToPath(new URL("./static/js/core/app.js", import.meta.url)),
-          login: fileURLToPath(
-            new URL("./static/js/core/login_app.js", import.meta.url)
-          ),
-          user_list: fileURLToPath(
-            new URL("./static/js/accounts/UserList.js", import.meta.url)
-          ),
-          settings: fileURLToPath(
-            new URL("./static/js/accounts/Settings.js", import.meta.url)
-          ),
-          website: fileURLToPath(
-            new URL("./static/js/website/app.ts", import.meta.url)
-          ),
-          contact_form: fileURLToPath(
-            new URL("./static/js/website/contact_form.js", import.meta.url)
-          ),
+            app: fileURLToPath(new URL("./core/app.js", import.meta.url)),
+            login: fileURLToPath(new URL("./core/login_app.js", import.meta.url)),
+            user_list: fileURLToPath(new URL("./accounts/UserList.js", import.meta.url)),
+            settings: fileURLToPath(new URL("./accounts/Settings.js", import.meta.url)),
+            website: fileURLToPath(new URL("./website/app.ts", import.meta.url)),
+            contact_form: fileURLToPath(new URL("./website/contact_form.js", import.meta.url)),
         },
         output: {
-          format: "es",
-          entryFileNames: "assets/[name]-[hash].js",
-          chunkFileNames: "assets/[name]-[hash].js",
-          assetFileNames: "assets/[name]-[hash].[ext]",
+            format: "es",
+            entryFileNames: "assets/[name]-[hash].js",
+            chunkFileNames: "assets/[name]-[hash].js",
+            assetFileNames: "assets/[name]-[hash].[ext]",
         },
       },
 
