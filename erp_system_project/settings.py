@@ -202,6 +202,10 @@ STORAGES = {
 # DJANGO_VITE_DEV_MODE = DEBUG and not IS_RENDER
 DJANGO_VITE_DEV_MODE = env.bool("DJANGO_VITE_DEV_MODE", default=False)
 
-DJANGO_VITE_ASSETS_PATH = BASE_DIR / "static" / "dist"
-DJANGO_VITE_MANIFEST_PATH = DJANGO_VITE_ASSETS_PATH / "manifest.json"
+DJANGO_VITE = {
+    "default": {
+        "dev_mode": DJANGO_VITE_DEV_MODE,
+        "manifest_path": BASE_DIR / "static" / "dist" / "manifest.json",
+    }
+}
 
