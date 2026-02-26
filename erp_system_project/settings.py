@@ -178,7 +178,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 # Use WhiteNoise to serve static files
@@ -194,16 +194,14 @@ STORAGES = {
     },
 }
 
-# Django Vite settings
-DJANGO_VITE_ASSETS_PATH = BASE_DIR / 'static' / 'dist'
 
 # Detect if we are running on Render
 # IS_RENDER = os.environ.get('RENDER', 'False') == 'True'
 
 # Explicitly disable dev mode on Render even if DEBUG is accidentally True
 # DJANGO_VITE_DEV_MODE = DEBUG and not IS_RENDER
-DJANGO_VITE_DEV_MODE=False
+DJANGO_VITE_DEV_MODE = env.bool("DJANGO_VITE_DEV_MODE", default=False)
 
-# Vite 5+ outputs manifest to .vite/manifest.json by default
-DJANGO_VITE_MANIFEST_PATH = DJANGO_VITE_ASSETS_PATH / '.vite' / 'manifest.json'
+DJANGO_VITE_ASSETS_PATH = BASE_DIR / "static" / "dist"
+DJANGO_VITE_MANIFEST_PATH = DJANGO_VITE_ASSETS_PATH / "manifest.json"
 
