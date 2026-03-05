@@ -206,6 +206,7 @@ DJANGO_VITE = {
     "default": {
         "dev_mode": DJANGO_VITE_DEV_MODE,
         "manifest_path": BASE_DIR / "static" / "dist" / "manifest.json",
+        "static_url_prefix": "dist",  # Vite builds into static/dist/, so assets are at /static/dist/assets/...
     }
 }
 
