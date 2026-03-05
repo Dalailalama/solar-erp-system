@@ -38,13 +38,18 @@ export default defineConfig(({ mode }) => {
       __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
     },
 
+    // Vite root: keys in manifest.json are relative to this directory.
+    // e.g. static/js/website/app.ts → manifest key: "website/app.ts"
+    root: "static/js",
+
     // Important for Django:
-    // - Dev: /static/js/ so Vite serves from the correct path
-    // - Prod: /static/dist/ because build emits there + manifest paths
-    base: isDev ? "/static/js/" : "/static/dist/",
+    // - Dev: /static/ (Vite serves static/js/* at /static/*)
+    // - Prod: /static/dist/ (manifest-based asset paths)
+    base: isDev ? "/static/" : "/static/dist/",
 
     build: {
-      outDir: "static/dist",
+      // Relative to root (static/js), so ../../static/dist = static/dist at project root
+      outDir: "../../static/dist",
       emptyOutDir: true,
       manifest: true,
 
