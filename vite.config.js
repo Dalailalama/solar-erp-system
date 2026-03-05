@@ -51,7 +51,7 @@ export default defineConfig(({ mode }) => {
       // Relative to root (static/js), so ../../static/dist = static/dist at project root
       outDir: "../../static/dist",
       emptyOutDir: true,
-      manifest: true,
+      manifest: "manifest.json",
 
       rollupOptions: {
         input: {
