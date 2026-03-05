@@ -22,9 +22,9 @@ export default defineConfig(({ mode }) => {
       AutoImport({
         imports: ["vue", "vue-router"],
         dirs: [
-          "./core/components/composable",
-          "./core/components/services",
-          "./core/components/utils",
+          "./static/js/core/components/composable",
+          "./static/js/core/components/services",
+          "./static/js/core/components/utils",
         ],
         dts: false,
         eslintrc: { enabled: false },
@@ -38,33 +38,30 @@ export default defineConfig(({ mode }) => {
       __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
     },
 
-    // Your JS source root for Vite
-    root: "static/js",
-
     // Important for Django:
-    // - Dev: typically still ok as /static/ (if your templates expect that)
+    // - Dev: /static/js/ so Vite serves from the correct path
     // - Prod: /static/dist/ because build emits there + manifest paths
-    base: isDev ? "/static/" : "/static/dist/",
+    base: isDev ? "/static/js/" : "/static/dist/",
 
     build: {
-      outDir: "../../static/dist",
+      outDir: "static/dist",
       emptyOutDir: true,
       manifest: true,
 
       rollupOptions: {
         input: {
-            app: fileURLToPath(new URL("./core/app.js", import.meta.url)),
-            login: fileURLToPath(new URL("./core/login_app.js", import.meta.url)),
-            user_list: fileURLToPath(new URL("./accounts/UserList.js", import.meta.url)),
-            settings: fileURLToPath(new URL("./accounts/Settings.js", import.meta.url)),
-            website: fileURLToPath(new URL("./website/app.ts", import.meta.url)),
-            contact_form: fileURLToPath(new URL("./website/contact_form.js", import.meta.url)),
+          "core/app.js": fileURLToPath(new URL("./static/js/core/app.js", import.meta.url)),
+          "core/login_app.js": fileURLToPath(new URL("./static/js/core/login_app.js", import.meta.url)),
+          "accounts/UserList.js": fileURLToPath(new URL("./static/js/accounts/UserList.js", import.meta.url)),
+          "accounts/Settings.js": fileURLToPath(new URL("./static/js/accounts/Settings.js", import.meta.url)),
+          "website/app.ts": fileURLToPath(new URL("./static/js/website/app.ts", import.meta.url)),
+          "website/contact_form.js": fileURLToPath(new URL("./static/js/website/contact_form.js", import.meta.url)),
         },
         output: {
-            format: "es",
-            entryFileNames: "assets/[name]-[hash].js",
-            chunkFileNames: "assets/[name]-[hash].js",
-            assetFileNames: "assets/[name]-[hash].[ext]",
+          format: "es",
+          entryFileNames: "assets/[name]-[hash].js",
+          chunkFileNames: "assets/[name]-[hash].js",
+          assetFileNames: "assets/[name]-[hash].[ext]",
         },
       },
 
