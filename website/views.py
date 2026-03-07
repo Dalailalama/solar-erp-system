@@ -3,31 +3,12 @@ from django.http import JsonResponse, FileResponse, Http404
 from django.views.decorators.http import require_http_methods
 from login_required import login_not_required
 import os
+import time
 from django.conf import settings
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 # from django.http import 
 
-
-
-def _touch_channel_layer():
-    """Touch channel layer so Redis-backed deployments get periodic activity."""
-    channel_layer = get_channel_layer()
-    if channel_layer is None:
-        return
-
-    try:
-        # This writes through the configured channel layer backend.
-        async_to_sync(channel_layer.group_send)(
-            'website_keepalive',
-            {
-                'type': 'keepalive.ping',
-                'source': 'website.home',
-            },
-        )
-    except Exception:
-        # Never break public homepage rendering because of keepalive logic.
-        return
 # ===== MAIN PAGES =====
 
 @login_not_required
@@ -36,7 +17,6 @@ def home(request):
     Solar Website Landing Page
     SEO-optimized homepage with hero, benefits, services, testimonials, and FAQ
     """
-    _touch_channel_layer()
     context = {
         'page_title': 'Best Solar Panel Installation Company',
         'meta_description': 'Leading solar energy company providing professional solar panel installation',
@@ -328,5 +308,39 @@ def download_brochure(request):
         filename='solar-brochure.pdf',  # what user sees
         content_type='application/pdf',
     )
+
+
+
+
+
+def _touch_channel_layer_for_healthz():
+    """Best-effort channel-layer touch for uptime monitors."""
+    channel_layer = get_channel_layer()
+    if channel_layer is None:
+        return False
+
+    try:
+        async_to_sync(channel_layer.group_send)(
+            'website_keepalive',
+            {
+                'type': 'keepalive.ping',
+                'source': 'website.healthz',
+            },
+        )
+        return True
+    except Exception:
+        return False
+@login_not_required
+@require_http_methods(["GET"])
+def healthz(request):
+    """Fast health check endpoint for uptime monitors."""
+    touched = _touch_channel_layer_for_healthz()
+    return JsonResponse({
+        'status': 'ok',
+        'service': 'solarproject',
+        'channel_layer_touched': touched,
+        'ts': int(time.time()),
+    })
+
 
 
