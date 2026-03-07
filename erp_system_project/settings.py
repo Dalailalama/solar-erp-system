@@ -69,12 +69,23 @@ INSTALLED_APPS = [
 # ASGI Configuration
 ASGI_APPLICATION = 'erp_system_project.asgi.application'
 
-# Channel Layer Configuration (Using In-Memory for development)
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer',
-    },
-}
+# Channel layer: Redis in production (when REDIS_URL is set), in-memory for local dev.
+REDIS_URL = env.str('REDIS_URL', default='')
+if REDIS_URL:
+    CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels_redis.core.RedisChannelLayer',
+            'CONFIG': {
+                'hosts': [REDIS_URL],
+            },
+        },
+    }
+else:
+    CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels.layers.InMemoryChannelLayer',
+        },
+    }
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -226,3 +237,5 @@ DJANGO_VITE = {
         "dev_server_port": VITE_DEV_SERVER_PORT,
     }
 }
+
+
