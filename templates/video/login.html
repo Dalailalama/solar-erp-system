@@ -1,0 +1,23 @@
+{% extends 'video/base.html' %}
+
+{% block title %}Video Login{% endblock %}
+
+{% block content %}
+<div class="video-login-page">
+    <form method="post" class="video-login-card">
+        {% csrf_token %}
+        <h1>Video Portal</h1>
+        <p>Sign in with your video-only account.</p>
+        {% if error %}
+            <div class="video-error">{{ error }}</div>
+        {% endif %}
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" required>
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" required>
+
+        <button type="submit">Sign In</button>
+    </form>
+</div>
+{% endblock %}

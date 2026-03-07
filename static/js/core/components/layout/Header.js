@@ -1,5 +1,3 @@
-import { ref, computed, onMounted, onUnmounted } from 'vue';
-import { useAuth } from '../composable/useAuth.js';
 
 export const Header = {
     template: `
@@ -47,8 +45,9 @@ export const Header = {
 
         // computed is auto-imported!
         const userName = computed(() => {
-            if (!authStore.user) return 'Guest';
-            return authStore.user.first_name ? `${authStore.user.first_name} ${authStore.user.last_name}` : authStore.user.username;
+            const user = authStore?.user;
+            if (!user || typeof user !== 'object') return 'Guest';
+            return user.first_name ? `${user.first_name} ${user.last_name || ''}`.trim() : (user.username || 'Guest');
         });
 
         // ref is auto-imported!
@@ -115,3 +114,6 @@ export const Header = {
         };
     }
 };
+
+
+

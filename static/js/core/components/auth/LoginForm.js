@@ -1,4 +1,3 @@
-// LoginForm Component - Imports handled by ERP Framework Auto-Import
 
 export const LoginForm = {
     name: 'LoginForm',

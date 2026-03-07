@@ -1,7 +1,3 @@
-import { ref, onMounted, watch, computed } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { useAuth } from '../composable/useAuth.js';
-import { useConfig } from '../composable/useConfig.js';
 
 export const MainLayout = {
     template: `
@@ -82,3 +78,5 @@ export const MainLayout = {
         };
     }
 };
+
+

@@ -7,7 +7,8 @@ export const ErrorBoundary = defineComponent({
         const error = ref(null);
 
         onErrorCaptured((err, instance, info) => {
-            console.error('[Framework] Error captured by boundary:', err, info);
+            const componentName = instance?.$.type?.name || instance?.type?.name || 'Unknown';
+            console.error('[Framework] Error captured by boundary:', { component: componentName, info, error: err });
             error.value = err;
 
             // Log to Diagnostics service
@@ -15,7 +16,7 @@ export const ErrorBoundary = defineComponent({
                 window.$fx.diagnostics.logError('Component Crash', {
                     error: err.stack || err.message,
                     info,
-                    component: instance?.$.type?.name || 'Unknown'
+                    component: componentName
                 });
             }
 
@@ -33,3 +34,4 @@ export const ErrorBoundary = defineComponent({
         };
     }
 });
+

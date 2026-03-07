@@ -1,5 +1,3 @@
-import { computed } from 'vue';
-import { useCollaboration } from '../composable/useCollaboration.js';
 
 /**
  * CollaborationIndicator Component
@@ -20,6 +18,10 @@ export const CollaborationIndicator = {
     setup(props) {
         const { isConnected, otherUsers } = useCollaboration(props.roomName);
 
+        const safeUsers = computed(() =>
+            (otherUsers.value || []).filter(user => user && (user.id !== null || user.username))
+        );
+
         const getAvatarColor = (username) => {
             const colors = [
                 '#3498db', '#e74c3c', '#2ecc71', '#f1c40f',
@@ -38,25 +40,23 @@ export const CollaborationIndicator = {
 
         return {
             isConnected,
-            otherUsers,
+            safeUsers,
             getAvatarColor,
             initials
         };
     },
     template: `
         <div class="collaboration-container d-flex align-items-center">
-            <!-- Connection Status -->
             <div 
                 class="status-dot me-3" 
                 :class="{ 'connected': isConnected }"
                 :title="isConnected ? 'Real-time connected' : 'Connecting...'"
             ></div>
 
-            <!-- Avatars -->
             <div class="avatar-group d-flex">
                 <div 
-                    v-for="user in otherUsers" 
-                    :key="user.id"
+                    v-for="user in safeUsers" 
+                    :key="user.id || user.username"
                     class="avatar-circle"
                     :style="{ backgroundColor: getAvatarColor(user.username) }"
                     :title="user.username"
@@ -64,12 +64,12 @@ export const CollaborationIndicator = {
                     {{ initials(user.username) }}
                 </div>
                 
-                <div v-if="otherUsers.length === 0" class="no-others text-muted small">
+                <div v-if="safeUsers.length === 0" class="no-others text-muted small">
                     <i class="fas fa-user-friends me-1"></i>
                     Only you are here
                 </div>
                 <div v-else-if="showNames" class="user-names ms-2 small text-muted">
-                    {{ otherUsers.length }} others viewing this
+                    {{ safeUsers.length }} others viewing this
                 </div>
             </div>
 
@@ -111,3 +111,5 @@ export const CollaborationIndicator = {
         </div>
     `
 };
+
+

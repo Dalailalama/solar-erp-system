@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { setupGuards } from './router/guards.js';
 
-// Route Definitions
 const routes = [
     {
         path: '/dashboard',
@@ -41,7 +40,6 @@ const routes = [
             title: 'User Management - ERP System'
         }
     },
-    // Example Routes
     {
         path: '/examples/validation',
         name: 'ValidationExample',
@@ -80,11 +78,34 @@ const routes = [
     }
 ];
 
-// Create Router instance
 export const router = createRouter({
-    history: createWebHistory('/app/'), // Base URL is /app/ for the SPA
+    history: createWebHistory('/app/'),
     routes
 });
 
-// Setup guards
+const DYNAMIC_IMPORT_ERROR = /Failed to fetch dynamically imported module|Importing a module script failed/i;
+const RELOAD_KEY = 'erp_dynamic_import_reload_once';
+
+// Global recovery for lazy-route chunk failures.
+router.onError((error, to) => {
+    const message = error?.message || '';
+    if (!DYNAMIC_IMPORT_ERROR.test(message)) {
+        return;
+    }
+
+    const attempted = sessionStorage.getItem(RELOAD_KEY);
+    if (attempted === '1') {
+        console.error('[Router] Dynamic import failed after retry:', error);
+        return;
+    }
+
+    sessionStorage.setItem(RELOAD_KEY, '1');
+    const target = to?.fullPath || window.location.pathname;
+    window.location.assign(target);
+});
+
+router.afterEach(() => {
+    sessionStorage.removeItem(RELOAD_KEY);
+});
+
 setupGuards(router);

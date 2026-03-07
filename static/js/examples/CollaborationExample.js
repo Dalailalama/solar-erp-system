@@ -1,41 +1,43 @@
-import { ref, onMounted } from 'vue';
-import { useCollaboration } from '../core/components/composable/useCollaboration.js';
-import { useToast } from '../core/components/composable/useToast.js';
 
 export const CollaborationExample = {
     name: 'CollaborationExample',
     setup() {
-        // Join a room called 'demo-room'
-        const room = useCollaboration('demo-room');
+        const { isConnected, otherUsers, broadcast, on } = useCollaboration('demo-room');
+        const authStore = useAuth;
         const toast = useToast;
+
         const messages = ref([]);
         const newMessage = ref('');
 
-        // Listen for custom 'chat' messages
-        room.on('chat', (data) => {
+        const safeOtherUsers = computed(() =>
+            (otherUsers.value || []).filter(user => user && (user.id !== null || user.username))
+        );
+
+        const currentUsername = computed(() => authStore.user?.username || 'You');
+
+        on('chat', (data) => {
+            const senderName = data?.sender_name || data?.username || 'User';
+            const text = data?.message || '';
+            if (!text) return;
+
             messages.value.push({
-                user: data.sender_name,
-                text: data.message,
+                user: senderName,
+                text,
                 time: new Date().toLocaleTimeString()
             });
-            // Show toast if window is not active or just as feedback
-            toast.info(`New message from ${data.sender_name}`);
+
+            toast.info(`New message from ${senderName}`);
         });
 
         const sendMessage = () => {
-            if (!newMessage.value.trim()) return;
+            const text = newMessage.value.trim();
+            if (!text) return;
 
-            const payload = {
-                message: newMessage.value.trim()
-            };
+            broadcast('chat', { message: text });
 
-            // Broadcast to other users in the same room
-            room.broadcast('chat', payload);
-
-            // Add to own list
             messages.value.push({
                 user: 'You',
-                text: newMessage.value.trim(),
+                text,
                 time: new Date().toLocaleTimeString()
             });
 
@@ -43,131 +45,120 @@ export const CollaborationExample = {
         };
 
         return {
-            room,
+            isConnected,
+            safeOtherUsers,
+            currentUsername,
             messages,
             newMessage,
             sendMessage
         };
     },
     template: `
-        <div class="container-fluid mt-4">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="card shadow-sm">
-                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">
-                                <i class="fas fa-comments me-2"></i>
-                                Real-Time Chat & Presence
-                            </h5>
-                            <!-- Integrated Collaboration Indicator -->
-                            <collaboration-indicator 
-                                room-name="demo-room" 
-                                :show-names="true"
-                            ></collaboration-indicator>
+        <div class="collab-page">
+            <div class="collab-grid">
+                <section class="panel panel-chat">
+                    <header class="panel-header panel-header-primary">
+                        <h3>Real-Time Chat & Presence</h3>
+                        <collaboration-indicator room-name="demo-room" :show-names="true"></collaboration-indicator>
+                    </header>
+
+                    <div class="panel-body">
+                        <div class="info-box">
+                            Open this page in two tabs/browsers to test real-time chat and presence.
                         </div>
-                        <div class="card-body">
-                            <div class="alert alert-info">
-                                <i class="fas fa-info-circle me-2"></i>
-                                <strong>How to test:</strong> Open this page in two different browser tabs/windows (or browsers). You will see yourself appearing in the collaboration indicator and can chat in real-time.
+
+                        <div class="chat-window">
+                            <div v-if="messages.length === 0" class="empty-state">
+                                No messages yet. Say hi.
                             </div>
 
-                            <div class="chat-window border rounded p-3 mb-3" style="height: 400px; overflow-y: auto;">
-                                <div v-if="messages.length === 0" class="text-center text-muted mt-5">
-                                    <i class="fas fa-ghost fa-3x mb-3"></i>
-                                    <p>No messages yet. Say hi!</p>
-                                </div>
-                                <div v-for="(msg, index) in messages" :key="index" class="mb-2">
-                                    <strong>{{ msg.user }}:</strong> {{ msg.text }}
-                                    <small class="text-muted ms-2">{{ msg.time }}</small>
-                                </div>
+                            <div v-for="(msg, index) in messages" :key="index" class="chat-line">
+                                <span class="chat-user">{{ msg.user }}:</span>
+                                <span class="chat-text">{{ msg.text }}</span>
+                                <span class="chat-time">{{ msg.time }}</span>
                             </div>
+                        </div>
 
-                            <div class="input-group">
-                                <input 
-                                    v-model="newMessage" 
-                                    @keyup.enter="sendMessage"
-                                    type="text" 
-                                    class="form-control" 
-                                    placeholder="Type a message..."
-                                >
-                                <button @click="sendMessage" class="btn btn-primary">
-                                    <i class="fas fa-paper-plane me-1"></i>
-                                    Send
-                                </button>
-                            </div>
+                        <div class="composer">
+                            <input
+                                v-model="newMessage"
+                                @keyup.enter="sendMessage"
+                                type="text"
+                                class="composer-input"
+                                placeholder="Type a message..."
+                            >
+                            <button @click="sendMessage" class="composer-btn">Send</button>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <div class="col-md-4">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-header bg-dark text-white">
-                            <h5 class="mb-0">Collaboration Stats</h5>
+                <aside class="panel panel-side">
+                    <header class="panel-header panel-header-dark">
+                        <h3>Collaboration Stats</h3>
+                    </header>
+                    <div class="panel-body">
+                        <div class="meta-row">
+                            <span>Status</span>
+                            <span :class="['status-pill', isConnected ? 'ok' : 'warn']">
+                                {{ isConnected ? 'Connected' : 'Connecting' }}
+                            </span>
                         </div>
-                        <div class="card-body">
-                            <h6>Connection Status:</h6>
-                            <div class="mb-3">
-                                <span v-if="room.isConnected" class="badge bg-success">
-                                    <i class="fas fa-check-circle me-1"></i> Connected
-                                </span>
-                                <span v-else class="badge bg-warning text-dark">
-                                    <i class="fas fa-spinner fa-spin me-1"></i> Connecting...
-                                </span>
-                            </div>
 
-                            <h6>Active Room:</h6>
-                            <p class="text-muted"><code>demo-room</code></p>
-
-                            <h6>Active Users ({{ room.activeUsers.length }}):</h6>
-                            <ul class="list-group">
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <span>{{ room.user.username }} (You)</span>
-                                    <span class="badge bg-primary rounded-pill">Me</span>
-                                </li>
-                                <li v-for="user in room.otherUsers" :key="user.id" class="list-group-item">
-                                    {{ user.username }}
-                                </li>
-                            </ul>
-
-                            <hr>
-                            
-                            <h6>Feature Technical Details:</h6>
-                            <ul class="small text-muted">
-                                <li>WebSocket-based (Django Channels)</li>
-                                <li>Automatic Reconnect on failure</li>
-                                <li>Real-time Presence joining/leaving</li>
-                                <li>Broadcast messaging system</li>
-                            </ul>
+                        <div class="meta-row">
+                            <span>Room</span>
+                            <code>demo-room</code>
                         </div>
+
+                        <h4 class="subhead">Active Users ({{ safeOtherUsers.length + 1 }})</h4>
+                        <ul class="user-list">
+                            <li class="user-row me-row">
+                                <span>{{ currentUsername }} (You)</span>
+                                <span class="me-pill">Me</span>
+                            </li>
+                            <li v-for="user in safeOtherUsers" :key="user.id || user.username" class="user-row">
+                                {{ user.username }}
+                            </li>
+                        </ul>
                     </div>
-                </div>
+                </aside>
             </div>
 
-            <!-- Developer Docs -->
-            <div class="row mt-4">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="mb-0">Developer Guide</h5>
-                        </div>
-                        <div class="card-body">
-                            <h6>1. Joining a Collaboration Room:</h6>
-                            <pre class="bg-light p-3 rounded"><code>const room = useCollaboration('resource-123');</code></pre>
-
-                            <h6 class="mt-3">2. Displaying Active Users:</h6>
-                            <pre class="bg-light p-3 rounded"><code>&lt;collaboration-indicator room-name="resource-123"&gt;&lt;/collaboration-indicator&gt;</code></pre>
-
-                            <h6 class="mt-3">3. Broadcasting Events:</h6>
-                            <pre class="bg-light p-3 rounded"><code>room.broadcast('update', { field: 'name', value: 'New Name' });</code></pre>
-
-                            <h6 class="mt-3">4. Listening for Events:</h6>
-                            <pre class="bg-light p-3 rounded"><code>room.on('update', (data) => {
-    console.log('Update received:', data);
-});</code></pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <style scoped>
+                .collab-page { padding: 16px; }
+                .collab-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+                .panel { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; overflow: hidden; }
+                .panel-header { padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; }
+                .panel-header h3 { margin: 0; font-size: 18px; }
+                .panel-header-primary { background: var(--color-primary); color: white; }
+                .panel-header-dark { background: #1f2937; color: white; }
+                .panel-body { padding: 14px; }
+                .info-box { background: rgba(52,152,219,0.12); border: 1px solid rgba(52,152,219,0.3); color: var(--text-primary); padding: 10px 12px; border-radius: 8px; margin-bottom: 12px; }
+                .chat-window { height: 380px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; background: var(--bg-body); }
+                .empty-state { color: var(--text-secondary); text-align: center; margin-top: 130px; }
+                .chat-line { display: flex; gap: 8px; align-items: baseline; margin-bottom: 8px; }
+                .chat-user { font-weight: 700; min-width: 48px; }
+                .chat-text { flex: 1; word-break: break-word; }
+                .chat-time { color: var(--text-secondary); font-size: 12px; }
+                .composer { margin-top: 10px; display: flex; gap: 8px; }
+                .composer-input { flex: 1; border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; background: var(--bg-card); color: var(--text-primary); }
+                .composer-btn { border: none; background: var(--color-primary); color: white; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+                .composer-btn:hover { filter: brightness(0.95); }
+                .meta-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+                .status-pill { padding: 4px 8px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+                .status-pill.ok { background: rgba(46,204,113,0.2); color: #27ae60; }
+                .status-pill.warn { background: rgba(241,196,15,0.2); color: #b58900; }
+                .subhead { margin: 14px 0 8px; font-size: 14px; }
+                .user-list { list-style: none; margin: 0; padding: 0; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; }
+                .user-row { padding: 10px 12px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
+                .user-row:last-child { border-bottom: none; }
+                .me-row { background: rgba(52,152,219,0.08); }
+                .me-pill { background: var(--color-primary); color: white; border-radius: 999px; padding: 2px 8px; font-size: 11px; }
+                @media (max-width: 1024px) { .collab-grid { grid-template-columns: 1fr; } }
+            </style>
         </div>
     `
 };
+
+
+
+

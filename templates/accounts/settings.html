@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_app.html' %}
 {% load static %}
 {% load django_vite %}
 
@@ -20,6 +20,7 @@
 </div>
 {% endblock %}
 
-{% block extra_js %}
-{% vite_asset 'accounts/Settings.js' %}
+{% block vue_entry %}
+{% vite_asset 'accounts/settings_entry.js' %}
 {% endblock %}
+

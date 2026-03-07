@@ -1,5 +1,3 @@
-// Imports removed by ERP Framework Auto-Import
-// All core Vue functions and composables are available globally!
 import '../../css/core/profile.css';
 
 export const Profile = {
@@ -7,29 +5,24 @@ export const Profile = {
     template: `
         <div class="profile-container">
             <div class="profile-grid">
-                <!-- User Profile Card -->
                 <div class="profile-sidebar-col">
                     <div class="panel profile-card">
                         <div class="panel-body text-center">
-                            <div class="profile-avatar mb-3">
-                                {{ userInitials }}
-                            </div>
-                            <h4 class="mb-1">{{ userDetails.first_name }} {{ userDetails.last_name }}</h4>
-                            <p class="text-muted">{{ userDetails.username }}</p>
-                            <p class="text-muted small">{{ userDetails.email }}</p>
+                            <div class="profile-avatar mb-3">{{ userInitials }}</div>
+                            <h4 class="mb-1">{{ displayUser.first_name }} {{ displayUser.last_name }}</h4>
+                            <p class="text-muted">{{ displayUser.username }}</p>
+                            <p class="text-muted small">{{ displayUser.email }}</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Edit Details & Password -->
                 <div class="profile-content-col">
-                    <!-- Personal Details -->
                     <div class="panel mb-4">
                         <div class="panel-header">
                             <h5 class="mb-0">Personal Details</h5>
                         </div>
                         <div class="panel-body">
-                            <form @submit.prevent="updateProfile">
+                            <form @submit="onUpdateProfileSubmit">
                                 <div class="form-row">
                                     <div class="form-group half">
                                         <label class="form-label">First Name</label>
@@ -51,17 +44,15 @@ export const Profile = {
                         </div>
                     </div>
 
-                    <!-- Change Password -->
                     <div class="panel">
                         <div class="panel-header">
                             <h5 class="mb-0">Change Password</h5>
                         </div>
                         <div class="panel-body">
-                            <form @submit.prevent="changePassword">
+                            <form @submit="onChangePasswordSubmit">
                                 <div class="form-group">
                                     <label class="form-label">New Password</label>
                                     <input type="password" class="form-input" v-model="passwordForm.new_password" required>
-                                    <!-- Password Criteria -->
                                     <div class="password-criteria mt-2">
                                         <small :class="criteria.length ? 'text-success' : 'text-danger'">
                                             <i :class="criteria.length ? 'fas fa-check' : 'fas fa-times'"></i> 8+ Characters
@@ -102,11 +93,25 @@ export const Profile = {
         const loading = ref(false);
         const loadingRes = ref(false);
 
-        const userDetails = ref({
+        const defaultUserDetails = () => ({
             username: '',
             first_name: '',
             last_name: '',
             email: ''
+        });
+
+        const userDetails = ref(defaultUserDetails());
+
+        const displayUser = computed(() => {
+            const user = userDetails.value && typeof userDetails.value === 'object'
+                ? userDetails.value
+                : defaultUserDetails();
+            return {
+                username: user.username || '',
+                first_name: user.first_name || '',
+                last_name: user.last_name || '',
+                email: user.email || ''
+            };
         });
 
         const form = reactive({
@@ -121,21 +126,24 @@ export const Profile = {
         });
 
         const userInitials = computed(() => {
-            const name = `${userDetails.value.first_name || ''} ${userDetails.value.last_name || ''}`.trim() || userDetails.value.username || 'U';
+            const name = `${displayUser.value.first_name} ${displayUser.value.last_name}`.trim() || displayUser.value.username || 'U';
             return name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
         });
 
-        // Initialize data
         onMounted(async () => {
-            // Since useAuth.user might be stale or minimal, fetch full profile
             try {
                 const response = await api.get('/accounts/user/');
-                userDetails.value = response;
-                form.first_name = response.first_name;
-                form.last_name = response.last_name;
-                form.email = response.email;
+                const payload = response?.user || response?.data || response || {};
+                userDetails.value = {
+                    ...defaultUserDetails(),
+                    ...(typeof payload === 'object' && payload !== null ? payload : {})
+                };
+                form.first_name = displayUser.value.first_name;
+                form.last_name = displayUser.value.last_name;
+                form.email = displayUser.value.email;
             } catch (e) {
                 console.error(e);
+                toast.error?.('Failed to load profile details');
             }
         });
 
@@ -143,16 +151,12 @@ export const Profile = {
             loading.value = true;
             try {
                 await api.put('/accounts/profile/', form);
-                // Update local display
                 userDetails.value = { ...userDetails.value, ...form };
-            } catch (e) {
-                // Toasts handled by useApi
             } finally {
                 loading.value = false;
             }
         };
 
-        // Password Validation
         const criteria = computed(() => {
             const p = passwordForm.new_password;
             return {
@@ -175,31 +179,40 @@ export const Profile = {
 
         const changePassword = async () => {
             if (!isPasswordValid.value || passwordMismatch.value) return;
-
             loadingRes.value = true;
             try {
                 await api.post('/accounts/change-password/', passwordForm);
                 passwordForm.new_password = '';
                 passwordForm.confirm_password = '';
-            } catch (e) {
-                // Handled
             } finally {
                 loadingRes.value = false;
             }
         };
 
+        const onUpdateProfileSubmit = (event) => {
+            event.preventDefault();
+            return updateProfile();
+        };
+
+        const onChangePasswordSubmit = (event) => {
+            event.preventDefault();
+            return changePassword();
+        };
+
         return {
-            userDetails,
+            displayUser,
             userInitials,
             form,
             passwordForm,
             loading,
             loadingRes,
-            updateProfile,
-            changePassword,
             criteria,
             isPasswordValid,
-            passwordMismatch
+            passwordMismatch,
+            onUpdateProfileSubmit,
+            onChangePasswordSubmit
         };
     }
 };
+
+

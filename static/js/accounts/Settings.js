@@ -1,8 +1,3 @@
-import { createApp, reactive, computed, ref, onMounted } from 'vue';
-import { useApi } from '../core/components/composable/useApi.js';
-import { useToast } from '../core/components/composable/useToast.js';
-import { useConfig } from '../core/components/composable/useConfig.js';
-import '../../css/accounts/settings.css';
 import '../../css/accounts/settings.css';
 
 const SettingsApp = {
@@ -342,8 +337,6 @@ const SettingsApp = {
 
 export { SettingsApp as Settings };
 
-// Mount only if the container exists (for standalone page)
-if (document.getElementById('settings-container')) {
-    const app = createApp(SettingsApp);
-    app.mount('#settings-container');
-}
+
+
+

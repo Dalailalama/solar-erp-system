@@ -1,10 +1,6 @@
-// Imports handled by ERP Framework Auto-Import
-
 export const UserList = {
     name: 'UserList',
     setup() {
-        const api = useApi();
-
         // DataTable Configuration
         const columns = [
             { key: 'id', label: 'ID', sortable: true },
@@ -57,4 +53,3 @@ export const UserList = {
         </div>
     `
 };
-

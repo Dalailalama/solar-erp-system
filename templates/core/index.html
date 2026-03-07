@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_app.html' %}
 {% load static %}
 {% load django_vite %}
 
@@ -9,8 +9,7 @@
 {% endblock %}
 
 {% block content %}
-<!-- Vue MainLayout will render here -->
-<main-layout></main-layout>
+<div id="app"></div>
 {% endblock %}
 
 {% block vue_entry %}

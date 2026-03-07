@@ -17,6 +17,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', api.urls),
     path('accounts/', include('accounts.urls')),
+    path('video/', include('video.urls')), # Dedicated video portal
     path('', include('website.urls')), # Public website at root
     path('app/', include('core.urls')), # app SPA at /app/
     path('crm/', include('CRM.urls')), # CRM
@@ -24,3 +25,4 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

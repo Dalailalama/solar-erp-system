@@ -1,0 +1,12 @@
+{% extends 'video/base.html' %}
+{% load django_vite %}
+
+{% block title %}Video Call{% endblock %}
+
+{% block content %}
+<div id="video-app"></div>
+{% endblock %}
+
+{% block vue_entry %}
+{% vite_asset 'video/app.js' %}
+{% endblock %}
