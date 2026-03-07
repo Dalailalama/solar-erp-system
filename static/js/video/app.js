@@ -166,31 +166,55 @@ const VideoHome = {
 
 const VideoRoom = {
     template: `
-        <div class="video-shell">
-            <header class="video-topbar">
-                <h1>Room: {{ roomId }}</h1>
-                <div class="video-row">
-                    <button class="video-link-btn" @click="copyCurrentLink">Copy Link</button>
-                    <button class="video-link-btn" @click="leaveCall">Leave</button>
-                </div>
-            </header>
+        <div class="video-room-shell">
+            <video ref="remoteVideo" autoplay playsinline class="video-remote"></video>
+            <video ref="localVideo" autoplay muted playsinline :class="['video-local', { mirrored: currentFacingMode === 'user' }]" ></video>
 
-            <main class="video-room-grid">
-                <section class="video-panel">
-                    <h3>Local</h3>
-                    <video ref="localVideo" autoplay muted playsinline class="video-player"></video>
-                </section>
+            <div class="video-status-badge">{{ status }}</div>
 
-                <section class="video-panel">
-                    <h3>Remote</h3>
-                    <video ref="remoteVideo" autoplay playsinline class="video-player"></video>
-                    <p class="video-status">{{ status }}</p>
-                </section>
-            </main>
+            <footer class="video-call-controls">
+                <button class="video-icon-btn" :aria-label="micEnabled ? 'Mute' : 'Unmute'" @click="toggleMic">
+                    <svg v-if="micEnabled" viewBox="0 0 24 24" class="video-icon" aria-hidden="true">
+                        <path d="M12 14a3 3 0 0 0 3-3V7a3 3 0 1 0-6 0v4a3 3 0 0 0 3 3z"></path>
+                        <path d="M19 11a1 1 0 1 0-2 0 5 5 0 0 1-10 0 1 1 0 1 0-2 0 7 7 0 0 0 6 6.92V21H9a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2h-2v-3.08A7 7 0 0 0 19 11z"></path>
+                    </svg>
+                    <svg v-else viewBox="0 0 24 24" class="video-icon" aria-hidden="true">
+                        <path d="M4.7 3.3a1 1 0 0 0-1.4 1.4l5.2 5.2V11a3 3 0 0 0 4.77 2.42l1.5 1.5A5 5 0 0 1 7 11a1 1 0 1 0-2 0 7 7 0 0 0 6 6.92V21H9a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2h-2v-3.08a6.9 6.9 0 0 0 3.18-1.1l3.1 3.1a1 1 0 1 0 1.42-1.42z"></path>
+                        <path d="M12 4a3 3 0 0 0-3 3v.17l6 6V7a3 3 0 0 0-3-3z"></path>
+                    </svg>
+                </button>
 
-            <footer class="video-controls">
-                <button class="video-btn" @click="toggleMic">{{ micEnabled ? 'Mute Mic' : 'Unmute Mic' }}</button>
-                <button class="video-btn" @click="toggleCam">{{ camEnabled ? 'Turn Off Cam' : 'Turn On Cam' }}</button>
+                <button class="video-icon-btn" :aria-label="camEnabled ? 'Turn camera off' : 'Turn camera on'" @click="toggleCam">
+                    <svg v-if="camEnabled" viewBox="0 0 24 24" class="video-icon" aria-hidden="true">
+                        <path d="M15 8a1 1 0 0 1 1-1h1.5L21 4.5v15l-3.5-2.5H16a1 1 0 0 1-1-1V8z"></path>
+                        <rect x="3" y="6" width="12" height="12" rx="2" ry="2"></rect>
+                    </svg>
+                    <svg v-else viewBox="0 0 24 24" class="video-icon" aria-hidden="true">
+                        <path d="M3 7a2 2 0 0 1 2-2h8.2l-2 2H5v10h10v-6.2l2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"></path>
+                        <path d="M21 4.5 17.5 7H16a1 1 0 0 0-1 1v.5l6 6.01V4.5z"></path>
+                        <path d="m4.7 3.3-1.4 1.4 16 16 1.4-1.4z"></path>
+                    </svg>
+                </button>
+
+                <button
+                    class="video-icon-btn"
+                    aria-label="Switch camera"
+                    :disabled="!canSwitchCamera"
+                    @click="switchCamera"
+                >
+                    <svg viewBox="0 0 24 24" class="video-icon" aria-hidden="true">
+                        <path d="M7 7h10a2 2 0 0 1 2 2v1h-2V9H7v1H5V9a2 2 0 0 1 2-2z"></path>
+                        <path d="M5 14h2v1h10v-1h2v1a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-1z"></path>
+                        <path d="m9 11-2 2 2 2v-1h6v-2H9v-1z"></path>
+                        <path d="m15 13 2-2-2-2v1H9v2h6v1z"></path>
+                    </svg>
+                </button>
+
+                <button class="video-icon-btn danger" aria-label="Leave call" @click="leaveCall">
+                    <svg viewBox="0 0 24 24" class="video-icon" aria-hidden="true">
+                        <path d="M3 13.2v2.3a2 2 0 0 0 2 2h1.8l2.2-3.2h6l2.2 3.2H19a2 2 0 0 0 2-2v-2.3l-3-1.8a11.4 11.4 0 0 0-12 0z"></path>
+                    </svg>
+                </button>
             </footer>
         </div>
     `,
@@ -206,9 +230,12 @@ const VideoRoom = {
             camEnabled: true,
             makingOffer: false,
             polite: true,
+            currentFacingMode: 'user',
+            canSwitchCamera: false,
         };
     },
     async mounted() {
+        document.body.classList.add('video-room-page');
         try {
             await this.initMedia();
             await this.initSocket();
@@ -217,6 +244,7 @@ const VideoRoom = {
         }
     },
     beforeUnmount() {
+        document.body.classList.remove('video-room-page');
         this.cleanup();
     },
     methods: {
@@ -231,13 +259,39 @@ const VideoRoom = {
                 throw new Error('getUserMedia is unavailable');
             }
 
+            this.canSwitchCamera = this.isLikelyMobile();
+
             try {
-                this.localStream = await mediaDevices.getUserMedia({ video: true, audio: true });
-                this.$refs.localVideo.srcObject = this.localStream;
+                this.localStream = await this.requestStream(this.currentFacingMode);
+                this.attachLocalStream();
             } catch (error) {
                 this.status = 'Camera/Mic permission denied or unavailable.';
                 throw error;
             }
+        },
+        async requestStream(facingMode) {
+            const base = {
+                audio: true,
+                video: {
+                    facingMode: { ideal: facingMode },
+                    width: { ideal: 1280 },
+                    height: { ideal: 720 },
+                },
+            };
+
+            try {
+                return await navigator.mediaDevices.getUserMedia(base);
+            } catch (_) {
+                return navigator.mediaDevices.getUserMedia({ audio: true, video: true });
+            }
+        },
+        attachLocalStream() {
+            this.$refs.localVideo.srcObject = this.localStream;
+            this.localStream.getAudioTracks().forEach((t) => { t.enabled = this.micEnabled; });
+            this.localStream.getVideoTracks().forEach((t) => { t.enabled = this.camEnabled; });
+        },
+        isLikelyMobile() {
+            return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent || '');
         },
         async initSocket() {
             const wsUrl = `${getWsOrigin()}/ws/video/${this.roomId}/`;
@@ -323,6 +377,8 @@ const VideoRoom = {
         },
         async createAndSendOffer() {
             this.ensurePc();
+            if (!this.pc) return;
+
             try {
                 this.makingOffer = true;
                 const offer = await this.pc.createOffer();
@@ -346,8 +402,30 @@ const VideoRoom = {
             this.camEnabled = !this.camEnabled;
             this.localStream?.getVideoTracks().forEach((t) => (t.enabled = this.camEnabled));
         },
-        async copyCurrentLink() {
-            await navigator.clipboard.writeText(window.location.href);
+        async switchCamera() {
+            if (!this.canSwitchCamera) return;
+
+            this.currentFacingMode = this.currentFacingMode === 'user' ? 'environment' : 'user';
+
+            try {
+                const newStream = await this.requestStream(this.currentFacingMode);
+                const oldStream = this.localStream;
+                this.localStream = newStream;
+                this.attachLocalStream();
+
+                const videoTrack = this.localStream.getVideoTracks()[0];
+                if (videoTrack && this.pc) {
+                    const sender = this.pc.getSenders().find((s) => s.track && s.track.kind === 'video');
+                    if (sender) {
+                        await sender.replaceTrack(videoTrack);
+                    }
+                }
+
+                oldStream?.getTracks().forEach((t) => t.stop());
+            } catch (error) {
+                this.status = 'Unable to switch camera.';
+                console.error('[Video] Switch camera failed:', error);
+            }
         },
         leaveCall() {
             this.cleanup();
@@ -372,6 +450,5 @@ const router = createRouter({
 });
 
 createApp({ template: '<router-view />' }).use(router).mount('#video-app');
-
 
 
