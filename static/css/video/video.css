@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   --video-bg: #0f172a;
   --video-surface: #111827;
   --video-card: #1f2937;
@@ -229,13 +229,10 @@ body.video-room-page {
   overflow: hidden;
 }
 
-.video-remote {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  background: #000;
+
+
+.video-remote.mirrored {
+  transform: scaleX(-1);
 }
 
 .video-local {
@@ -339,6 +336,10 @@ body.video-room-page {
     right: 10px;
   }
 
+  .video-remote {
+    object-fit: cover;
+  }
+
   .video-status-badge {
     top: 10px;
     left: 10px;
@@ -359,8 +360,4 @@ body.video-room-page {
     font-size: 20px;
   }
 }
-
-
-
-
 

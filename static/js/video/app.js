@@ -1,6 +1,21 @@
-﻿import { createApp } from 'vue';
+import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import { getWsOrigin } from '../core/utils/runtimeUrls.js';
+
+const QUALITY_PROFILES = {
+    low: { maxBitrate: 180000, maxFramerate: 10, scaleResolutionDownBy: 2.5 },
+    balanced: { maxBitrate: 550000, maxFramerate: 15, scaleResolutionDownBy: 1.6 },
+    high: { maxBitrate: 1400000, maxFramerate: 24, scaleResolutionDownBy: 1 },
+};
+
+function getIceServers() {
+    const custom = window.__VIDEO_ICE_SERVERS__;
+    if (Array.isArray(custom) && custom.length) return custom;
+    return [
+        { urls: 'stun:stun.l.google.com:19302' },
+        { urls: 'stun:stun1.l.google.com:19302' },
+    ];
+}
 
 const VideoHome = {
     template: `
@@ -32,7 +47,7 @@ const VideoHome = {
                             </span>
                             <button
                                 class="video-btn"
-                                :disabled="u.is_self || !u.online || callingUserId === u.id"
+                                :disabled="!u.online || callingUserId === u.id"
                                 @click="callUser(u)"
                             >
                                 {{ callingUserId === u.id ? 'Calling...' : 'Video Call' }}
@@ -83,7 +98,7 @@ const VideoHome = {
                 const res = await fetch('/video/api/users/', { credentials: 'same-origin' });
                 if (!res.ok) throw new Error('Failed to load users');
                 const data = await res.json();
-                this.users = data.users || [];
+                this.users = (data.users || []).filter((u) => !u.is_self);
             } catch (e) {
                 this.error = e.message || 'Unable to fetch users';
             }
@@ -167,10 +182,10 @@ const VideoHome = {
 const VideoRoom = {
     template: `
         <div class="video-room-shell">
-            <video ref="remoteVideo" autoplay playsinline class="video-remote"></video>
+            <video ref="remoteVideo" autoplay playsinline :class="['video-remote', { mirrored: mirrorRemote }]" ></video>
             <video ref="localVideo" autoplay muted playsinline :class="['video-local', { mirrored: currentFacingMode === 'user' }]" ></video>
 
-            <div class="video-status-badge">{{ status }}</div>
+            <div class="video-status-badge">{{ status }} | {{ qualityLabel }}</div>
 
             <footer class="video-call-controls">
                 <button class="video-icon-btn" :aria-label="micEnabled ? 'Mute' : 'Unmute'" @click="toggleMic">
@@ -223,6 +238,7 @@ const VideoRoom = {
             roomId: this.$route.params.room,
             status: 'Connecting...',
             socket: null,
+            socketReconnectTimer: null,
             pc: null,
             localStream: null,
             remoteStream: null,
@@ -232,6 +248,17 @@ const VideoRoom = {
             polite: true,
             currentFacingMode: 'user',
             canSwitchCamera: false,
+            qualityProfile: 'balanced',
+            qualityLabel: 'Quality: Adaptive',
+            pendingIceCandidates: [],
+            statsTimer: null,
+            poorNetworkTicks: 0,
+            goodNetworkTicks: 0,
+            reconnectAttempts: 0,
+            maxReconnectAttempts: 4,
+            manualClose: false,
+            peerEnded: false,
+            mirrorRemote: true,
         };
     },
     async mounted() {
@@ -271,11 +298,16 @@ const VideoRoom = {
         },
         async requestStream(facingMode) {
             const base = {
-                audio: true,
+                audio: {
+                    echoCancellation: true,
+                    noiseSuppression: true,
+                    autoGainControl: true,
+                },
                 video: {
                     facingMode: { ideal: facingMode },
-                    width: { ideal: 1280 },
-                    height: { ideal: 720 },
+                    width: { ideal: 640, max: 1280 },
+                    height: { ideal: 360, max: 720 },
+                    frameRate: { ideal: 15, max: 24 },
                 },
             };
 
@@ -307,7 +339,15 @@ const VideoRoom = {
             };
 
             this.socket.onclose = () => {
-                this.status = 'Disconnected';
+                if (this.manualClose || this.peerEnded) {
+                    this.status = 'Disconnected';
+                    return;
+                }
+                this.status = 'Signaling disconnected. Reconnecting...';
+                clearTimeout(this.socketReconnectTimer);
+                this.socketReconnectTimer = setTimeout(() => {
+                    this.initSocket();
+                }, 1800);
             };
         },
         ensurePc() {
@@ -318,7 +358,9 @@ const VideoRoom = {
             }
 
             this.pc = new RTCPeerConnection({
-                iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
+                iceServers: getIceServers(),
+                bundlePolicy: 'max-bundle',
+                rtcpMuxPolicy: 'require',
             });
 
             this.remoteStream = new MediaStream();
@@ -326,8 +368,13 @@ const VideoRoom = {
             this.localStream.getTracks().forEach((t) => this.pc.addTrack(t, this.localStream));
 
             this.pc.ontrack = (event) => {
-                event.streams[0].getTracks().forEach((t) => this.remoteStream.addTrack(t));
+                event.streams[0].getTracks().forEach((t) => {
+                    if (!this.remoteStream.getTracks().some((rt) => rt.id === t.id)) {
+                        this.remoteStream.addTrack(t);
+                    }
+                });
                 this.status = 'Connected';
+                this.reconnectAttempts = 0;
             };
 
             this.pc.onicecandidate = (event) => {
@@ -335,6 +382,74 @@ const VideoRoom = {
                     this.send({ type: 'ice-candidate', candidate: event.candidate });
                 }
             };
+
+            this.pc.oniceconnectionstatechange = () => {
+                const s = this.pc?.iceConnectionState;
+                if (!s) return;
+                if (s === 'connected' || s === 'completed') {
+                    this.status = 'Connected';
+                    this.reconnectAttempts = 0;
+                    return;
+                }
+                if (s === 'disconnected') {
+                    this.status = 'Network unstable. Trying to recover...';
+                    this.handleReconnect();
+                    return;
+                }
+                if (s === 'failed') {
+                    this.status = 'Connection failed. Reconnecting...';
+                    this.applyQualityProfile('low');
+                    this.handleReconnect();
+                }
+            };
+
+            this.pc.onconnectionstatechange = () => {
+                const s = this.pc?.connectionState;
+                if (!s) return;
+                if (s === 'failed') {
+                    this.status = 'Peer connection failed. Reconnecting...';
+                    this.handleReconnect();
+                }
+            };
+
+            this.applyQualityProfile(this.qualityProfile);
+            this.startStatsMonitor();
+        },
+        async handleReconnect() {
+            if (!this.pc || this.reconnectAttempts >= this.maxReconnectAttempts) {
+                if (this.reconnectAttempts >= this.maxReconnectAttempts) {
+                    this.status = 'Unable to recover connection. Please rejoin call.';
+                }
+                return;
+            }
+
+            this.reconnectAttempts += 1;
+            const delayMs = Math.min(1200 * this.reconnectAttempts, 5000);
+            setTimeout(async () => {
+                if (!this.pc || this.manualClose) return;
+                try {
+                    if (typeof this.pc.restartIce === 'function') {
+                        this.pc.restartIce();
+                    }
+                    const offer = await this.pc.createOffer({ iceRestart: true });
+                    await this.pc.setLocalDescription(offer);
+                    this.send({ type: 'offer', offer: this.pc.localDescription });
+                } catch (error) {
+                    console.warn('[Video] ICE restart failed:', error);
+                }
+            }, delayMs);
+        },
+        async flushPendingIceCandidates() {
+            if (!this.pc || !this.pc.remoteDescription) return;
+            const buffered = [...this.pendingIceCandidates];
+            this.pendingIceCandidates = [];
+            for (const candidate of buffered) {
+                try {
+                    await this.pc.addIceCandidate(candidate);
+                } catch (_) {
+                    // Ignore invalid/outdated candidates after restart.
+                }
+            }
         },
         async handleSignal(msg) {
             if (msg.type === 'room-state') {
@@ -354,6 +469,7 @@ const VideoRoom = {
                 if (offerCollision && !this.polite) return;
 
                 await this.pc.setRemoteDescription(new RTCSessionDescription(msg.offer));
+                await this.flushPendingIceCandidates();
                 const answer = await this.pc.createAnswer();
                 await this.pc.setLocalDescription(answer);
                 this.send({ type: 'answer', answer: this.pc.localDescription });
@@ -362,19 +478,42 @@ const VideoRoom = {
 
             if (msg.type === 'answer' && this.pc) {
                 await this.pc.setRemoteDescription(new RTCSessionDescription(msg.answer));
+                await this.flushPendingIceCandidates();
                 this.status = 'Connected';
                 return;
             }
 
             if (msg.type === 'ice-candidate' && this.pc && msg.candidate) {
-                try { await this.pc.addIceCandidate(msg.candidate); } catch (_) {}
+                const candidate = new RTCIceCandidate(msg.candidate);
+                if (this.pc.remoteDescription) {
+                    try {
+                        await this.pc.addIceCandidate(candidate);
+                    } catch (_) {}
+                } else {
+                    this.pendingIceCandidates.push(candidate);
+                }
                 return;
             }
 
             if (msg.type === 'peer-left' || msg.type === 'hangup') {
-                this.status = 'Peer left the room';
+                this.handlePeerDisconnected();
+                return;
             }
         },
+        handlePeerDisconnected() {
+            if (this.peerEnded) return;
+            this.peerEnded = true;
+            this.manualClose = true;
+            this.status = 'Peer disconnected. Returning to users list...';
+            this.stopStatsMonitor();
+            this.resetPeerConnection();
+            setTimeout(() => {
+                if (this.$route?.path?.startsWith('/room/')) {
+                    this.$router.push('/');
+                }
+            }, 1200);
+        },
+
         async createAndSendOffer() {
             this.ensurePc();
             if (!this.pc) return;
@@ -390,9 +529,107 @@ const VideoRoom = {
             }
         },
         send(payload) {
-            if (this.socket?.readyState === WebSocket.OPEN) {
+            if (!this.peerEnded && this.socket?.readyState === WebSocket.OPEN) {
                 this.socket.send(JSON.stringify(payload));
             }
+        },
+        async applyQualityProfile(profileName) {
+            if (!QUALITY_PROFILES[profileName]) return;
+            this.qualityProfile = profileName;
+            this.qualityLabel = `Quality: ${profileName}`;
+
+            if (!this.pc) return;
+            const sender = this.pc.getSenders().find((s) => s.track && s.track.kind === 'video');
+            if (!sender || typeof sender.getParameters !== 'function') return;
+
+            try {
+                const params = sender.getParameters() || {};
+                if (!params.encodings || !params.encodings.length) {
+                    params.encodings = [{}];
+                }
+                const profile = QUALITY_PROFILES[profileName];
+                params.encodings[0].maxBitrate = profile.maxBitrate;
+                params.encodings[0].maxFramerate = profile.maxFramerate;
+                params.encodings[0].scaleResolutionDownBy = profile.scaleResolutionDownBy;
+                await sender.setParameters(params);
+            } catch (error) {
+                console.warn('[Video] Unable to apply quality profile:', error);
+            }
+        },
+        startStatsMonitor() {
+            this.stopStatsMonitor();
+            this.statsTimer = setInterval(async () => {
+                if (!this.pc || this.pc.connectionState === 'closed') return;
+                try {
+                    const stats = await this.pc.getStats();
+                    let rtt = null;
+                    let outgoingBitrate = null;
+
+                    stats.forEach((report) => {
+                        if (report.type === 'candidate-pair' && report.state === 'succeeded' && report.nominated) {
+                            if (typeof report.currentRoundTripTime === 'number') {
+                                rtt = report.currentRoundTripTime;
+                            }
+                            if (typeof report.availableOutgoingBitrate === 'number') {
+                                outgoingBitrate = report.availableOutgoingBitrate;
+                            }
+                        }
+                    });
+
+                    const poor = (rtt !== null && rtt > 0.45) || (outgoingBitrate !== null && outgoingBitrate < 260000);
+                    const veryPoor = (rtt !== null && rtt > 0.9) || (outgoingBitrate !== null && outgoingBitrate < 140000);
+                    const good = (rtt !== null && rtt < 0.2) && (outgoingBitrate !== null && outgoingBitrate > 700000);
+
+                    if (veryPoor) {
+                        this.poorNetworkTicks += 2;
+                    } else if (poor) {
+                        this.poorNetworkTicks += 1;
+                    } else {
+                        this.poorNetworkTicks = Math.max(0, this.poorNetworkTicks - 1);
+                    }
+
+                    if (good) {
+                        this.goodNetworkTicks += 1;
+                    } else {
+                        this.goodNetworkTicks = 0;
+                    }
+
+                    if (this.poorNetworkTicks >= 2 && this.qualityProfile !== 'low') {
+                        this.status = 'Poor network detected. Lowering video quality...';
+                        await this.applyQualityProfile('low');
+                    } else if (this.goodNetworkTicks >= 4 && this.qualityProfile === 'low') {
+                        this.status = 'Network recovered. Improving quality...';
+                        await this.applyQualityProfile('balanced');
+                        this.poorNetworkTicks = 0;
+                    }
+                } catch (error) {
+                    console.warn('[Video] Stats monitor error:', error);
+                }
+            }, 5000);
+        },
+        stopStatsMonitor() {
+            if (this.statsTimer) {
+                clearInterval(this.statsTimer);
+                this.statsTimer = null;
+            }
+        },
+        resetPeerConnection() {
+            this.pendingIceCandidates = [];
+            if (this.pc) {
+                try {
+                    this.pc.ontrack = null;
+                    this.pc.onicecandidate = null;
+                    this.pc.oniceconnectionstatechange = null;
+                    this.pc.onconnectionstatechange = null;
+                    this.pc.close();
+                } catch (_) {}
+                this.pc = null;
+            }
+            if (this.remoteStream) {
+                this.remoteStream.getTracks().forEach((t) => t.stop());
+            }
+            this.remoteStream = null;
+            this.reconnectAttempts = 0;
         },
         toggleMic() {
             this.micEnabled = !this.micEnabled;
@@ -418,6 +655,7 @@ const VideoRoom = {
                     const sender = this.pc.getSenders().find((s) => s.track && s.track.kind === 'video');
                     if (sender) {
                         await sender.replaceTrack(videoTrack);
+                        await this.applyQualityProfile(this.qualityProfile);
                     }
                 }
 
@@ -428,15 +666,21 @@ const VideoRoom = {
             }
         },
         leaveCall() {
+            this.manualClose = true;
             this.cleanup();
             this.$router.push('/');
         },
         cleanup() {
-            try { this.send({ type: 'hangup' }); } catch (_) {}
+            try {
+                if (!this.peerEnded && this.socket?.readyState === WebSocket.OPEN) {
+                    this.send({ type: 'hangup' });
+                }
+            } catch (_) {}
+            clearTimeout(this.socketReconnectTimer);
+            this.stopStatsMonitor();
             this.socket?.close();
-            this.pc?.close();
+            this.resetPeerConnection();
             this.localStream?.getTracks().forEach((t) => t.stop());
-            this.remoteStream?.getTracks().forEach((t) => t.stop());
         },
     },
 };

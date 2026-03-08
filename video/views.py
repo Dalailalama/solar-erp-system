@@ -69,6 +69,7 @@ def video_users(request):
     users = (
         User.objects
         .filter(groups__name='video_user', is_active=True)
+        .exclude(id=request.user.id)
         .distinct()
         .order_by('username')
     )
@@ -85,3 +86,4 @@ def video_users(request):
     ]
 
     return JsonResponse({'users': data})
+
