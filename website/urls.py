@@ -3,7 +3,8 @@ from . import views
 
 app_name = 'website'
 
-urlpatterns = [    # Main Pages
+urlpatterns = [
+    path('redis-ping/', views.redis_ping, name='redis_ping'),    # Main Pages
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
     
@@ -41,4 +42,5 @@ urlpatterns = [    # Main Pages
     
     path('download_brochure/', views.download_brochure, name='download_brochure'),
 ]
+
 

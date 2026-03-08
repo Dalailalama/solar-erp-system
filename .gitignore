@@ -182,3 +182,5 @@ cython_debug/
 
 node_modules/
 staticfiles/
+start_cloudflare_tunnel.ps1
+start_quick_tunnel.ps1

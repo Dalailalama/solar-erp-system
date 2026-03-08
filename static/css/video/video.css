@@ -361,3 +361,9 @@ body.video-room-page {
   }
 }
 
+
+@media (min-width: 901px) and (orientation: landscape) {
+  .video-remote {
+    object-fit: contain;
+  }
+}

@@ -4,6 +4,9 @@ from django.views.decorators.http import require_http_methods
 from login_required import login_not_required
 import os
 from django.conf import settings
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
+import time
 # from django.http import 
 
 # ===== MAIN PAGES =====
@@ -306,6 +309,46 @@ def download_brochure(request):
         content_type='application/pdf',
     )
 
+@login_not_required
+@require_http_methods(["GET"])
+def redis_ping(request):
+    """Uptime endpoint: 200 only when Redis ping succeeds."""
+    redis_configured = bool(getattr(settings, 'REDIS_URL', ''))
+    channel_layer = get_channel_layer()
 
+    if not redis_configured or channel_layer is None:
+        return JsonResponse({
+            'status': 'error',
+            'service': 'solarproject',
+            'redis_configured': redis_configured,
+            'redis_ok': False,
+            'ts': int(time.time()),
+            'error': 'Redis is not configured.',
+        }, status=500)
 
-
+    try:
+        async_to_sync(channel_layer.group_send)(
+            'website_keepalive',
+            {
+                'type': 'keepalive.ping',
+                'source': 'website.redis_ping',
+                'ts': int(time.time()),
+            },
+        )
+        return JsonResponse({
+            'status': 'ok',
+            'service': 'solarproject',
+            'redis_configured': True,
+            'redis_ok': True,
+            'ts': int(time.time()),
+            'error': '',
+        })
+    except Exception as exc:
+        return JsonResponse({
+            'status': 'error',
+            'service': 'solarproject',
+            'redis_configured': True,
+            'redis_ok': False,
+            'ts': int(time.time()),
+            'error': str(exc),
+        }, status=500)
