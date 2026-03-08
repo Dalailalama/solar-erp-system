@@ -1,12 +1,9 @@
-﻿from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.http import JsonResponse, FileResponse, Http404
 from django.views.decorators.http import require_http_methods
 from login_required import login_not_required
 import os
-import time
 from django.conf import settings
-from channels.layers import get_channel_layer
-from asgiref.sync import async_to_sync
 # from django.http import 
 
 # ===== MAIN PAGES =====
@@ -309,38 +306,6 @@ def download_brochure(request):
         content_type='application/pdf',
     )
 
-
-
-
-
-def _touch_channel_layer_for_healthz():
-    """Best-effort channel-layer touch for uptime monitors."""
-    channel_layer = get_channel_layer()
-    if channel_layer is None:
-        return False
-
-    try:
-        async_to_sync(channel_layer.group_send)(
-            'website_keepalive',
-            {
-                'type': 'keepalive.ping',
-                'source': 'website.healthz',
-            },
-        )
-        return True
-    except Exception:
-        return False
-@login_not_required
-@require_http_methods(["GET"])
-def healthz(request):
-    """Fast health check endpoint for uptime monitors."""
-    touched = _touch_channel_layer_for_healthz()
-    return JsonResponse({
-        'status': 'ok',
-        'service': 'solarproject',
-        'channel_layer_touched': touched,
-        'ts': int(time.time()),
-    })
 
 
 

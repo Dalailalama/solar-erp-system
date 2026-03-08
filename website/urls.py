@@ -1,11 +1,9 @@
-﻿from django.urls import path
+from django.urls import path
 from . import views
 
 app_name = 'website'
 
-urlpatterns = [
-    path('healthz/', views.healthz, name='healthz'),
-    # Main Pages
+urlpatterns = [    # Main Pages
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
     
