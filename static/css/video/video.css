@@ -224,12 +224,20 @@ body.video-room-page {
 .video-room-shell {
   position: relative;
   width: 100%;
-  height: 100dvh;
+  height: 100svh;
   background: #020617;
   overflow: hidden;
 }
 
-
+.video-remote {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  background: #000;
+}
 
 .video-remote.mirrored {
   transform: scaleX(-1);
@@ -239,15 +247,15 @@ body.video-room-page {
   position: absolute;
   top: 14px;
   right: 14px;
-  width: 34vw;
-  max-width: 160px;
-  min-width: 110px;
-  aspect-ratio: 3 / 4;
+  width: clamp(110px, 20vw, 220px);
+  max-height: 30vh;
   object-fit: cover;
+  object-position: center;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.35);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   background: #111;
+  z-index: 3;
 }
 
 .video-local.mirrored {
@@ -265,13 +273,17 @@ body.video-room-page {
   padding: 6px 10px;
   font-size: 12px;
   z-index: 4;
+  max-width: 70vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .video-call-controls {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 16px;
+  bottom: max(12px, env(safe-area-inset-bottom));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -329,28 +341,19 @@ body.video-room-page {
   }
 
   .video-local {
-    width: 34vw;
-    min-width: 100px;
-    max-width: 135px;
+    width: clamp(96px, 34vw, 140px);
+    max-height: 26vh;
     top: 10px;
     right: 10px;
-  }
-
-  .video-remote {
-    object-fit: cover;
   }
 
   .video-status-badge {
     top: 10px;
     left: 10px;
     max-width: 72vw;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   .video-call-controls {
-    bottom: max(12px, env(safe-area-inset-bottom));
     gap: 10px;
   }
 
@@ -361,9 +364,9 @@ body.video-room-page {
   }
 }
 
-
-@media (min-width: 901px) and (orientation: landscape) {
-  .video-remote {
-    object-fit: contain;
+@media (min-width: 1200px) {
+  .video-local {
+    width: clamp(140px, 16vw, 260px);
+    max-height: 34vh;
   }
 }
