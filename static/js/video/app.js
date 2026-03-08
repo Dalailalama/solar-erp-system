@@ -218,10 +218,8 @@ const VideoRoom = {
                     @click="switchCamera"
                 >
                     <svg viewBox="0 0 24 24" class="video-icon" aria-hidden="true">
-                        <path d="M7 7h10a2 2 0 0 1 2 2v1h-2V9H7v1H5V9a2 2 0 0 1 2-2z"></path>
-                        <path d="M5 14h2v1h10v-1h2v1a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-1z"></path>
-                        <path d="m9 11-2 2 2 2v-1h6v-2H9v-1z"></path>
-                        <path d="m15 13 2-2-2-2v1H9v2h6v1z"></path>
+                        <path d="M9 4h6l1.83 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-3.17L15 20H9l-1.83-2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3.17L9 4z"></path>
+                        <path d="M8 12a4 4 0 0 1 6.93-2.73V8h2v4h-4v-2h1.42A2.5 2.5 0 1 0 15 12a1 1 0 1 1 2 0 4 4 0 1 1-9 0z"></path>
                     </svg>
                 </button>
 
@@ -247,6 +245,8 @@ const VideoRoom = {
             makingOffer: false,
             polite: true,
             currentFacingMode: 'user',
+            currentVideoDeviceId: null,
+            videoInputDevices: [],
             canSwitchCamera: false,
             qualityProfile: 'balanced',
             qualityLabel: 'Quality: Adaptive',
@@ -286,11 +286,11 @@ const VideoRoom = {
                 throw new Error('getUserMedia is unavailable');
             }
 
-            this.canSwitchCamera = this.isLikelyMobile();
-
             try {
                 this.localStream = await this.requestStream(this.currentFacingMode);
                 this.attachLocalStream();
+                await this.refreshVideoInputs();
+                this.canSwitchCamera = this.videoInputDevices.length > 1 || this.isLikelyMobile();
             } catch (error) {
                 this.status = 'Camera/Mic permission denied or unavailable.';
                 throw error;
@@ -312,15 +312,71 @@ const VideoRoom = {
             };
 
             try {
-                return await navigator.mediaDevices.getUserMedia(base);
+                const stream = await navigator.mediaDevices.getUserMedia(base);
+                this.syncVideoTrackMetadata(stream.getVideoTracks()[0], facingMode);
+                return stream;
             } catch (_) {
-                return navigator.mediaDevices.getUserMedia({ audio: true, video: true });
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
+                this.syncVideoTrackMetadata(stream.getVideoTracks()[0], facingMode);
+                return stream;
+            }
+        },
+        async requestVideoOnlyStream(facingMode, deviceId = null) {
+            const exactFacing = {
+                video: {
+                    ...(deviceId ? { deviceId: { exact: deviceId } } : { facingMode: { exact: facingMode } }),
+                    width: { ideal: 640, max: 1280 },
+                    height: { ideal: 360, max: 720 },
+                    frameRate: { ideal: 15, max: 24 },
+                },
+                audio: false,
+            };
+            const idealFacing = {
+                video: {
+                    ...(deviceId ? { deviceId: { exact: deviceId } } : { facingMode: { ideal: facingMode } }),
+                    width: { ideal: 640, max: 1280 },
+                    height: { ideal: 360, max: 720 },
+                    frameRate: { ideal: 15, max: 24 },
+                },
+                audio: false,
+            };
+
+            try {
+                return await navigator.mediaDevices.getUserMedia(exactFacing);
+            } catch (_) {
+                return navigator.mediaDevices.getUserMedia(idealFacing);
             }
         },
         attachLocalStream() {
             this.$refs.localVideo.srcObject = this.localStream;
             this.localStream.getAudioTracks().forEach((t) => { t.enabled = this.micEnabled; });
             this.localStream.getVideoTracks().forEach((t) => { t.enabled = this.camEnabled; });
+        },
+        syncVideoTrackMetadata(track, fallbackFacingMode = 'user') {
+            if (!track) return;
+            const settings = track.getSettings ? track.getSettings() : {};
+            this.currentVideoDeviceId = settings.deviceId || this.currentVideoDeviceId;
+            this.currentFacingMode = settings.facingMode || fallbackFacingMode || this.currentFacingMode;
+        },
+        async refreshVideoInputs() {
+            if (!navigator.mediaDevices?.enumerateDevices) {
+                this.videoInputDevices = [];
+                return;
+            }
+            try {
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                this.videoInputDevices = devices.filter((d) => d.kind === 'videoinput');
+            } catch (_) {
+                this.videoInputDevices = [];
+            }
+        },
+        getNextVideoInputDeviceId() {
+            if (!this.videoInputDevices.length) return null;
+            if (!this.currentVideoDeviceId) return this.videoInputDevices[0].deviceId;
+            const currentIndex = this.videoInputDevices.findIndex((d) => d.deviceId === this.currentVideoDeviceId);
+            if (currentIndex === -1) return this.videoInputDevices[0].deviceId;
+            const nextIndex = (currentIndex + 1) % this.videoInputDevices.length;
+            return this.videoInputDevices[nextIndex].deviceId;
         },
         isLikelyMobile() {
             return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent || '');
@@ -642,16 +698,22 @@ const VideoRoom = {
         async switchCamera() {
             if (!this.canSwitchCamera) return;
 
-            this.currentFacingMode = this.currentFacingMode === 'user' ? 'environment' : 'user';
+            const previousFacingMode = this.currentFacingMode;
+            const previousDeviceId = this.currentVideoDeviceId;
+            const targetFacingMode = this.currentFacingMode === 'user' ? 'environment' : 'user';
 
             try {
-                const newStream = await this.requestStream(this.currentFacingMode);
-                const oldStream = this.localStream;
-                this.localStream = newStream;
-                this.attachLocalStream();
+                await this.refreshVideoInputs();
+                this.canSwitchCamera = this.videoInputDevices.length > 1 || this.isLikelyMobile();
 
-                const videoTrack = this.localStream.getVideoTracks()[0];
-                if (videoTrack && this.pc) {
+                const nextDeviceId = this.getNextVideoInputDeviceId();
+                const newVideoStream = await this.requestVideoOnlyStream(targetFacingMode, nextDeviceId);
+                const videoTrack = newVideoStream.getVideoTracks()[0];
+                if (!videoTrack) {
+                    throw new Error('No video track available from switched camera');
+                }
+
+                if (this.pc) {
                     const sender = this.pc.getSenders().find((s) => s.track && s.track.kind === 'video');
                     if (sender) {
                         await sender.replaceTrack(videoTrack);
@@ -659,9 +721,24 @@ const VideoRoom = {
                     }
                 }
 
-                oldStream?.getTracks().forEach((t) => t.stop());
+                videoTrack.enabled = this.camEnabled;
+                this.syncVideoTrackMetadata(videoTrack, targetFacingMode);
+
+                if (!this.localStream) {
+                    this.localStream = new MediaStream([videoTrack]);
+                } else {
+                    this.localStream.getVideoTracks().forEach((track) => {
+                        this.localStream.removeTrack(track);
+                        track.stop();
+                    });
+                    this.localStream.addTrack(videoTrack);
+                }
+
+                this.$refs.localVideo.srcObject = this.localStream;
             } catch (error) {
                 this.status = 'Unable to switch camera.';
+                this.currentFacingMode = previousFacingMode;
+                this.currentVideoDeviceId = previousDeviceId;
                 console.error('[Video] Switch camera failed:', error);
             }
         },
@@ -694,5 +771,6 @@ const router = createRouter({
 });
 
 createApp({ template: '<router-view />' }).use(router).mount('#video-app');
+
 
 
