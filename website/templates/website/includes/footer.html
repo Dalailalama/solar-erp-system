@@ -9,24 +9,7 @@
                         <a href="{% url 'website:home' %}" class="logo">
                             <div class="solar-brand">
                                 <div class="brand-icon">
-                                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                        <!-- Core Circle -->
-                                        <circle cx="50" cy="62" r="18" fill="none" stroke="currentColor"
-                                            stroke-width="6" />
-                                        <!-- 4 Blunt Fanned Rays exactly as in design -->
-                                        <g fill="currentColor">
-                                            <rect x="44" y="10" width="12" height="18" rx="2"
-                                                transform="rotate(-45 50 62)" />
-                                            <rect x="44" y="6" width="12" height="18" rx="2"
-                                                transform="rotate(-15 50 62)" />
-                                            <rect x="44" y="6" width="12" height="18" rx="2"
-                                                transform="rotate(15 50 62)" />
-                                            <rect x="44" y="10" width="12" height="18" rx="2"
-                                                transform="rotate(45 50 62)" />
-                                        </g>
-                                        <!-- Precise Bolt (White for dark footer) -->
-                                        <path d="M54 48 L42 62 H50 L46 76 L60 58 H52 L54 48Z" fill="#FFF" />
-                                    </svg>
+                                    <img src="{% static 'website/images/website_logo.png' %}" alt="Ultra Rays logo">
                                 </div>
                                 <div class="brand-text">
                                     <span class="brand-main">Ultra Rays</span>
@@ -151,3 +134,5 @@
         </div>
     </div>
 </footer>
+
+

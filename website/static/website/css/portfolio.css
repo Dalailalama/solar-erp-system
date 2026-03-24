@@ -20,6 +20,8 @@
     /* Blue */
     --cat-ind: #8b5cf6;
     /* Violet */
+    --cat-ground: #f59e0b;
+    /* Amber */
 }
 
 /* ===== GLOBAL LAYOUT ===== */
@@ -311,6 +313,10 @@
 
 .cat-ind {
     background: var(--cat-ind);
+}
+
+.cat-ground {
+    background: var(--cat-ground);
 }
 
 .p-content {

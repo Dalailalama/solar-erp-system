@@ -279,7 +279,7 @@ img {
 .section-subtitle {
   font-size: var(--fs-lg);
   color: var(--gray-600);
-  max-width: 600px;
+  /* max-width: 600px; */
 }
 
 .text-center {

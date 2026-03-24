@@ -68,8 +68,8 @@ see the quality of our work across India.{% endblock %}
                 <div class="filter-pills">
                     <button class="f-btn active" data-filter="all">All Projects</button>
                     <button class="f-btn" data-filter="residential">Residential</button>
-                    <button class="f-btn" data-filter="commercial">Commercial</button>
-                    <button class="f-btn" data-filter="industrial">Industrial</button>
+                    <button class="f-btn" data-filter="commercial-industrial">Commercial / Industrial</button>
+                    <button class="f-btn" data-filter="ground-mounted">Ground Mounted</button>
                 </div>
 
                 <div class="view-opts">
@@ -88,11 +88,69 @@ see the quality of our work across India.{% endblock %}
             <div class="p-card" data-category="residential">
                 <div class="p-img-box">
                     <span class="cat-badge cat-res">Residential</span>
-                    <img src="{% static 'website/images/project-1.jpg' %}" alt="Modern Villa" class="p-img">
+                    <img src="{% static 'website/images/portfolio-img1.jpeg' %}" alt="3 kW Residential Solar Project" class="p-img">
                 </div>
                 <div class="p-content">
-                    <h3 class="p-title">Modern Villa Installation</h3>
-                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Pune, MH</div>
+                    <h3 class="p-title">Residential Rooftop Solar Installation</h3>
+                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Ahmedabaad, GJ</div>
+
+                    <div class="p-specs">
+                        <div class="spec-item">
+                            <span class="spec-lbl">Size</span>
+                            <span class="spec-val">3 kW</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Type</span>
+                            <span class="spec-val">On-Grid</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Category</span>
+                            <span class="spec-val">Rooftop</span>
+                        </div>
+                    </div>
+
+                    {% comment %} <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a> {% endcomment %}
+                </div>
+            </div>
+
+            <!-- Item 2: Residential -->
+            <div class="p-card" data-category="residential">
+                <div class="p-img-box">
+                    <span class="cat-badge cat-res">Residential</span>
+                    <img src="{% static 'website/images/portfolio-img2.jpeg' %}" alt="3 kW Home Solar Project" class="p-img">
+                </div>
+                <div class="p-content">
+                    <h3 class="p-title">Compact Home Solar Setup</h3>
+                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Bhavnagar, GJ</div>
+
+                    <div class="p-specs">
+                        <div class="spec-item">
+                            <span class="spec-lbl">Size</span>
+                            <span class="spec-val">3 kW</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Type</span>
+                            <span class="spec-val">On-Grid</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Category</span>
+                            <span class="spec-val">Rooftop</span>
+                        </div>
+                    </div>
+
+                    {% comment %} <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a> {% endcomment %}
+                </div>
+            </div>
+
+            <!-- Item 3: Residential -->
+            <div class="p-card" data-category="residential">
+                <div class="p-img-box">
+                    <span class="cat-badge cat-res">Residential</span>
+                    <img src="{% static 'website/images/portfolio-img3.jpeg' %}" alt="5 kW Residential Solar Project" class="p-img">
+                </div>
+                <div class="p-content">
+                    <h3 class="p-title">Family Home Solar Project</h3>
+                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Dholka, GJ</div>
 
                     <div class="p-specs">
                         <div class="spec-item">
@@ -100,28 +158,173 @@ see the quality of our work across India.{% endblock %}
                             <span class="spec-val">5 kW</span>
                         </div>
                         <div class="spec-item">
-                            <span class="spec-lbl">Savings</span>
-                            <span class="spec-val">₹60k/yr</span>
+                            <span class="spec-lbl">Type</span>
+                            <span class="spec-val">On-Grid</span>
                         </div>
                         <div class="spec-item">
-                            <span class="spec-lbl">Type</span>
+                            <span class="spec-lbl">Category</span>
                             <span class="spec-val">Rooftop</span>
                         </div>
                     </div>
 
-                    <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a>
+                    {% comment %} <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a> {% endcomment %}
                 </div>
             </div>
 
-            <!-- Item 2: Commercial -->
-            <div class="p-card" data-category="commercial">
+            <!-- Item 4: Residential -->
+            <div class="p-card" data-category="residential">
                 <div class="p-img-box">
-                    <span class="cat-badge cat-com">Commercial</span>
+                    <span class="cat-badge cat-res">Residential</span>
+                    <img src="{% static 'website/images/portfolio-img4.jpeg' %}" alt="5 kW House Solar Project" class="p-img">
+                </div>
+                <div class="p-content">
+                    <h3 class="p-title">Premium Rooftop Solar System</h3>
+                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Morbi, GJ</div>
+
+                    <div class="p-specs">
+                        <div class="spec-item">
+                            <span class="spec-lbl">Size</span>
+                            <span class="spec-val">5 kW</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Type</span>
+                            <span class="spec-val">On-Grid</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Category</span>
+                            <span class="spec-val">Rooftop</span>
+                        </div>
+                    </div>
+
+                    {% comment %} <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a> {% endcomment %}
+                </div>
+            </div>
+
+            <!-- Item 5: Residential -->
+            <div class="p-card" data-category="residential">
+                <div class="p-img-box">
+                    <span class="cat-badge cat-res">Residential</span>
+                    <img src="{% static 'website/images/portfolio-img5.jpeg' %}" alt="7 kW Residential Solar Project" class="p-img">
+                </div>
+                <div class="p-content">
+                    <h3 class="p-title">Large Home Solar Installation</h3>
+                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Ambaji, GJ</div>
+
+                    <div class="p-specs">
+                        <div class="spec-item">
+                            <span class="spec-lbl">Size</span>
+                            <span class="spec-val">7 kW</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Type</span>
+                            <span class="spec-val">On-Grid</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Category</span>
+                            <span class="spec-val">Rooftop</span>
+                        </div>
+                    </div>
+
+                    {% comment %} <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a> {% endcomment %}
+                </div>
+            </div>
+
+            <!-- Item 6: Residential -->
+            <div class="p-card" data-category="residential">
+                <div class="p-img-box">
+                    <span class="cat-badge cat-res">Residential</span>
+                    <img src="{% static 'website/images/portfolio-img6.jpeg' %}" alt="7 kW Residential Rooftop Solar" class="p-img">
+                </div>
+                <div class="p-content">
+                    <h3 class="p-title">Smart Home Solar Upgrade</h3>
+                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Rajkot, GJ</div>
+
+                    <div class="p-specs">
+                        <div class="spec-item">
+                            <span class="spec-lbl">Size</span>
+                            <span class="spec-val">7 kW</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Type</span>
+                            <span class="spec-val">On-Grid</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Category</span>
+                            <span class="spec-val">Rooftop</span>
+                        </div>
+                    </div>
+
+                    {% comment %} <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a> {% endcomment %}
+                </div>
+            </div>
+
+            <!-- Item 7: Residential -->
+            <div class="p-card" data-category="residential">
+                <div class="p-img-box">
+                    <span class="cat-badge cat-res">Residential</span>
+                    <img src="{% static 'website/images/portfolio-img7.jpeg' %}" alt="10 kW Residential Solar System" class="p-img">
+                </div>
+                <div class="p-content">
+                    <h3 class="p-title">Luxury Bungalow Solar Project</h3>
+                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Ahmedabaad, GJ</div>
+
+                    <div class="p-specs">
+                        <div class="spec-item">
+                            <span class="spec-lbl">Size</span>
+                            <span class="spec-val">10 kW</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Type</span>
+                            <span class="spec-val">On-Grid</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Category</span>
+                            <span class="spec-val">Rooftop</span>
+                        </div>
+                    </div>
+
+                    {% comment %} <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a> {% endcomment %}
+                </div>
+            </div>
+
+            <!-- Item 8: Residential -->
+            <div class="p-card" data-category="residential">
+                <div class="p-img-box">
+                    <span class="cat-badge cat-res">Residential</span>
+                    <img src="{% static 'website/images/portfolio-img8.jpeg' %}" alt="10 kW Home Solar System" class="p-img">
+                </div>
+                <div class="p-content">
+                    <h3 class="p-title">High Capacity Home Solar Setup</h3>
+                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Bhavnagar, GJ</div>
+
+                    <div class="p-specs">
+                        <div class="spec-item">
+                            <span class="spec-lbl">Size</span>
+                            <span class="spec-val">10 kW</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Type</span>
+                            <span class="spec-val">On-Grid</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Category</span>
+                            <span class="spec-val">Rooftop</span>
+                        </div>
+                    </div>
+
+                    {% comment %} <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a> {% endcomment %}
+                </div>
+            </div>
+
+            <!-- Item 9: Commercial / Industrial -->
+            <div class="p-card" data-category="commercial-industrial">
+                <div class="p-img-box">
+                    <span class="cat-badge cat-com">Commercial / Industrial</span>
                     <img src="{% static 'website/images/project-2.jpg' %}" alt="Warehouse Solar" class="p-img">
                 </div>
                 <div class="p-content">
                     <h3 class="p-title">Logistics Warehouse Roof</h3>
-                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Ahmedabad, GJ</div>
+                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Rajkot, GJ</div>
 
                     <div class="p-specs">
                         <div class="spec-item">
@@ -134,23 +337,23 @@ see the quality of our work across India.{% endblock %}
                         </div>
                         <div class="spec-item">
                             <span class="spec-lbl">Type</span>
-                            <span class="spec-val">Industrial</span>
+                            <span class="spec-val">Warehouse Roof</span>
                         </div>
                     </div>
 
-                    <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a>
+                    {% comment %} <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a> {% endcomment %}
                 </div>
             </div>
 
-            <!-- Item 3: Industrial -->
-            <div class="p-card" data-category="industrial">
+            <!-- Item 10: Commercial / Industrial -->
+            <div class="p-card" data-category="commercial-industrial">
                 <div class="p-img-box">
-                    <span class="cat-badge cat-ind">Industrial</span>
+                    <span class="cat-badge cat-com">Commercial / Industrial</span>
                     <img src="{% static 'website/images/project-3.jpg' %}" alt="Textile Plant" class="p-img">
                 </div>
                 <div class="p-content">
                     <h3 class="p-title">Textile Manufacturing Unit</h3>
-                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Surat, GJ</div>
+                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Morbi, GJ</div>
 
                     <div class="p-specs">
                         <div class="spec-item">
@@ -159,56 +362,27 @@ see the quality of our work across India.{% endblock %}
                         </div>
                         <div class="spec-item">
                             <span class="spec-lbl">Savings</span>
-                            <span class="spec-val">₹40L/yr</span>
+                            <span class="spec-val">Rs. 40L/yr</span>
                         </div>
                         <div class="spec-item">
                             <span class="spec-lbl">Type</span>
-                            <span class="spec-val">Ground</span>
+                            <span class="spec-val">Factory Roof</span>
                         </div>
                     </div>
 
-                    <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a>
+                    {% comment %} <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a> {% endcomment %}
                 </div>
             </div>
 
-            <!-- Item 4: Residential -->
-            <div class="p-card" data-category="residential">
+            <!-- Item 11: Commercial / Industrial -->
+            <div class="p-card" data-category="commercial-industrial">
                 <div class="p-img-box">
-                    <span class="cat-badge cat-res">Residential</span>
-                    <img src="{% static 'website/images/project-4.jpg' %}" alt="Farm House" class="p-img">
-                </div>
-                <div class="p-content">
-                    <h3 class="p-title">Off-Grid Farm House</h3>
-                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Nashik, MH</div>
-
-                    <div class="p-specs">
-                        <div class="spec-item">
-                            <span class="spec-lbl">Size</span>
-                            <span class="spec-val">10 kW</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-lbl">Status</span>
-                            <span class="spec-val">100% Off-Grid</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-lbl">Type</span>
-                            <span class="spec-val">Hybrid</span>
-                        </div>
-                    </div>
-
-                    <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-
-            <!-- Item 5: Commercial -->
-            <div class="p-card" data-category="commercial">
-                <div class="p-img-box">
-                    <span class="cat-badge cat-com">Commercial</span>
+                    <span class="cat-badge cat-com">Commercial / Industrial</span>
                     <img src="{% static 'website/images/project-5.jpg' %}" alt="IT Park" class="p-img">
                 </div>
                 <div class="p-content">
                     <h3 class="p-title">IT Park Carport System</h3>
-                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Bangalore, KA</div>
+                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Ahmedabaad, GJ</div>
 
                     <div class="p-specs">
                         <div class="spec-item">
@@ -225,19 +399,19 @@ see the quality of our work across India.{% endblock %}
                         </div>
                     </div>
 
-                    <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a>
+                    {% comment %} <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a> {% endcomment %}
                 </div>
             </div>
 
-            <!-- Item 6: Industrial -->
-            <div class="p-card" data-category="industrial">
+            <!-- Item 12: Commercial / Industrial -->
+            <div class="p-card" data-category="commercial-industrial">
                 <div class="p-img-box">
-                    <span class="cat-badge cat-ind">Industrial</span>
+                    <span class="cat-badge cat-com">Commercial / Industrial</span>
                     <img src="{% static 'website/images/project-6.jpg' %}" alt="Steel Plant" class="p-img">
                 </div>
                 <div class="p-content">
                     <h3 class="p-title">Steel Processing Plant</h3>
-                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Jamshedpur, JH</div>
+                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Bhavnagar, GJ</div>
 
                     <div class="p-specs">
                         <div class="spec-item">
@@ -250,11 +424,69 @@ see the quality of our work across India.{% endblock %}
                         </div>
                         <div class="spec-item">
                             <span class="spec-lbl">Type</span>
-                            <span class="spec-val">Rooftop</span>
+                            <span class="spec-val">Industrial Roof</span>
                         </div>
                     </div>
 
-                    <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a>
+                    {% comment %} <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a> {% endcomment %}
+                </div>
+            </div>
+
+            <!-- Item 13: Ground Mounted -->
+            <div class="p-card" data-category="ground-mounted">
+                <div class="p-img-box">
+                    <span class="cat-badge cat-ground">Ground Mounted</span>
+                    <img src="{% static 'website/images/portfolio-img9.jpeg' %}" alt="Ground Mounted Solar Project" class="p-img">
+                </div>
+                <div class="p-content">
+                    <h3 class="p-title">Ground Mounted Solar Array</h3>
+                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Dholka, GJ</div>
+
+                    <div class="p-specs">
+                        <div class="spec-item">
+                            <span class="spec-lbl">Size</span>
+                            <span class="spec-val">25 kW</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Type</span>
+                            <span class="spec-val">Ground Mounted</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Category</span>
+                            <span class="spec-val">Open Plot</span>
+                        </div>
+                    </div>
+
+                    {% comment %} <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a> {% endcomment %}
+                </div>
+            </div>
+
+            <!-- Item 14: Ground Mounted -->
+            <div class="p-card" data-category="ground-mounted">
+                <div class="p-img-box">
+                    <span class="cat-badge cat-ground">Ground Mounted</span>
+                    <img src="{% static 'website/images/portfolio-img10.jpeg' %}" alt="Large Ground Mounted Solar Project" class="p-img">
+                </div>
+                <div class="p-content">
+                    <h3 class="p-title">Utility Ground Mount Project</h3>
+                    <div class="p-loc"><i class="fas fa-map-marker-alt"></i> Ambaji, GJ</div>
+
+                    <div class="p-specs">
+                        <div class="spec-item">
+                            <span class="spec-lbl">Size</span>
+                            <span class="spec-val">50 kW</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Type</span>
+                            <span class="spec-val">Ground Mounted</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-lbl">Category</span>
+                            <span class="spec-val">Open Plot</span>
+                        </div>
+                    </div>
+
+                    {% comment %} <a href="#" class="p-link">View Project <i class="fas fa-arrow-right"></i></a> {% endcomment %}
                 </div>
             </div>
 

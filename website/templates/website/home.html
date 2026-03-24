@@ -77,10 +77,11 @@ solar company, best solar panels{% endblock %}
                 <span class="hero-badge">Clean • Reliable • Affordable</span>
                 <h1 class="hero-title">
                     Power Your Home with
-                    <span class="highlight">Smart Solar Energy</span>
+                    {% comment %} <span class="highlight">Smart Solar Energy</span> {% endcomment %}
+                    <span>Smart Solar Energy</span>
                 </h1>
                 <p class="hero-subtitle">
-                    Save up to 70% on electricity bills with professional solar installation. Clean energy for Indian
+                    Save up to 90% on electricity bills with professional solar installation. Clean energy for Indian
                     homes and businesses.
                 </p>
 
@@ -172,7 +173,7 @@ solar company, best solar panels{% endblock %}
                     <i class="fas fa-dollar-sign"></i>
                 </div>
                 <h3>Reduce Energy Bills</h3>
-                <p>Save up to 70% on your monthly electricity costs with solar panels. Start saving from day one.</p>
+                <p>Save up to 90% on your monthly electricity costs with solar panels. Start saving from day one.</p>
             </div>
             <div class="benefit-card">
                 <div class="benefit-icon">
@@ -192,16 +193,15 @@ solar company, best solar panels{% endblock %}
                 <div class="benefit-icon">
                     <i class="fas fa-bolt"></i>
                 </div>
-                <h3>Energy Independence</h3>
-                <p>Generate your own clean electricity and reduce dependence on the grid and rising energy costs.</p>
+                <h3>Protection from Future Energy Costs</h3>
+                <p>Installing solar today helps protect you from rising future energy costs and gives you long-term savings year after year.</p>
             </div>
             <div class="benefit-card">
                 <div class="benefit-icon">
                     <i class="fas fa-piggy-bank"></i>
                 </div>
                 <h3>Government Incentives</h3>
-                <p>Take advantage of federal tax credits, state rebates, and local incentives to reduce installation
-                    costs.</p>
+                <p>Get support through government schemes and central government subsidy to reduce your solar installation cost.</p>
             </div>
             <div class="benefit-card">
                 <div class="benefit-icon">
@@ -257,7 +257,7 @@ solar company, best solar panels{% endblock %}
                 <div class="step-number">5</div>
                 <div class="step-content">
                     <h3>Professional Installation</h3>
-                    <p>Our certified installers complete the installation in 1-3 days with minimal disruption.</p>
+                    <p>Our certified installers complete the installation in 7-8 days with minimal disruption.</p>
                 </div>
             </div>
             <div class="process-step">
@@ -284,7 +284,7 @@ solar company, best solar panels{% endblock %}
         <div class="services-grid">
             <div class="service-card">
                 <div class="service-image">
-                    <img src="{% static 'website/images/residential-solar.jpg' %}" alt="Residential Solar"
+                    <img src="{% static 'website/images/residential-solar.png' %}" alt="Residential Solar"
                         loading="lazy">
                 </div>
                 <div class="service-content">
@@ -313,12 +313,11 @@ solar company, best solar panels{% endblock %}
             </div>
             <div class="service-card">
                 <div class="service-image">
-                    <img src="{% static 'website/images/commercial-solar.jpg' %}" alt="Commercial Solar" loading="lazy">
+                    <img src="{% static 'website/images/industrial-solar.png' %}" alt="Commercial Solar" loading="lazy">
                 </div>
                 <div class="service-content">
-                    <h3>Commercial Solar</h3>
-                    <p>Reduce operating costs and demonstrate environmental leadership with commercial solar. Perfect
-                        for businesses, offices, and retail spaces.</p>
+                    <h3>Commercial/Industrial</h3>
+                    <p>Reliable solar solutions for commercial buildings, offices, warehouses, factories, and industrial facilities. Reduce electricity costs, improve energy efficiency, and support long-term business growth.</p>
                     <ul class="service-features">
                         <li>
                             <i class="fas fa-check"></i> ROI analysis
@@ -341,12 +340,11 @@ solar company, best solar panels{% endblock %}
             </div>
             <div class="service-card">
                 <div class="service-image">
-                    <img src="{% static 'website/images/industrial-solar.jpg' %}" alt="Industrial Solar" loading="lazy">
+                    <img src="{% static 'website/images/ground-mount.png' %}" alt="Ground Mount Solar" loading="lazy">
                 </div>
                 <div class="service-content">
-                    <h3>Industrial Solar</h3>
-                    <p>Large-scale solar solutions for industrial facilities and manufacturing plants. Reduce energy
-                        costs and meet sustainability goals.</p>
+                    <h3>Ground Mounted Solar</h3>
+                    <p>Large-scale solar solutions for industrial facilities and open land. Reduce energy costs, meet sustainability goals, and in eligible cases sell power to the government.</p>
                     <ul class="service-features">
                         <li>
                             <i class="fas fa-check"></i> High-capacity systems
@@ -380,21 +378,21 @@ solar company, best solar panels{% endblock %}
                 <div class="stat-icon">
                     <i class="fas fa-solar-panel"></i>
                 </div>
-                <div class="stat-value" data-target="5000">5,000</div>
+                <div class="stat-value" data-target="2130">2,130</div>
                 <div class="stat-label">Installations Completed</div>
             </div>
             <div class="stat-box">
                 <div class="stat-icon">
                     <i class="fas fa-users"></i>
                 </div>
-                <div class="stat-value" data-target="4500">4,500</div>
+                <div class="stat-value" data-target="2090">2,090</div>
                 <div class="stat-label">Happy Customers</div>
             </div>
             <div class="stat-box">
                 <div class="stat-icon">
                     <i class="fas fa-bolt"></i>
                 </div>
-                <div class="stat-value" data-target="50">50</div>
+                <div class="stat-value" data-target="12">12</div>
                 <div class="stat-suffix">MW</div>
                 <div class="stat-label">Total Capacity Installed</div>
             </div>
@@ -402,9 +400,9 @@ solar company, best solar panels{% endblock %}
                 <div class="stat-icon">
                     <i class="fas fa-leaf"></i>
                 </div>
-                <div class="stat-value" data-target="25000">25,000</div>
+                <div class="stat-value" data-target="14400">14,400</div>
                 <div class="stat-suffix">tons</div>
-                <div class="stat-label">CO₂ Emissions Reduced</div>
+                <div class="stat-label">Estimated Annual CO2 Emissions Reduced</div>
             </div>
         </div>
     </div>
@@ -429,13 +427,12 @@ solar company, best solar panels{% endblock %}
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                 </div>
-                <p class="testimonial-text">The team was professional, efficient, and completed the installation in just
-                    2 days. Our energy bills have dropped by 65%! Highly recommend!</p>
+                <p class="testimonial-text">I had a really good experience with Ultrarays Solar Energy Solution. The team was professional, explained everything clearly, and handled the installation very smoothly. It feels great knowing I’m using clean energy while saving money at the same time. Highly recommended for anyone thinking about going solar.</p>
                 <div class="testimonial-author">
-                    <img src="{% static 'website/images/testimonial-1.jpg' %}" alt="John Smith" loading="lazy">
+                    <img src="{% static 'website/images/kahan.jpeg' %}" alt="Hirani Kahan" loading="lazy">
                     <div class="author-info">
-                        <h4>John Smith</h4>
-                        <p>Homeowner, Los Angeles</p>
+                        <h4>Hirani Kahan</h4>
+                        <p>Ahmedabad</p>
                     </div>
                 </div>
             </div>
@@ -447,14 +444,19 @@ solar company, best solar panels{% endblock %}
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                 </div>
-                <p class="testimonial-text">Excellent service from start to finish. The solar calculator helped us
-                    understand our savings, and the financing options made it affordable. Very happy with our decision!
+                <p class="testimonial-text">We recently installed a solar system from this company and the entire experience was outstanding. From site inspection to final installation, the team was highly professional, knowledgeable, and supportive.
+
+They explained everything clearly – system capacity, generation expectations, subsidies, and ROI – which gave us complete confidence before moving forward. The installation was completed on time with excellent workmanship and proper safety standards.
+
+After installation, the system performance is excellent and we are already seeing a significant reduction in our electricity bill. Their after-sales support is also very responsive.
+
+Highly recommended for anyone looking for reliable and hassle-free solar installation services. Great quality, honest pricing, and excellent service! 🌞
                 </p>
                 <div class="testimonial-author">
-                    <img src="{% static 'website/images/testimonial-2.jpg' %}" alt="Sarah Johnson" loading="lazy">
+                    <img src="{% static 'website/images/nikhil-kalavadiya.jpg' %}" alt="Kalavadiya Nikhil" loading="lazy">
                     <div class="author-info">
-                        <h4>Sarah Johnson</h4>
-                        <p>Business Owner, San Diego</p>
+                        <h4>Kalavadiya Nikhil</h4>
+                        <p>Ahmedabad</p>
                     </div>
                 </div>
             </div>
@@ -466,13 +468,12 @@ solar company, best solar panels{% endblock %}
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                 </div>
-                <p class="testimonial-text">Best investment we've made! The system pays for itself, and we're doing our
-                    part for the environment. The monitoring app is fantastic too!</p>
+                <p class="testimonial-text">I had a great experience with Ultrarays Solar Energy Solutions. Their team provided excellent solar panel fitting and very professional service for my home. From consultation to installation, everything was handled smoothly and on time. The staff was knowledgeable, friendly, and explained the system clearly. I’m very satisfied with the quality of work and the performance of the solar panels. I highly recommend Ultrarays Solar Energy Solutions to anyone looking for reliable and efficient solar services.</p>
                 <div class="testimonial-author">
-                    <img src="{% static 'website/images/testimonial-3.jpg' %}" alt="Michael Chen" loading="lazy">
+                    <img src="{% static 'website/images/prerakshah.jpeg' %}" alt="Prerak Shah" loading="lazy">
                     <div class="author-info">
-                        <h4>Michael Chen</h4>
-                        <p>Homeowner, Phoenix</p>
+                        <h4>Prerak Shah</h4>
+                        <p>Ahmedabad</p>
                     </div>
                 </div>
             </div>
@@ -519,69 +520,98 @@ solar company, best solar panels{% endblock %}
         </div>
         <div class="faq-grid">
             <div class="faq-item">
-                <button class="faq-question">
-                    <span>How much can I save with solar panels?</span>
+                <button class="faq-question" type="button" aria-expanded="false">
+                    <span>How do I know what size solar system I need?</span>
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="faq-answer">
-                    <p>Most homeowners save between 40-70% on their electricity bills. The exact savings depend on your
-                        location, energy consumption, system size, and local electricity rates. Use our <a
-                            href="/calculator">solar calculator</a> to get a personalized estimate.</p>
+                    <div class="faq-answer-inner">
+                        <p>Your system size depends on your monthly electricity consumption, roof space, and sunlight
+                        availability. A professional site survey helps determine the ideal capacity.</p>
+                    </div>
                 </div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">
-                    <span>How long does installation take?</span>
+                <button class="faq-question" type="button" aria-expanded="false">
+                    <span>What is the return on investment (ROI) for solar panels?</span>
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="faq-answer">
-                    <p>The physical installation typically takes 1-3 days for residential systems. However, the entire
-                        process from consultation to activation usually takes 4-8 weeks, including design, permits, and
-                        utility approvals.</p>
+                    <div class="faq-answer-inner">
+                        <p>Most residential systems recover their cost within 3-5 years, after which you enjoy almost
+                        free electricity for 20+ years.</p>
+                    </div>
                 </div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">
-                    <span>What financing options are available?</span>
+                <button class="faq-question" type="button" aria-expanded="false">
+                    <span>Can solar panels eliminate my electricity bill completely?</span>
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="faq-answer">
-                    <p>We offer multiple financing options including cash purchase, solar loans, leases, and Power
-                        Purchase Agreements (PPAs). We also help you take advantage of federal tax credits and state
-                        incentives. Learn more about <a href="/financing">financing options</a>.</p>
+                    <div class="faq-answer-inner">
+                        <p>Yes, with the right system size and usage pattern, you can reduce your bill to nearly zero
+                        through net metering.</p>
+                    </div>
                 </div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">
-                    <span>Do solar panels work on cloudy days?</span>
+                <button class="faq-question" type="button" aria-expanded="false">
+                    <span>What happens if I generate more electricity than I use?</span>
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="faq-answer">
-                    <p>Yes! Solar panels still generate electricity on cloudy days, though at reduced efficiency
-                        (typically 10-25% of full capacity). Modern solar panels are designed to capture diffuse
-                        sunlight and work efficiently in various weather conditions.</p>
+                    <div class="faq-answer-inner">
+                        <p>Excess electricity is sent back to the grid through net metering, earning you credits on
+                        your bill.</p>
+                    </div>
                 </div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">
-                    <span>What is the warranty on solar panels?</span>
+                <button class="faq-question" type="button" aria-expanded="false">
+                    <span>Why should I install solar panels now?</span>
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="faq-answer">
-                    <p>Our solar panels come with a 25-year performance warranty, guaranteeing at least 80% efficiency
-                        after 25 years. We also provide a 10-year workmanship warranty on installation and a 25-year
-                        warranty on inverters.</p>
+                    <div class="faq-answer-inner">
+                        <p>With rising electricity costs and government incentives, now is the best time to invest and
+                        maximize savings.</p>
+                    </div>
                 </div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">
-                    <span>How much maintenance do solar panels require?</span>
+                <button class="faq-question" type="button" aria-expanded="false">
+                    <span>Will solar panels work during monsoon season?</span>
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="faq-answer">
-                    <p>Solar panels require minimal maintenance. Rain naturally cleans the panels, but we recommend
-                        professional cleaning 1-2 times per year for optimal performance. We offer maintenance plans for
-                        worry-free operation.</p>
+                    <div class="faq-answer-inner">
+                        <p>Yes, they still generate electricity, though output may be lower due to reduced sunlight.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" type="button" aria-expanded="false">
+                    <span>What type of solar system should I choose?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>On-grid: most affordable, no battery. Off-grid: works without the electricity grid. Hybrid:
+                        includes battery backup.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" type="button" aria-expanded="false">
+                    <span>What warranties are provided?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Most solar panels come with a 25-year performance warranty and a 5-10 year product
+                        warranty.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -609,19 +639,52 @@ solar company, best solar panels{% endblock %}
 {% block extra_js %}
 <script>
     // FAQ Accordion
-    document.querySelectorAll('.faq-question').forEach(button => {
-        button.addEventListener('click', () => {
-            const faqItem = button.parentElement;
-            const isOpen = faqItem.classList.contains('active');
+    const faqItems = document.querySelectorAll('.faq-item');
 
-            // Close all FAQ items
-            document.querySelectorAll('.faq-item').forEach(item => {
-                item.classList.remove('active');
-            });
+    const setFaqState = (item, shouldOpen) => {
+        const button = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        const answerInner = item.querySelector('.faq-answer-inner');
 
-            // Open clicked item if it wasn't open
-            if (!isOpen) {
-                faqItem.classList.add('active');
+        item.classList.toggle('active', shouldOpen);
+        button.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+        answer.style.maxHeight = shouldOpen ? `${answerInner.scrollHeight}px` : '0px';
+        answer.style.opacity = shouldOpen ? '1' : '0';
+    };
+
+    faqItems.forEach(item => {
+        const button = item.querySelector('.faq-question');
+
+        const toggleItem = event => {
+            if (event.target.closest('a')) {
+                return;
+            }
+
+            const isOpen = item.classList.contains('active');
+            faqItems.forEach(otherItem => setFaqState(otherItem, false));
+            setFaqState(item, !isOpen);
+        };
+
+        button.addEventListener('click', event => {
+            event.stopPropagation();
+            toggleItem(event);
+        });
+
+        item.addEventListener('click', event => {
+            if (event.target.closest('.faq-question') || event.target.closest('a')) {
+                return;
+            }
+
+            toggleItem(event);
+        });
+    });
+
+    window.addEventListener('resize', () => {
+        faqItems.forEach(item => {
+            if (item.classList.contains('active')) {
+                const answer = item.querySelector('.faq-answer');
+                const answerInner = item.querySelector('.faq-answer-inner');
+                answer.style.maxHeight = `${answerInner.scrollHeight}px`;
             }
         });
     });
@@ -689,6 +752,24 @@ solar company, best solar panels{% endblock %}
         benefitsObserver.observe(benefitsSection);
     }
 
+    document.querySelectorAll('.testimonial-text').forEach(text => {
+        if (text.scrollHeight <= text.clientHeight + 4) {
+            return;
+        }
+
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'testimonial-toggle';
+        button.textContent = 'See more';
+
+        button.addEventListener('click', () => {
+            const expanded = text.classList.toggle('is-expanded');
+            button.textContent = expanded ? 'See less' : 'See more';
+        });
+
+        text.insertAdjacentElement('afterend', button);
+    });
+
     // Smooth Scroll for Anchor Links with Header Offset
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -710,3 +791,24 @@ solar company, best solar panels{% endblock %}
     });
 </script>
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

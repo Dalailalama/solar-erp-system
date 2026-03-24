@@ -78,12 +78,12 @@ body {
 /* ===== HERO SECTION ===== */
 .industrial-hero {
     position: relative;
-    min-height: 70vh;
+    min-height: clamp(520px, 64vh, 760px);
     background: var(--slate-industrial);
     display: flex;
     align-items: center;
     overflow: hidden;
-    padding: var(--space-xl) 0;
+    padding: clamp(4rem, 7vw, 5.5rem) 0;
 }
 
 /* Industrial Grid Texture Overlay */
@@ -106,13 +106,14 @@ body {
     margin: 0 auto;
     padding: 0 var(--space-md);
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
     align-items: center;
-    gap: var(--space-lg);
+    gap: clamp(2rem, 4vw, 4rem);
 }
 
 .hero-text {
     color: var(--white);
+    max-width: 620px;
 }
 
 .kicker {
@@ -127,15 +128,17 @@ body {
 .hero-title {
     font-size: var(--font-h1);
     font-weight: 800;
-    line-height: 1.1;
+    line-height: 1.05;
     margin-bottom: var(--space-sm);
+    letter-spacing: -0.04em;
 }
 
 .hero-subtitle {
-    font-size: var(--font-h4);
+    font-size: clamp(1.05rem, 1.35vw, 1.35rem);
     color: var(--gray-300);
     margin-bottom: var(--space-md);
     max-width: 600px;
+    line-height: 1.7;
 }
 
 /* Buttons */
@@ -195,6 +198,18 @@ body {
     align-items: center;
     gap: 1rem;
     animation: float 6s ease-in-out infinite;
+    max-width: 320px;
+}
+
+.hero-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-visual>div {
+    width: min(100%, 520px) !important;
+    height: clamp(300px, 32vw, 420px) !important;
 }
 
 .stats-icon {
@@ -639,12 +654,14 @@ body {
 }
 
 .cta-container {
-    background: var(--navy-feasibility);
+    background:
+        linear-gradient(135deg, rgba(36, 52, 71, 0.96) 0%, rgba(54, 71, 88, 0.98) 100%);
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
     padding: var(--space-xl) var(--space-md);
     position: relative;
     overflow: hidden;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 /* Circuit Pattern */
@@ -667,10 +684,25 @@ body {
     gap: var(--space-xl);
     position: relative;
     z-index: 10;
+    align-items: center;
 }
 
 .cta-content {
     color: var(--white);
+    max-width: 520px;
+    position: relative;
+    z-index: 2;
+}
+
+.cta-content::before {
+    content: '';
+    position: absolute;
+    inset: -24px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 28px;
+    z-index: -1;
+    pointer-events: none;
 }
 
 .cta-badge {
@@ -690,6 +722,18 @@ body {
     font-weight: 800;
     margin-bottom: 1rem;
     line-height: 1.2;
+    color: var(--white);
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+    text-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.cta-content p {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1.35rem;
+    line-height: 1.7;
+    margin: 0;
+    max-width: 30ch;
 }
 
 .trust-signals {
@@ -703,8 +747,13 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.9rem;
-    color: var(--gray-300);
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.86);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    padding: 10px 14px;
+    backdrop-filter: blur(8px);
 }
 
 .trust-item i {
@@ -715,6 +764,8 @@ body {
     background: var(--white);
     border-radius: 24px;
     padding: 32px;
+    box-shadow: 0 24px 48px rgba(17, 24, 39, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .form-group {
@@ -767,8 +818,86 @@ body {
     gap: 6px;
 }
 
+.alt-cta a:hover {
+    color: var(--primary-orange);
+}
+
 /* ===== RESPONSIVE BREAKPOINTS ===== */
+@media (min-width: 1280px) {
+    .industrial-hero {
+        min-height: min(72vh, 780px);
+    }
+
+    .hero-content {
+        max-width: 1240px;
+    }
+}
+
+@media (max-width: 1279px) {
+    .industrial-hero {
+        min-height: clamp(500px, 60vh, 680px);
+        padding: 4.5rem 0;
+    }
+
+    .hero-content {
+        max-width: 1120px;
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.85fr);
+        gap: 2.5rem;
+    }
+
+    .hero-title {
+        font-size: clamp(2.5rem, 4.2vw, 3.35rem);
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+        max-width: 34rem;
+    }
+
+    .hero-visual > div {
+        height: clamp(260px, 28vw, 360px) !important;
+    }
+}
+
+@media (max-width: 1100px) {
+    .industrial-hero {
+        min-height: auto;
+        padding: 4rem 0 3.5rem;
+    }
+
+    .hero-content {
+        grid-template-columns: minmax(0, 1fr) minmax(240px, 0.8fr);
+        gap: 2rem;
+    }
+
+    .hero-title {
+        font-size: clamp(2.3rem, 4vw, 3rem);
+    }
+
+    .hero-subtitle {
+        font-size: 1.02rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .floating-stats {
+        padding: 18px 20px;
+    }
+
+    .hero-visual > div {
+        height: 260px !important;
+    }
+}
+
 @media (max-width: 1024px) {
+    .industrial-hero {
+        min-height: auto;
+        padding: 4.5rem 0 4rem;
+    }
+
     .arch-grid {
         grid-template-columns: 1fr;
     }
@@ -784,18 +913,65 @@ body {
 
     .hero-content {
         grid-template-columns: 1fr;
-        padding-top: 60px;
+        gap: 2.5rem;
+        padding: 3rem 1.5rem 0;
+        text-align: center;
     }
 
-    .hero-image {
-        display: none;
-        /* Hide visual on tablet/mobile if needed */
+    .hero-text {
+        max-width: none;
+        margin: 0 auto;
+    }
+
+    .hero-subtitle {
+        max-width: 42rem;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 1.08rem;
+    }
+
+    .btn-group {
+        justify-content: center;
+    }
+
+    .floating-stats {
+        margin: 0 auto;
+    }
+
+    .architectures-section,
+    .benefits-section,
+    .expertise-section,
+    .cta-footer {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    .cta-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .cta-content {
+        max-width: none;
     }
 }
 
 @media (max-width: 768px) {
-    .cta-grid {
-        grid-template-columns: 1fr;
+    .industrial-hero {
+        padding: 3.75rem 0 3rem;
+    }
+
+    .hero-content,
+    .arch-grid,
+    .benefits-layout,
+    .expertise-grid,
+    .section-header {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    .hero-content {
+        padding-top: 0;
     }
 
     .expertise-grid,
@@ -804,12 +980,32 @@ body {
         /* Stack on mobile */
     }
 
+    .card-header,
+    .spec-header {
+        gap: 1rem;
+    }
+
+    .arch-card,
+    .benefit-card,
+    .spec-body {
+        padding: 1.5rem;
+    }
+
+    .icon-box {
+        width: 56px;
+        height: 56px;
+        font-size: 1.75rem;
+    }
+
     /* Mobile Horizontal Scroll for Benefits (Alternative) */
     .benefits-grid.mobile-scroll {
         display: flex;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         padding-bottom: 20px;
+        margin: 0 -1.25rem;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
     }
 
     .benefits-grid.mobile-scroll .benefit-card {
@@ -818,19 +1014,190 @@ body {
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: clamp(2.1rem, 9vw, 2.75rem);
+        line-height: 1.08;
+    }
+
+    .hero-subtitle {
+        font-size: 1.05rem;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+    }
+
+    .kicker {
+        letter-spacing: 1.5px;
+        font-size: 0.85rem;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    .floating-stats {
+        width: 100%;
+        max-width: none;
+        padding: 18px;
+        justify-content: flex-start;
+    }
+
+    .stats-info strong {
+        font-size: 1.25rem;
+    }
+
+    .section-header {
+        margin-bottom: 2.25rem;
+    }
+
+    .section-header h2 {
+        line-height: 1.15;
+    }
+
+    .arch-card h3,
+    .benefit-card h3,
+    .spec-title {
+        line-height: 1.25;
+    }
+
+    .spec-table {
+        font-size: 0.8rem;
+    }
+
+    .cta-container {
+        padding: 3rem 1.25rem;
+        border-top-left-radius: 28px;
+        border-top-right-radius: 28px;
+    }
+
+    .cta-content::before {
+        inset: -16px;
+        border-radius: 22px;
+    }
+
+    .cta-grid h2 {
+        font-size: 2rem;
+    }
+
+    .cta-content p {
+        font-size: 1.05rem;
+        max-width: none;
+    }
+
+    .trust-signals {
+        gap: 0.875rem;
+    }
+
+    .trust-item {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .cta-form-card {
+        padding: 24px 20px;
+        border-radius: 20px;
     }
 }
 
 @media (max-width: 640px) {
+    .industrial-hero {
+        padding: 3.25rem 0 2.5rem;
+    }
 
-    /* Mobile styles */
+    .hero-content,
+    .arch-grid,
+    .benefits-layout,
+    .expertise-grid,
+    .section-header {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
     .btn-group {
         flex-direction: column;
+        gap: 0.875rem;
     }
 
     .btn-group .btn {
         width: 100%;
         justify-content: center;
+    }
+
+    .floating-stats {
+        align-items: flex-start;
+    }
+
+    .hero-visual > div {
+        height: 220px !important;
+    }
+
+    .stats-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 1.2rem;
+    }
+
+    .arch-card,
+    .benefit-card {
+        padding: 1.25rem;
+        border-radius: 20px;
+    }
+
+    .card-header,
+    .spec-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .tag {
+        align-self: flex-start;
+    }
+
+    .card-visual,
+    .spec-visual {
+        height: 110px;
+        font-size: 0.75rem;
+    }
+
+    .benefit-metric {
+        font-size: 2.5rem;
+    }
+
+    .spec-header,
+    .spec-body {
+        padding: 18px;
+    }
+
+    .spec-table td {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 4px 0;
+    }
+
+    .spec-table td:last-child {
+        text-align: left;
+        padding-bottom: 10px;
+    }
+
+    .cta-grid h2 {
+        font-size: 1.75rem;
+    }
+
+    .cta-content p {
+        font-size: 1rem;
+    }
+
+    .form-input,
+    .btn-submit {
+        min-height: 52px;
+    }
+
+    .alt-cta a {
+        text-align: center;
+        justify-content: center;
+        line-height: 1.5;
     }
 }

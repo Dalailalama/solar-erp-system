@@ -51,8 +51,47 @@ advanced solar calculator tailored for Indian homes and businesses.{% endblock %
                     </div>
                 </div>
 
+                <label class="future-consumption-toggle">
+                    <input type="checkbox" id="futureConsumptionToggle">
+                    <span>Add future appliance consumption</span>
+                </label>
+
+                <div class="appliance-estimator appliance-estimator-hidden" id="applianceEstimator">
+                    <div class="mode-panel-head">
+                        <div>
+                            <h3>Plan Future Appliances</h3>
+                            <p>Add only the appliances you expect to purchase later. Their future consumption will be
+                                added on top of your current bill during recalculation.</p>
+                        </div>
+                        <button type="button" class="btn-add-appliance" id="addApplianceBtn">
+                            <i class="fas fa-plus"></i> Add Appliance
+                        </button>
+                    </div>
+
+                    <div class="appliance-rows" id="applianceRows"></div>
+
+                    <div class="appliance-summary">
+                        <div class="appliance-summary-card">
+                            <span class="summary-label">Future Load</span>
+                            <strong id="connectedLoadValue">0.0 kW</strong>
+                        </div>
+                        <div class="appliance-summary-card">
+                            <span class="summary-label">Future Daily Units</span>
+                            <strong id="dailyUnitsValue">0.0 kWh</strong>
+                        </div>
+                        <div class="appliance-summary-card">
+                            <span class="summary-label">Future Monthly Units</span>
+                            <strong id="monthlyUnitsValue">0 kWh</strong>
+                        </div>
+                        <div class="appliance-summary-card highlight">
+                            <span class="summary-label">Added Future Bill</span>
+                            <strong id="estimatedBillValue">â‚¹0</strong>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Form Grid -->
-                <div class="form-grid">
+                {% comment %} <div class="form-grid">
                     <!-- State -->
                     <div class="form-group">
                         <label>Select State</label>
@@ -109,7 +148,7 @@ advanced solar calculator tailored for Indian homes and businesses.{% endblock %
                             <i class="fas fa-chevron-down select-arrow"></i>
                         </div>
                     </div>
-                </div>
+                </div> {% endcomment %}
 
                 <button class="btn-recalc" id="recalculateBtn" onclick="calculateSolar()">
                     Recalculate Savings <i class="fas fa-sync-alt"></i>
@@ -154,6 +193,16 @@ advanced solar calculator tailored for Indian homes and businesses.{% endblock %
                     </div>
                 </div>
 
+                <div class="calc-recommendation" id="calcRecommendation">
+                    <div class="calc-recommendation-title">
+                        <i class="fas fa-lightbulb"></i> Recommended Note
+                    </div>
+                    <p id="calcRecommendationText">A 3 kW system is ideal for normal household usage and works well
+                        with government subsidy benefits.</p>
+                    <div class="calc-future-note" id="calcFutureNote">If you enable future consumption, the calculator
+                        will add that future load on top of your current bill before recalculating savings.</div>
+                </div>
+
                 <div class="trust-indicators">
                     <div class="trust-item"><i class="fas fa-check-circle"></i> MNRE Approved Benchmark Costs</div>
                     <div class="trust-item"><i class="fas fa-check-circle"></i> Based on Local Solar Irradiance Data
@@ -193,11 +242,41 @@ advanced solar calculator tailored for Indian homes and businesses.{% endblock %
         const elPayback = document.getElementById('res-payback');
         const elMonthly = document.getElementById('res-monthly');
         const elAnnual = document.getElementById('res-annual');
+        const elRecommendation = document.getElementById('calcRecommendationText');
+        const elFutureNote = document.getElementById('calcFutureNote');
+        const futureConsumptionToggle = document.getElementById('futureConsumptionToggle');
+        const applianceEstimator = document.getElementById('applianceEstimator');
+        const applianceRows = document.getElementById('applianceRows');
+        const addApplianceBtn = document.getElementById('addApplianceBtn');
+        const connectedLoadValue = document.getElementById('connectedLoadValue');
+        const dailyUnitsValue = document.getElementById('dailyUnitsValue');
+        const monthlyUnitsValue = document.getElementById('monthlyUnitsValue');
+        const estimatedBillValue = document.getElementById('estimatedBillValue');
 
         // Logic Constants (Approximate for Indian Market)
-        const RATE_PER_UNIT = 10;
-        const UNITS_PER_KW_MONTH = 120;
-        const COST_PER_KW = 55000;
+        const RATE_PER_UNIT = 7;
+        const UNITS_PER_KW_MONTH = 135; // 4.5 sun hours/day * 30 days
+        const COST_PER_KW = 49000; // Average base cost per kW
+        const SUBSIDY_AMOUNT = 78000;
+        const DAYS_PER_MONTH = 30;
+
+        const APPLIANCE_PRESETS = {
+            tv: { label: 'LED TV', watts: 100, hours: 4 },
+            refrigerator_single: { label: 'Refrigerator Single Door', watts: 120, hours: 12 },
+            refrigerator_double: { label: 'Refrigerator Double Door', watts: 220, hours: 12 },
+            air_cooler: { label: 'Air Cooler', watts: 180, hours: 8 },
+            ac_1_ton_3star_inverter: { label: 'AC 1 Ton 3 Star Inverter', watts: 1150, hours: 6 },
+            ac_1_ton_3star_non_inverter: { label: 'AC 1 Ton 3 Star Non-Inverter', watts: 1400, hours: 6 },
+            ac_1_ton_5star_inverter: { label: 'AC 1 Ton 5 Star Inverter', watts: 950, hours: 6 },
+            ac_1_ton_5star_non_inverter: { label: 'AC 1 Ton 5 Star Non-Inverter', watts: 1200, hours: 6 },
+            ac_1_5_ton: { label: 'AC 1.5 Ton', watts: 1700, hours: 6 },
+            washing_machine: { label: 'Washing Machine', watts: 500, hours: 1 },
+            water_pump: { label: 'Water Pump', watts: 750, hours: 1 },
+            microwave: { label: 'Microwave Oven', watts: 1200, hours: 0.5 },
+            geyser: { label: 'Geyser', watts: 2000, hours: 1 },
+            induction: { label: 'Induction Cooktop', watts: 1800, hours: 1 },
+            custom: { label: 'Custom Appliance', watts: 250, hours: 2 }
+        };
 
         // Helper: Format Large Numbers (Lakh/Cr)
         const formatCurrencySmart = (num) => {
@@ -214,20 +293,116 @@ advanced solar calculator tailored for Indian homes and businesses.{% endblock %
             return parseFloat(num).toFixed(1);
         }
 
+        const applianceOptionsMarkup = selectedKey => Object.entries(APPLIANCE_PRESETS).map(([key, preset]) => {
+            const selected = key === selectedKey ? 'selected' : '';
+            return `<option value="${key}" ${selected}>${preset.label}</option>`;
+        }).join('');
+
+        const createApplianceRow = (presetKey = 'custom', quantity = 1) => {
+            const preset = APPLIANCE_PRESETS[presetKey] || APPLIANCE_PRESETS.custom;
+            const row = document.createElement('div');
+            row.className = 'appliance-row';
+            row.innerHTML = `
+                <div class="appliance-row-top">
+                    <div class="custom-select-wrapper">
+                        <select class="custom-select appliance-select">
+                            ${applianceOptionsMarkup(presetKey)}
+                        </select>
+                        <i class="fas fa-chevron-down select-arrow"></i>
+                    </div>
+                    <button type="button" class="remove-appliance" aria-label="Remove appliance">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+                <div class="appliance-row-grid">
+                    <div class="appliance-field">
+                        <label>Qty</label>
+                        <input type="number" class="appliance-input appliance-qty" min="1" max="20" value="${quantity}">
+                    </div>
+                    <input type="hidden" class="appliance-watts" value="${preset.watts}">
+                    <div class="appliance-field">
+                        <label>Hours / Day</label>
+                        <input type="number" class="appliance-input appliance-hours" min="0" max="24" step="0.5" value="${preset.hours}">
+                    </div>
+                    <div class="appliance-field appliance-output">
+                        <label>Monthly Units</label>
+                        <strong class="appliance-units">0 kWh</strong>
+                    </div>
+                </div>
+            `;
+            applianceRows.appendChild(row);
+            updateApplianceRow(row, true);
+            return row;
+        };
+
+        const updateApplianceRow = (row, forcePresetValues = false) => {
+            const select = row.querySelector('.appliance-select');
+            const qtyInput = row.querySelector('.appliance-qty');
+            const wattsInput = row.querySelector('.appliance-watts');
+            const hoursInput = row.querySelector('.appliance-hours');
+            const output = row.querySelector('.appliance-units');
+            const preset = APPLIANCE_PRESETS[select.value] || APPLIANCE_PRESETS.custom;
+
+            if (forcePresetValues) {
+                wattsInput.value = preset.watts;
+                hoursInput.value = preset.hours;
+            }
+
+            const quantity = Math.max(parseFloat(qtyInput.value) || 0, 0);
+            const watts = Math.max(parseFloat(wattsInput.value) || 0, 0);
+            const hours = Math.min(Math.max(parseFloat(hoursInput.value) || 0, 0), 24);
+            const monthlyUnits = (quantity * watts * hours * DAYS_PER_MONTH) / 1000;
+
+            output.textContent = `${formatDecimal(monthlyUnits)} kWh`;
+            return { quantity, watts, hours, monthlyUnits };
+        };
+
+        const getApplianceTotals = () => {
+            const rows = applianceRows.querySelectorAll('.appliance-row');
+            let connectedLoadWatts = 0;
+            let dailyUnits = 0;
+            let monthlyUnits = 0;
+
+            rows.forEach(row => {
+                const values = updateApplianceRow(row);
+                connectedLoadWatts += values.quantity * values.watts;
+                dailyUnits += (values.quantity * values.watts * values.hours) / 1000;
+                monthlyUnits += values.monthlyUnits;
+            });
+
+            return { connectedLoadWatts, dailyUnits, monthlyUnits };
+        };
+
+        const updateApplianceSummary = () => {
+            const totals = getApplianceTotals();
+            connectedLoadValue.textContent = `${formatDecimal(totals.connectedLoadWatts / 1000)} kW`;
+            dailyUnitsValue.textContent = `${formatDecimal(totals.dailyUnits)} kWh`;
+            monthlyUnitsValue.textContent = `${Math.round(totals.monthlyUnits)} kWh`;
+            estimatedBillValue.textContent = formatCurrencySmart(Math.round(totals.monthlyUnits * RATE_PER_UNIT));
+            return totals;
+        };
+
         // Calculation Function
         window.calculateSolar = function () { // Make global for button onclick
             // Cap the input value
             let rawValue = parseInt(numInput.value) || 0;
             if (rawValue > 5000000) rawValue = 5000000;
 
-            let billAmount = rawValue;
+            const applianceTotals = updateApplianceSummary();
+            const futureBillAmount = futureConsumptionToggle.checked ? (applianceTotals.monthlyUnits * RATE_PER_UNIT) : 0;
+            let billAmount = rawValue + futureBillAmount;
 
             // Core Logic
+            let currentUnitsConsumed = rawValue / RATE_PER_UNIT;
+            let futureUnitsConsumed = futureBillAmount / RATE_PER_UNIT;
             let unitsConsumed = billAmount / RATE_PER_UNIT;
-            let systemSize = unitsConsumed / UNITS_PER_KW_MONTH;
+            let currentActualSystemSize = currentUnitsConsumed / UNITS_PER_KW_MONTH;
+            let futureActualSystemSize = futureUnitsConsumed / UNITS_PER_KW_MONTH;
+            let actualSystemSize = unitsConsumed / UNITS_PER_KW_MONTH;
+            let systemSize = actualSystemSize;
 
             // Round system size
-            if (systemSize < 1 && systemSize > 0) systemSize = 1;
+            if (systemSize > 0 && systemSize < 3) systemSize = 3;
 
             // Savings
             let monthlySavings = unitsConsumed * RATE_PER_UNIT * 0.90;
@@ -235,8 +410,24 @@ advanced solar calculator tailored for Indian homes and businesses.{% endblock %
 
             let annualSavings = monthlySavings * 12;
 
-            let systemCost = systemSize * COST_PER_KW;
+            let grossSystemCost = systemSize * COST_PER_KW;
+            let systemCost = Math.max(grossSystemCost - SUBSIDY_AMOUNT, 0);
             let paybackYears = (annualSavings > 0) ? (systemCost / annualSavings) : 0;
+            const bufferedCapacityKw = Math.max(3 - currentActualSystemSize, 0);
+            const futureFitsInBuffer = futureConsumptionToggle.checked && futureActualSystemSize > 0 && actualSystemSize <= 3;
+            const remainingBufferedCapacityKw = Math.max(bufferedCapacityKw - futureActualSystemSize, 0);
+            const futureExtraKw = Math.max(systemSize <= 3 ? 1 : Math.ceil(systemSize * 0.2), 1);
+
+            let recommendationText = 'A 3 kW system is ideal for normal household usage and works well with government subsidy benefits.';
+            if (rawValue >= 4000 || systemSize > 3) {
+                recommendationText = `Based on your total projected usage, ${formatDecimal(systemSize)} kW is recommended. For future consumption growth, consider adding 1 kW extra.`;
+            }
+
+            if (futureConsumptionToggle.checked && futureBillAmount > 0) {
+                recommendationText = futureFitsInBuffer
+                    ? `Your current bill plus future appliance load comes to ${formatDecimal(actualSystemSize)} kW. This still fits inside the 3 kW minimum system buffer.`
+                    : `Your current bill plus future appliance load suggests ${formatDecimal(systemSize)} kW. This includes your projected future consumption.`;
+            }
 
             if (paybackYears > 20) paybackYears = 20; // Cap visual payback
 
@@ -245,6 +436,12 @@ advanced solar calculator tailored for Indian homes and businesses.{% endblock %
             elPayback.textContent = paybackYears.toFixed(1);
             elMonthly.textContent = formatCurrencySmart(Math.round(monthlySavings));
             elAnnual.textContent = formatCurrencySmart(Math.round(annualSavings));
+            elRecommendation.textContent = recommendationText;
+            elFutureNote.textContent = futureConsumptionToggle.checked && futureBillAmount > 0
+                ? (futureFitsInBuffer
+                    ? `Future load added: ${formatCurrencySmart(Math.round(futureBillAmount))} per month. It is available within the buffered 3 kW minimum capacity, leaving about ${formatDecimal(remainingBufferedCapacityKw)} kW headroom after adding these appliances.`
+                    : `Future load added: ${formatCurrencySmart(Math.round(futureBillAmount))} per month, increasing your projected system sizing for upcoming appliances.`)
+                : 'Enable future consumption to add appliance-based load on top of your current bill and see a future-ready system recommendation.';
         }
 
         // Sync Logic
@@ -262,6 +459,45 @@ advanced solar calculator tailored for Indian homes and businesses.{% endblock %
             }
             calculateSolar();
         });
+
+        futureConsumptionToggle.addEventListener('change', function () {
+            applianceEstimator.classList.toggle('appliance-estimator-hidden', !this.checked);
+            calculateSolar();
+        });
+
+        addApplianceBtn.addEventListener('click', function () {
+            createApplianceRow('custom');
+            calculateSolar();
+        });
+
+        applianceRows.addEventListener('change', function (event) {
+            const row = event.target.closest('.appliance-row');
+            if (!row) return;
+
+            if (event.target.classList.contains('appliance-select')) {
+                updateApplianceRow(row, true);
+            }
+
+            calculateSolar();
+        });
+
+        applianceRows.addEventListener('input', function (event) {
+            if (!event.target.closest('.appliance-row')) return;
+            calculateSolar();
+        });
+
+        applianceRows.addEventListener('click', function (event) {
+            const removeBtn = event.target.closest('.remove-appliance');
+            if (!removeBtn) return;
+
+            const rows = applianceRows.querySelectorAll('.appliance-row');
+            if (rows.length <= 1) return;
+
+            removeBtn.closest('.appliance-row').remove();
+            calculateSolar();
+        });
+
+        createApplianceRow('ac_1_ton_3star_inverter', 1);
 
         // Initial Run
         calculateSolar();

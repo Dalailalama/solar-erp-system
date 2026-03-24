@@ -1,4 +1,4 @@
-﻿import { defineConfig, loadEnv } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import { fileURLToPath, URL } from "node:url";
@@ -6,7 +6,7 @@ import { fileURLToPath, URL } from "node:url";
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   const isDev = mode === "development";
-  const devServerUrl = env.VITE_DEV_SERVER_URL || "http://192.168.0.111:5173";
+  const devServerUrl = env.VITE_DEV_SERVER_URL || "http://127.0.0.1:5173";
 
   return {
     root: "static/js",
@@ -67,7 +67,7 @@ export default defineConfig(({ mode }) => {
 
     server: {
       port: 5173,
-      host: env.VITE_DEV_SERVER_HOST || "192.168.0.111",
+      host: env.VITE_DEV_SERVER_HOST || "127.0.0.1",
       cors: true,
       origin: devServerUrl,
       watch: {
@@ -91,4 +91,5 @@ export default defineConfig(({ mode }) => {
     },
   };
 });
+
 
