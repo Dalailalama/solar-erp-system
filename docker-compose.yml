@@ -5,17 +5,36 @@ services:
     ports:
       - "8000:8000"
     environment:
+      - SECRET_KEY=django-insecure-24m@@_ti3^&jn3-+qs@(e)mubl+8g7y#hz+=#@*q=$vva!yt^&
       - DEBUG=False
-      - SECRET_KEY=ch@ng3-th1s-t0-a-r34l-s3cr3t-k3y-in-pr0duct10n
-      - ALLOWED_HOSTS=*
-      - CORS_ALLOWED_ORIGINS=http://localhost:8000
-      - CSRF_TRUSTED_ORIGINS=http://localhost:8000
+      - ALLOWED_HOSTS=212.38.94.125,localhost,127.0.0.1
+      - CSRF_TRUSTED_ORIGINS=http://212.38.94.125
+      - DATABASE_URL=postgres://ultrarays_user:UltrabuildPasshaha890@db:5432/ultrarays_db
+      - CORS_ALLOWED_ORIGINS=http://212.38.94.125
       - DJANGO_VITE_DEV_MODE=False
+      - VITE_DEV_SERVER_URL=http://127.0.0.1:5173
+      - VITE_DEV_SERVER_HOST=127.0.0.1
+      - VITE_DEV_SERVER_PROTOCOL=http
+      - VITE_DEV_SERVER_PORT=5173
+      - VITE_BACKEND_ORIGIN=http://212.38.94.125
+      - VITE_WS_ORIGIN=ws://212.38.94.125
+    depends_on:
+      - db
     restart: unless-stopped
     volumes:
-      - app_data:/app/db
       - media_data:/app/media
 
+  db:
+    image: postgres:15-alpine
+    container_name: solar_db
+    environment:
+      - POSTGRES_USER=ultrarays_user
+      - POSTGRES_PASSWORD=UltrabuildPasshaha890
+      - POSTGRES_DB=ultrarays_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
 volumes:
-  app_data:
+  postgres_data:
   media_data:
