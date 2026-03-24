@@ -6,8 +6,8 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# Stage 2: Django App
-FROM python:3.11-slim
+# Stage 2: Django App (Python 3.12 required for Django 6.0)
+FROM python:3.12-slim
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 WORKDIR /app
 
