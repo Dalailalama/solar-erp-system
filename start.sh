@@ -1,14 +1,13 @@
 #!/bin/bash
 set -e
 
-# Run migrations
+mkdir -p /app/db
+
 echo "Running migrations..."
 python manage.py migrate --noinput
 
-# Collect static files
 echo "Collecting static files..."
 python manage.py collectstatic --noinput
 
-# Start Gunicorn server with Uvicorn worker class for ASGI setup
-echo "Starting server..."
+echo "Starting server on port 8000..."
 gunicorn erp_system_project.asgi:application -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000

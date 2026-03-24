@@ -1,47 +1,21 @@
-version: '3.8'
-
 services:
   web:
     build: .
-    container_name: erp_system_web
+    container_name: solar_web
     ports:
       - "8000:8000"
     environment:
       - DEBUG=False
-      - SECRET_KEY=generate_a_secure_random_key_here_for_prod
-      - DATABASE_URL=postgres://erp_user:erp_password@db:5432/erp_db
-      - REDIS_URL=redis://redis:6379/0
-      - ALLOWED_HOSTS=localhost,127.0.0.1,host.docker.internal
+      - SECRET_KEY=ch@ng3-th1s-t0-a-r34l-s3cr3t-k3y-in-pr0duct10n
+      - ALLOWED_HOSTS=*
       - CORS_ALLOWED_ORIGINS=http://localhost:8000
       - CSRF_TRUSTED_ORIGINS=http://localhost:8000
       - DJANGO_VITE_DEV_MODE=False
-    depends_on:
-      - db
-      - redis
     restart: unless-stopped
     volumes:
+      - app_data:/app/db
       - media_data:/app/media
 
-  db:
-    image: postgres:15-alpine
-    container_name: erp_system_db
-    environment:
-      - POSTGRES_USER=erp_user
-      - POSTGRES_PASSWORD=erp_password
-      - POSTGRES_DB=erp_db
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    restart: unless-stopped
-    ports:
-      - "5432:5432"
-
-  redis:
-    image: redis:7-alpine
-    container_name: erp_system_redis
-    restart: unless-stopped
-    ports:
-      - "6379:6379"
-
 volumes:
-  postgres_data:
+  app_data:
   media_data:
