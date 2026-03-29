@@ -138,12 +138,15 @@
     padding: 10px;
     border-radius: 20px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
 }
 
 .poly-img {
     width: 100%;
     aspect-ratio: 16/10;
+    display: block;
     object-fit: cover;
+    object-position: center;
     border-radius: 12px;
 }
 
@@ -351,6 +354,7 @@
 .p-specs {
     display: flex;
     justify-content: space-between;
+    gap: 16px;
     margin-top: auto;
     padding-top: 16px;
     border-top: 1px solid var(--gray-100);
@@ -359,6 +363,8 @@
 .spec-item {
     display: flex;
     flex-direction: column;
+    flex: 1 1 0;
+    min-width: 0;
 }
 
 .spec-lbl {
@@ -372,6 +378,14 @@
     font-weight: 700;
     color: var(--port-text-dark);
     font-size: 0.95rem;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+
+.p-card[data-category="commercial-industrial"] .p-specs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
 }
 
 .p-link {
